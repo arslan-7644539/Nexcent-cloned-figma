@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Satoshi", "sans-serif";
+  --breakpoint-3xl: 120rem;
+
+  /* Custom Color Started */
+  --color-primary: #28cb8b;
+  --color-secondary: #263238;
+  /*  Custom Color End */
+  /* --shadow-text:   0_4px_6px_rgba(0,0,0,0.5) */
+
+  /* --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+  --ease-snappy: cubic-bezier(0.2, 0, 0, 1); */
+  /* ... */
+}

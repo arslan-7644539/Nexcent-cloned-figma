@@ -1,0 +1,94 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "title": "The Lion King",
+      "year": 1994,
+      "imdb": 8.5,
+      "genre": ["Animation", "Adventure", "Drama"],
+      "image": "https://image.tmdb.org/t/p/w500/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg",
+      "description": "A young lion prince flees his kingdom only to learn the true meaning of responsibility and bravery."
+    },
+    {
+      "id": 2,
+      "title": "Frozen",
+      "year": 2013,
+      "imdb": 7.4,
+      "genre": ["Animation", "Adventure", "Comedy"],
+      "image": "https://image.tmdb.org/t/p/w500/kgwjIb2JDHRhNk13lmSxiClFjVk.jpg",
+      "description": "When the newly crowned Queen Elsa accidentally uses her power to turn things into ice, her sister Anna teams up with a mountain man and a reindeer to change the weather condition."
+    },
+    {
+      "id": 3,
+      "title": "Aladdin",
+      "year": 1992,
+      "imdb": 8.0,
+      "genre": ["Animation", "Adventure", "Comedy"],
+      "image": "https://image.tmdb.org/t/p/w500/tYjJ3YjHovOMOV8rU8gUagpo7mo.jpg",
+      "description": "A kindhearted street urchin and a power-hungry Grand Vizier vie for a magic lamp that has the power to make their deepest wishes come true."
+    },
+    {
+      "id": 4,
+      "title": "Beauty and the Beast",
+      "year": 1991,
+      "imdb": 8.0,
+      "genre": ["Animation", "Family", "Fantasy"],
+      "image": "https://image.tmdb.org/t/p/w500/9ChnFyROySKK2aEe78dIka0KZeM.jpg",
+      "description": "A prince cursed to spend his days as a hideous monster sets out to regain his humanity by earning a young woman's love."
+    },
+    {
+      "id": 5,
+      "title": "Mulan",
+      "year": 1998,
+      "imdb": 7.6,
+      "genre": ["Animation", "Adventure", "Family"],
+      "image": "https://image.tmdb.org/t/p/w500/arjKa6B1mfaN40XY3VsNodHWPqn.jpg",
+      "description": "To save her father from serving in the Imperial Army, a fearless young woman disguises herself as a man to battle northern invaders in China."
+    },
+    {
+      "id": 6,
+      "title": "Moana",
+      "year": 2016,
+      "imdb": 7.6,
+      "genre": ["Animation", "Adventure", "Comedy"],
+      "image": "https://image.tmdb.org/t/p/w500/4JSkN3DXJJPL9x4l8V54oU3Vvb7.jpg",
+      "description": "In Ancient Polynesia, when a terrible curse incurred by the Demigod Maui reaches Moana's island, she answers the Ocean's call to seek out the Demigod to set things right."
+    },
+    {
+      "id": 7,
+      "title": "Zootopia",
+      "year": 2016,
+      "imdb": 8.0,
+      "genre": ["Animation", "Adventure", "Comedy"],
+      "image": "https://image.tmdb.org/t/p/w500/j8uPZspvU5WZLkmN5X21qK8QdFB.jpg",
+      "description": "Determined to prove herself, Officer Judy Hopps, the first bunny on Zootopia's police force, jumps at the chance to crack her first case."
+    },
+    {
+      "id": 8,
+      "title": "Tangled",
+      "year": 2010,
+      "imdb": 7.7,
+      "genre": ["Animation", "Adventure", "Comedy"],
+      "image": "https://image.tmdb.org/t/p/w500/ym7Kst6a4uodryxqbGOxmewF235.jpg",
+      "description": "Rapunzel, a naive and young girl with 70 feet of magical golden hair, sets off on an adventure to discover the world for the first time."
+    },
+    {
+      "id": 9,
+      "title": "Finding Nemo",
+      "year": 2003,
+      "imdb": 8.2,
+      "genre": ["Animation", "Adventure", "Comedy"],
+      "image": "https://image.tmdb.org/t/p/w500/eHuGQ10FUzK1mdOY69wF5pGgEf5.jpg",
+      "description": "After his son is captured in the Great Barrier Reef and taken to Sydney, a timid clownfish sets out on a journey to bring him home."
+    },
+    {
+      "id": 10,
+      "title": "The Incredibles",
+      "year": 2004,
+      "imdb": 8.0,
+      "genre": ["Animation", "Action", "Adventure"],
+      "image": "https://image.tmdb.org/t/p/w500/2LqaLgk4Z226KkgPJuiOQ58wvrm.jpg",
+      "description": "A family of undercover superheroes, while trying to live the quiet suburban life, are forced into action to save the world."
+    }
+  ]
+}
