@@ -69,18 +69,16 @@ const ClientsSection = () => (
     <p className="text-sm text-gray-600 [text-shadow:1px_1px_3px_rgba(0,0,0,0.3)]">
       We have been working with some Fortune 500+ clients
     </p>
-    <div className="flex space-x-45">
+    <motion.div className="flex space-x-45">
       {clientsLogos.map((logo, index) => (
-        // <div className="flex flex-row gap-14">
         <img
           key={index}
           src={logo}
           alt="Client Logo"
           className="w-10 h-10 rounded-md shadow-md"
         />
-        // </div>
       ))}
-    </div>
+    </motion.div>
   </div>
 );
 
@@ -116,13 +114,19 @@ const UnlockSection = () => (
     <div className=" container mx-auto w-[1002.34px] h-[301.4px] flex flex-col  md:flex-row items-center py-[100.23px] mx-auto ">
       {/* ------------- */}
       <div className="w-1/2">
-        <div className=" w-[307.66px] h-[301.4px] ">
+        <motion.div
+          initial={{ x: -100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className=" w-[307.66px] h-[301.4px] "
+        >
           <img
             src={rafikiLogo}
             alt="logo"
             className="top-[36.2px] w-[307.34px] h-[229px] "
           />
-        </div>
+        </motion.div>
       </div>
       {/* --------------- */}
       <div className="w-1/2">
@@ -217,7 +221,11 @@ const CalenderSection = () => (
   <>
     <div className=" container mx-auto top-[571.16px]  w-[1002.34px] h-[301.68px] ">
       <div className=" w-full h-auto  flex flex-row  justify-evenly gap-96 my-20 items-center px-[100.23px] ">
-        <img
+        <motion.img
+          initial={{ x: -100, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
           src={mobileLogo}
           alt="logo"
           className="w-[307.34px] h-[301.68px]"
@@ -277,10 +285,14 @@ const CumunityUpdate = () => (
               <p className="left-[11.14px] top-[11.14px] w-[198.38px] h-[59px] text-center font-semibold text-[13.92px] leading-[19.5px] text-[#89939E] ">
                 {item.title}{" "}
               </p>
-              <button className="left-[11.14px] text-primary  cursor-pointer hover:text-green-800 transition  top-[81.27px] w-[198.38px] h-[31.14px] flex flex-row justify-center gap-[5.57px] px-[5.57px] py-[5.57px]  ">
+              <motion.button
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.8 }}
+                className="left-[11.14px] text-primary  cursor-pointer hover:text-green-800 transition  top-[81.27px] w-[198.38px] h-[31.14px] flex flex-row justify-center gap-[5.57px] px-[5.57px] py-[5.57px]  "
+              >
                 <span> Read More</span>
                 <FaLongArrowAltRight className=" mt-1" />
-              </button>
+              </motion.button>
             </div>
           </div>
         ))}
@@ -294,7 +306,10 @@ const HeroSection = () => {
   return (
     <>
       <motion.div
-      
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
         className="fixed top-0 left-0 right-0 h-1 bg-blue-500 z-50"
         style={{ scaleX: scrollYProgress, transformOrigin: "0%" }}
       />

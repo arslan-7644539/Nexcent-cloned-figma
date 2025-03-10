@@ -5,6 +5,7 @@ import pathIcon from "../../assets/path.svg";
 import youtubeIcon from "../../assets/youtube.svg";
 import twitterIcon from "../../assets/twitter.svg";
 import instaIcon from "../../assets/insta.svg";
+import {motion} from 'motion/react'
 
 const Footer = () => {
   const Frame16 = () => (
@@ -28,10 +29,18 @@ const Footer = () => {
         {/* Left Section */}
         <div className="md:col-span-4 flex flex-col items-center gap-6">
           {/* Logo Section */}
-          <div className="flex items-center gap-2">
-            <img src={footerIcon} alt="logo" className="w-8 h-6" />
+          <motion.div 
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+          className="flex items-center gap-2">
+            <img
+            
+              src={footerIcon}
+              alt="logo"
+              className="w-8 h-6"
+            />
             <h3 className="text-white text-3xl font-semibold">Nexcent</h3>
-          </div>
+          </motion.div>
           {/* Copyright */}
           <div className="text-justify flex flex-col gap-2 text-[#F5F7FA] text-sm">
             <p>Copyright © 2020 Landify UI Kit.</p>
@@ -129,134 +138,6 @@ const Footer = () => {
     </div>
   );
 
-  //   const Footer = () => (
-  //     <div className="top-[209.31px] w-full h-[229.21px] flex flex-row justify-start gap-[87.01px] px-[114.85px] py-[44.55px] bg-[#263238] ">
-  //       <div className="grid md:grid-cols-12 ">
-  //         {/* -------------- */}
-  //         <div className="left-[114.85px] top-[44.55px] flex flex-col items-center gap-8 ">
-  //           <div className="w-[132.95px] h-[20.65px] flex flex-row justify-center gap-[6.88px] ">
-  //             {/* logo */}
-  //             <img src={footerIcon} alt="logo" className="w-[30px] h-[21px]  " />
-  //             <h3 className="text-white left-[37px] top-[1.44px] w-[95.94px] h-[18px]  ">
-  //               Nexcent
-  //             </h3>
-  //           </div>
-  //           <div className="top-[48.5px] w-[243.62px] h-[33.57px] flex flex-col items-center gap-[5.57px] ">
-  //             <p className="w-[244px] h-[14px] font-medium text-[9.74px] leading-[13.9px] text-center text-[#F5F7FA] ">
-  //               Copyright © 2020 Landify UI Kit.
-  //             </p>
-  //             <p className="w-[244px] h-[14px] font-medium text-[9.74px] leading-[13.9px] text-center text-[#F5F7FA]  ">
-  //               All rights reserved
-  //             </p>
-  //           </div>
-  //           <div className="top-[109.91px] flex gap-3.5 justify-center items-center">
-  //             <img className="w-[22px] h-[22px] " src={pathIcon} alt="logo" />
-  //             <img className="w-[22px] h-[22px] " src={instaIcon} alt="logo" />
-  //             <img className="w-[22px] h-[22px] " src={twitterIcon} alt="logo" />
-  //             <img className="w-[22px] h-[22px] " src={youtubeIcon} alt="logo" />
-  //           </div>
-  //         </div>
-  //         {/* --------- */}
-  //         <div className="left-[445.48px] top-[44.55px] w-[442px] h-[140.12px] flex flex-row justify-start gap-[20.88px] col-span-4">
-  //           {/* ============ */}
-  //           <div className="w-[111.34px] h-[140.12px] flex flex-col items-start gap-[16.17px] ">
-  //             <h3 className="w-[111px] h-[20px] font-semibold text-[13.92px] leading-[19.5px] text-center text-white">
-  //               Company
-  //             </h3>
-  //             <div className=" top-[36.71px] w-[111.37px] h-[103.41px] flex flex-col items-start gap-[8.35px] ">
-  //               <a
-  //                 className="w-[111px] h-[14px] font-medium text-[9.74px] leading-[13.9px] text-center text-[#F5F7FA] "
-  //                 href="#"
-  //               >
-  //                 About Us
-  //               </a>
-  //               <a
-  //                 className="w-[111px] h-[14px] top-[44.71px] font-medium text-[9.74px] leading-[13.9px] text-center text-[#F5F7FA] "
-  //                 href="#"
-  //               >
-  //                 Contact Us
-  //               </a>
-  //               <a
-  //                 className="w-[111px] h-[14px] font-medium text-[9.74px] leading-[13.9px] text-center text-[#F5F7FA] "
-  //                 href="#"
-  //               >
-  //                 Blogs
-  //               </a>
-  //               <a
-  //                 className="w-[111px] top-[67.06px]  h-[14px] font-medium text-[9.74px] leading-[13.9px] text-center text-[#F5F7FA] "
-  //                 href="#"
-  //               >
-  //                 Pricing
-  //               </a>
-  //               <a
-  //                 className="w-[111px] top-[89.41px]   h-[14px] font-medium text-[9.74px] leading-[13.9px] text-center text-[#F5F7FA] "
-  //                 href="#"
-  //               >
-  //                 Testimonial
-  //               </a>
-  //             </div>
-  //           </div>
-  //           {/* ============= */}
-  //           <div>
-  //             <h3 className="w-[111px] h-[20px] font-semibold text-[13.92px] leading-[19.5px] text-center text-white">
-  //               Support
-  //             </h3>
-  //             <div className="  top-[36.71px] w-[111.37px] h-[103.41px] flex flex-col items-start gap-[8.35px] ">
-  //               <a
-  //                 className="w-[111px] h-[14px] font-medium text-[9.74px] leading-[13.9px] text-center text-[#F5F7FA] "
-  //                 href="#"
-  //               >
-  //                 Help Center
-  //               </a>
-  //               <a
-  //                 className="w-[111px] h-[14px] font-medium text-[9.74px] leading-[13.9px] text-center text-[#F5F7FA] "
-  //                 href="#"
-  //               >
-  //                 Terms of Service
-  //               </a>
-  //               <a
-  //                 className="w-[111px] h-[14px] font-medium text-[9.74px] leading-[13.9px] text-center text-[#F5F7FA] "
-  //                 href="#"
-  //               >
-  //                 Legal
-  //               </a>
-  //               <a
-  //                 className="w-[111px] h-[14px] font-medium text-[9.74px] leading-[13.9px] text-center text-[#F5F7FA] "
-  //                 href="#"
-  //               >
-  //                 Privacy Policy
-  //               </a>
-  //               <a
-  //                 className="w-[111px] h-[14px] font-medium text-[9.74px] leading-[13.9px] text-center text-[#F5F7FA] "
-  //                 href="#"
-  //               >
-  //                 Status
-  //               </a>
-  //             </div>
-  //           </div>
-  //           {/* ============= */}
-  //           <div className="flex flex-col items-start gap-2">
-  //             <h3 className="text-white font-semibold text-sm">
-  //               Stay up to date
-  //             </h3>
-  //             <div className="relative w-full">
-  //               <input
-  //                 className="w-[177px] h-[28px] bg-[#F5F7FA]  text-black px-3 py-1 rounded-lg border border-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
-  //                 type="email"
-  //                 placeholder="Your Email "
-  //               />
-  //               <button className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-green-500 text-white px-2 py-1 rounded-md">
-  //                 <FaLocationArrow className="right-1.5" />
-  //               </button>
-  //             </div>
-  //           </div>
-
-  //           {/* =============== */}
-  //         </div>
-  //         {/* ---------------------- */}
-  //       </div>
-  //     </div>
-  //   );
   return (
     <>
       <div className=" container mx-auto top-[2608.87px] w-full h-[438.53px] flex flex-col items-start mt-[33px] ">
