@@ -20,6 +20,7 @@ import mobileLogo from "../../assets/pana.svg";
 import Image18 from "../../assets/image18.svg";
 import Image19 from "../../assets/image19.svg";
 import Image20 from "../../assets/image20.svg";
+import { motion, useScroll } from "motion/react";
 
 const clientsLogos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7];
 
@@ -289,12 +290,23 @@ const CumunityUpdate = () => (
 );
 
 const HeroSection = () => {
+  const { scrollYProgress } = useScroll();
   return (
     <>
+      <motion.div
+      
+        className="fixed top-0 left-0 right-0 h-1 bg-blue-500 z-50"
+        style={{ scaleX: scrollYProgress, transformOrigin: "0%" }}
+      />
       {/* Hero Section */}
       <div className="container mx-auto flex flex-col md:flex-row items-center gap-10 py-20 px-8 bg-[#F5F7FA] shadow-md ">
         {/* Left Content */}
-        <div className=" ml-40 w-full md:w-1/2 flex flex-col items-start gap-5">
+        <motion.div
+          initial={{ x: -200, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className=" ml-40 w-full md:w-1/2 flex flex-col items-start gap-5"
+        >
           <h3 className="text-7xl font-bold text-secondary">
             Lessons and insights <br />
             <span className="text-primary">from 8 years</span>
@@ -305,11 +317,17 @@ const HeroSection = () => {
           <button className="w-24 h-10 bg-primary shadow-[0_4px_6px_rgba(0,0,0,0.5)]  text-white rounded-md  hover:bg-green-800 transition">
             Register
           </button>
-        </div>
+        </motion.div>
 
         {/* Right Image */}
         <div className=" w-full md:w-1/3 flex items-center justify-center">
-          <img
+          <motion.img
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.5,
+              scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+            }}
             src={illustration}
             alt="Illustration"
             className="w-full h-auto object-cover"
