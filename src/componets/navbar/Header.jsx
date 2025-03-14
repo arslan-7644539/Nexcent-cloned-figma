@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Logo from "../../assets/Logo.svg";
 import { NavLink, useNavigate } from "react-router";
 import { motion } from "motion/react";
 import { useAuth } from "../../context/authContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
+import { ChevronDown, LogOut, User } from "lucide-react";
 // import { NavLink } from "react-router";
 
 const Header = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef();
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // ------------------------------
   const { user } = useAuth();
   const navigate = useNavigate();
   const activeLink = ({ isActive }) => {
@@ -37,64 +53,96 @@ const Header = () => {
         className="flex items-center  gap-[22px]"
       >
         <div className="flex gap-[16px]">
-          <motion.NavLink
+          <NavLink
             className={`text-secondary drop-shadow-sm ${activeLink} font-medium text-[15.14px] hover:underline`}
             to="/"
           >
             Home
-          </motion.NavLink>
-          <motion.NavLink
+          </NavLink>
+          <NavLink
             className={`text-secondary drop-shadow-sm ${activeLink} font-medium text-[15.14px] hover:underline`}
-            to="#"
+            to="/"
           >
             Feature
-          </motion.NavLink>
-          <motion.NavLink
+          </NavLink>
+          <NavLink
             className="text-secondary drop-shadow-sm  font-medium text-[15.14px] hover:underline"
             to="#"
           >
             Community
-          </motion.NavLink>
-          <motion.NavLink
+          </NavLink>
+          <NavLink
             className="text-secondary drop-shadow-sm  font-medium text-[15.14px] hover:underline"
-            to="#"
+            to="/blog-Post"
           >
             Blog
-          </motion.NavLink>
-          <motion.NavLink
+          </NavLink>
+          <NavLink
             className="text-secondary drop-shadow-sm  font-medium text-[15.14px] hover:underline"
             to="#"
           >
             Pricing
-          </motion.NavLink>
+          </NavLink>
         </div>
 
-        {user ? (
-          <motion.button
-            onClick={() => signOut(auth)}
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{
-              duration: 0.5,
-              ease: "easeOut",
-            }}
-            className="w-[140.25px] text-white h-[40.49px] flex items-center justify-center gap-[5.57px] px-[9.74px] py-[5px] cursor-pointer rounded-[2.78px] bg-primary  hover:bg-green-800 transition shadow-[0_4px_6px_rgba(0,0,0,0.5)] "
+        {user && (
+          // <motion.button
+
+          //   onClick={()=> navigate("/dashbord")}
+          //   initial={{ y: -100, opacity: 0 }}
+          //   animate={{ y: 0, opacity: 1 }}
+          //   transition={{
+          //     duration: 0.5,
+          //     ease: "easeOut",
+          //   }}
+          //   className="w-[140.25px] text-white h-[40.49px] flex items-center justify-center gap-[5.57px] px-[9.74px] py-[5px] cursor-pointer rounded-[2.78px] bg-primary  hover:bg-green-800 transition shadow-[0_4px_6px_rgba(0,0,0,0.5)] "
+          // >
+          //   Dashbore
+          // </motion.button>
+
+          <div
+            className="relative flex items-center space-x-3"
+            ref={dropdownRef}
           >
-            Logout
-          </motion.button>
-        ) : (
-          <motion.button
-            onClick={() => navigate("/register")}
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{
-              duration: 0.5,
-              ease: "easeOut",
-            }}
-            className="w-[140.25px] text-white h-[40.49px] flex items-center justify-center gap-[5.57px] px-[9.74px] py-[5px] cursor-pointer rounded-[2.78px] bg-primary  hover:bg-green-800 transition shadow-[0_4px_6px_rgba(0,0,0,0.5)] "
-          >
-            Register Now
-          </motion.button>
+            <div className="flex flex-col items-center">
+              <img
+                src="https://media-mct1-1.cdn.whatsapp.net/v/t61.24694-24/473402618_1317270199580736_2652709947685588980_n.jpg?ccb=11-4&oh=01_Q5AaIbau7BThPDJcgc1M8LI97iGPx7Wblm5JXUywOymzVll0&oe=67DED6CC&_nc_sid=5e03e0&_nc_cat=102"
+                alt="Profile"
+                className="w-10 h-10 rounded-full border-2 border-white shadow-md cursor-pointer"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              />
+              <p> {user.displayName} </p>
+            </div>
+            <ChevronDown
+              size={20}
+              className="text-gray-600 cursor-pointer transition-transform duration-200"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            />
+
+            {/* Dropdown */}
+            {isDropdownOpen && (
+              <div className="absolute right-0 top-12 w-52 bg-white rounded-xl shadow-xl border border-gray-200 z-20 animate-fade-in-up">
+                <ul className="py-2 text-gray-700">
+                  <li>
+                    <button
+                      onClick={() => navigate("/dashbord")}
+                      className="w-full text-left px-4 py-3 hover:bg-gray-100 flex items-center gap-2"
+                    >
+                      <User size={18} /> Dashbord
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => signOut(auth)}
+                      className="w-full text-left px-4 py-3 hover:bg-gray-100 flex items-center gap-2 text-red-500"
+                    >
+                      <LogOut size={18} /> Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
         )}
       </motion.nav>
     </div>

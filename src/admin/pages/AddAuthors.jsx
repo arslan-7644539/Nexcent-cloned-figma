@@ -1,72 +1,62 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "motion/react";
-import { Link, useNavigate } from "react-router";
-import { useFormik } from "formik";
 import * as yup from "yup";
+import { useFormik } from "formik";
+import { LinearProgress } from "@mui/material";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, fireDB } from "../../firebase";
-import { doc, setDoc } from "firebase/firestore";
-import { toast } from "react-toastify";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { useNavigate } from "react-router";
 
-const Register = () => {
+const AddAuthors = () => {
   const navigate = useNavigate();
-  // --------------------------
-  const regesterSchema = yup.object({
-    username: yup.string().required("userName is required"),
-    email: yup.string().email("Invalid Email").required("Email is requird"),
+
+  const authorSchema = yup.object({
+    username: yup.string().required("username is required"),
+    email: yup.string().email("Invalid Email").required("Email is required"),
     password: yup
       .string()
-      .min(6, " must be have 6 character ")
+      .min(6, "password must be a 6 characters")
       .required("password is required"),
   });
-  // ---------------------------------------
 
-  const regForm = useFormik({
+  const authorForm = useFormik({
     initialValues: {
       username: "",
       email: "",
       password: "",
     },
-    validationSchema: regesterSchema,
+    validationSchema: authorSchema,
     onSubmit: async (values, actions) => {
-      // e.preventDefault();
       try {
-        const res = await createUserWithEmailAndPassword(
+        const userCrenditional = await createUserWithEmailAndPassword(
           auth,
           values.email,
           values.password
         );
-        const user = res.user;
-        // console.log("🚀 ~ handleSubmit ~ user:", user);
+        const user = userCrenditional.user;
+        // ---------------------------------
+
         await setDoc(doc(fireDB, "users", user.uid), {
-          uid: user.uid,
           username: values.username,
           email: values.email,
-          createdAt: new Date(),
+          password: values.password,
+          uid: user.uid,
+          createdAt: Timestamp.now(),
         });
-
+        alert("New Author Added Successfully");
         actions.resetForm();
-        alert("Regester successfully");
-        toast.success('Regestration Successfully"', {
-          position: "top-right",
-        });
-        navigate("/login");
+        // setTimeout(() => {
+        //   navigate("/dashbord");
+        // }, 1000);
       } catch (error) {
-        if (error.code === "auth/email-already-in-use") {
-          console.error(error);
-          toast.error("something went wrong", {
-            position: "top-right",
-          });
-        }
-        if (error.code === "auth/email-already-in-use") {
-          actions.setFieldError("email", "This email is already registered");
-        }
+        console.error(error);
       } finally {
         actions.setSubmitting(false);
       }
     },
   });
-  // console.log("🚀 ~ Register ~ regForm:", regForm);
+
   const {
     values,
     handleChange,
@@ -75,21 +65,7 @@ const Register = () => {
     touched,
     handleBlur,
     isSubmitting,
-  } = regForm;
-
-  const alredyHaveRegester = (
-    <div className="text-center mt-4">
-      <p className="text-[#717171] text-sm">
-        Already have an account?{" "}
-        <Link
-          to="/login"
-          className="text-[#4CAF4F] font-medium hover:underline"
-        >
-          Login here
-        </Link>
-      </p>
-    </div>
-  );
+  } = authorForm;
 
   return (
     <div className=" container mx-auto h-screen flex justify-center items-center bg-[#F5F7FA] py-16 px-6 md:px-20">
@@ -100,7 +76,7 @@ const Register = () => {
         transition={{ duration: 0.6 }}
       >
         <h2 className="text-3xl md:text-4xl font-bold text-[#4D4D4D] mb-4">
-          Create Your Account
+          Create New Author
         </h2>
         <p className="text-[#717171] text-lg md:text-xl mb-8">
           Please fill the form below to get started with our amazing platform.
@@ -168,17 +144,12 @@ const Register = () => {
             )}
           </div>
 
-          {/* ------------------------------------ */}
-          {alredyHaveRegester}
-          {/* ------------------------------------ */}
-
-          {/* Submit Button */}
           <button
             disabled={isSubmitting}
             type="submit"
             className="w-full bg-primary text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#3a9e3e] transition duration-300"
           >
-            {isSubmitting ? "Registering" : " Register Now"}
+            {isSubmitting ? <LinearProgress /> : "   Add now"}
           </button>
         </form>
       </motion.div>
@@ -186,4 +157,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default AddAuthors;

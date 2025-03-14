@@ -5,10 +5,11 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
+import { LinearProgress } from "@mui/material";
 
 const Login = () => {
-   const navigate = useNavigate()
-    // -----------------------------
+  const navigate = useNavigate();
+  // -----------------------------
   const loginSchema = yup.object({
     email: yup.string().email("Invalid Email").required("Email is required"),
     password: yup.string().min(6).required("password is required"),
@@ -30,7 +31,7 @@ const Login = () => {
         const user = res.user;
         alert("Login Successfully");
         actions.resetForm();
-        navigate("/")
+        navigate("/dashbord");
       } catch (error) {
         console.error("login errer : ", error);
       } finally {
@@ -54,10 +55,7 @@ const Login = () => {
     <div className="text-center mt-4">
       <p className="text-[#717171] text-sm">
         Don't have an account?{" "}
-        <Link
-          to="/register"
-          className="text-[#4CAF4F] font-medium hover:underline"
-        >
+        <Link to="#" className="text-[#4CAF4F] font-medium hover:underline">
           Register here
         </Link>
       </p>
@@ -108,7 +106,7 @@ const Login = () => {
               Password
             </label>
             <input
-            autoComplete="current-password"
+              autoComplete="current-password"
               onBlur={handleBlur}
               type="password"
               name="password"
@@ -130,7 +128,7 @@ const Login = () => {
             type="submit"
             className="w-full bg-primary text-white font-semibold px-6 py-3 rounded-xl hover:bg-[#3a9e3e] transition duration-300"
           >
-            {isSubmitting ? "Logging in..." : " Login Now"}
+            {isSubmitting ? <LinearProgress /> : " Login Now"}
           </button>
         </form>
       </motion.div>
