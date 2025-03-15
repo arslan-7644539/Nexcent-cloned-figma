@@ -4,6 +4,7 @@ import { fireDB } from "../../../firebase";
 import { AuthContext } from "../../../context/authContext";
 import { Link, useNavigate } from "react-router";
 import { LinearProgress } from "@mui/material";
+import BackButton from "../buttons/BackButton";
 // apna firebase config yahan import karo
 
 const AdminViewPost = () => {
@@ -13,7 +14,10 @@ const AdminViewPost = () => {
   return (
     <div className="container mx-auto min-h-screen bg-gray-100 p-6">
       <div className="max-w-6xl mx-auto bg-white p-6 rounded shadow">
-        <h2 className="text-2xl font-bold mb-4">📋 All Blog Posts</h2>
+        <div className="flex flex-row justify-between items-baseline">
+          <h2 className="text-2xl font-bold mb-4">📋 All Blog Posts</h2>
+          <BackButton />
+        </div>
 
         <div className="overflow-x-auto">
           <table className="w-full table-auto border border-gray-200">

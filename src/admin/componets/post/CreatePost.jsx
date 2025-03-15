@@ -6,6 +6,7 @@ import { AuthContext } from "../../../context/authContext";
 import CircularProgress from "@mui/material/CircularProgress";
 import { motion } from "motion/react";
 import { useSnackbar } from "notistack";
+import BackButton from "../buttons/BackButton";
 
 const AddPost = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -25,7 +26,6 @@ const AddPost = () => {
     //   setPost({ ...post, image: files[0] });
     // } else {
     setPost({ ...post, [name]: value });
-    
   };
 
   const handleSubmit = async (e) => {
@@ -51,7 +51,7 @@ const AddPost = () => {
         author: user.displayName,
       });
       setPost({ title: "", description: "", tags: "", image: null });
-      enqueueSnackbar("✅ Post created successfully!",{variant:"success"});
+      enqueueSnackbar("✅ Post created successfully!", { variant: "success" });
       setIsLoading(false);
     } catch (error) {
       console.error(error);
@@ -64,12 +64,17 @@ const AddPost = () => {
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen bg-[#f5f7fa] py-40 px-4   "
+      className="min-h-screen bg-[#f5f7fa] py-40 px-4 D  "
     >
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-6">
-        <h2 className="text-3xl font-semibold text-gray-800 mb-6">
-          📝 Add New Post
-        </h2>
+        <div className="flex flex-row justify-between">
+          <h2 className="text-3xl font-semibold text-gray-800 mb-6">
+            📝 Add New Post
+          </h2>
+          <div>
+            <BackButton />
+          </div>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Title */}

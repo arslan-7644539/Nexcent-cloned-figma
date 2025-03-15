@@ -3,12 +3,14 @@ import { motion } from "motion/react";
 import { LinearProgress } from "@mui/material";
 import { useParams } from "react-router";
 import { AuthContext } from "../../../context/authContext";
+import BackButton from "../buttons/BackButton";
 
 const EditProfile = () => {
   const [userId, setUserId] = useState("");
   const { uid } = useParams();
-  console.log("🚀 ~ EditProfile ~ uid:", uid)
-  const { userData, profileUpdate , profileUpdateLoading} = useContext(AuthContext);
+  console.log("🚀 ~ EditProfile ~ uid:", uid);
+  const { userData, profileUpdate, profileUpdateLoading } =
+    useContext(AuthContext);
   console.log("🚀 ~ EditProfile ~ userData:", userData);
   const [updatedData, setUpdatedData] = useState({
     username: "",
@@ -55,10 +57,15 @@ const EditProfile = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-[#4D4D4D] mb-4">
-          Edit Your Profile
-        </h2>
-        <p className="text-[#717171] text-lg md:text-xl mb-8">
+        <div className="flex flex-row justify-between items-baseline py-5 ">
+          <h2 className="text-2xl md:text-4xl font-semibold text-[#4D4D4D] mb-4">
+            Edit Your Profile
+          </h2>
+          <div className="top-1.5">
+            <BackButton />
+          </div>
+        </div>
+        <p className="text-[#717171] text-lg md:text-xl mb-8 text-center ">
           Please fill the form below to edit your profile .
         </p>
 

@@ -12,12 +12,13 @@ import {
 import { AuthContext } from "../../context/authContext";
 import { Edit } from "@mui/icons-material";
 import { useNavigate } from "react-router";
+import BackButton from "../componets/buttons/BackButton";
 
 const Profile = () => {
-  const navigaite = useNavigate()
+  const navigaite = useNavigate();
   const avatar =
     "https://media-mct1-1.cdn.whatsapp.net/v/t61.24694-24/473402618_1317270199580736_2652709947685588980_n.jpg?ccb=11-4&oh=01_Q5AaIbau7BThPDJcgc1M8LI97iGPx7Wblm5JXUywOymzVll0&oe=67DED6CC&_nc_sid=5e03e0&_nc_cat=102";
-  const { user,userData } = useContext(AuthContext);
+  const { user, userData } = useContext(AuthContext);
   return (
     <Card
       sx={{
@@ -44,9 +45,13 @@ const Profile = () => {
 
           {/* Info */}
           <Grid item xs={12} sm={8}>
-            <Typography variant="h5" fontWeight="bold" gutterBottom>
-              {user.displayName || "Admin User"}
-            </Typography>
+            <div className="flex flex-row justify-between items-baseline ">
+              <Typography variant="h5" fontWeight="bold" gutterBottom>
+                {user.displayName || "Admin User"}
+              </Typography>
+              {/* ------------- back button */}
+              <BackButton />
+            </div>
             <Typography variant="body1" color="text.secondary">
               Email: {user.email}
             </Typography>
@@ -59,7 +64,11 @@ const Profile = () => {
 
             {/* Edit Button */}
             <Box mt={2}>
-              <Button onClick={()=> navigaite(`/dashbord/edit-profile/${user.uid}`)} variant="contained" startIcon={<Edit />}>
+              <Button
+                onClick={() => navigaite(`/dashbord/edit-profile/${user.uid}`)}
+                variant="contained"
+                startIcon={<Edit />}
+              >
                 Edit Profile
               </Button>
             </Box>

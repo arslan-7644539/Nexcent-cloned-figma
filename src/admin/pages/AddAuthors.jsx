@@ -8,6 +8,7 @@ import { auth, fireDB } from "../../firebase";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router";
 import { useSnackbar } from "notistack";
+import BackButton from "../componets/buttons/BackButton";
 
 const AddAuthors = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -80,10 +81,13 @@ const AddAuthors = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-[#4D4D4D] mb-4">
-          Create New Author
-        </h2>
-        <p className="text-[#717171] text-lg md:text-xl mb-8">
+        <div className="flex flex-row justify-between items-center mb-3    ">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#4D4D4D] mb-4">
+            Create New Author
+          </h2>
+          <BackButton />
+        </div>
+        <p className="text-[#717171] text-lg md:text-xl mb-6">
           Please fill the form below to get started with our amazing platform.
         </p>
 
