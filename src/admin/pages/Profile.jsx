@@ -29,11 +29,7 @@ const Profile = () => {
         p: 2,
       }}
     >
-
-      
-
       <CardContent>
-
         <Grid container spacing={2} alignItems="center">
           {/* Avatar */}
           <Grid item xs={12} sm={4}>

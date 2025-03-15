@@ -13,7 +13,7 @@ const EditPost = () => {
   //   const [isLoading, setIsLoading] = useState(false);
   const { postUpdateLoading, postUpdate, blogs } = useContext(AuthContext);
   const [postId, setPostId] = useState(null);
-  console.log("🚀 ~ EditPost ~ postId:", postId);
+  // console.log("🚀 ~ EditPost ~ postId:", postId);
   const [updatedPost, setUpdatedPost] = useState({
     title: "",
     description: "",

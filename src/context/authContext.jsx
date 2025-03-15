@@ -11,12 +11,14 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { useNavigate } from "react-router";
+import { useSnackbar } from "notistack";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   // ------------------------------------
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   // post-update
   const [postUpdateLoading, setPostUpdateLoading] = useState(false);
@@ -26,7 +28,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const updateRef = doc(fireDB, "posts", postId);
       await updateDoc(updateRef, updatedData);
-      alert("Updated successfuly");
+      enqueueSnackbar("Updated successfuly", { variant: "success" });
       setPostUpdateLoading(false);
       setUpdatedPost({
         title: "",
@@ -51,7 +53,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const profileRef = doc(fireDB, "users", userId);
       await updateDoc(profileRef, updatedData);
-      alert("profile update successfully");
+      enqueueSnackbar("profile update successfully", { variant: "success" });
       setProfileUpdateLoading(false);
       setUpdatedData({
         username: "",
@@ -75,7 +77,22 @@ export const AuthProvider = ({ children }) => {
       );
       if (confirm) {
         await deleteDoc(doc(fireDB, "posts", postId));
-        alert("post delete Successfuly");
+        enqueueSnackbar("post delete Successfuly", { variant: "success" });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // delete-user
+  const deleteUser = async (userId) => {
+    try {
+      const confirm = window.confirm(
+        "Are you sure you want to delete this user"
+      );
+      if (confirm) {
+        await deleteDoc(doc(fireDB, "users", userId));
+        enqueueSnackbar("user delete Successfuly", { variant: "success" });
       }
     } catch (error) {
       console.error(error);
@@ -110,9 +127,11 @@ export const AuthProvider = ({ children }) => {
 
   // user Data fetching from firestor
   const [userData, setUserData] = useState(null);
+  const [usersLoading, setusersLoading] = useState(false);
   console.log("🚀 ~ AuthProvider ~ userData:", userData);
 
   const fetchUserData = async () => {
+    setusersLoading(true);
     try {
       const userQuery = await getDocs(collection(fireDB, "users"));
       const usersData = userQuery.docs.map((doc) => ({
@@ -120,8 +139,10 @@ export const AuthProvider = ({ children }) => {
         ...doc.data(),
       }));
       setUserData(usersData);
+      setusersLoading(false);
     } catch (error) {
       console.error(error);
+      setusersLoading(false);
     }
   };
 
@@ -131,7 +152,7 @@ export const AuthProvider = ({ children }) => {
 
   // user authenticatiion
   const [user, setUser] = useState(null);
-  console.log("🚀 ~ AuthProvider ~ user:", user);
+  // console.log("🚀 ~ AuthProvider ~ user:", user);
   const [loading, setLoading] = useState(true); // optional for loading state
 
   useEffect(() => {
@@ -149,12 +170,17 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         loading,
+        // -----------------------
         blogsFetchingLoading,
         blogs,
         deletePost,
         postUpdate,
         postUpdateLoading,
+        // -----------------------
         userData,
+        usersLoading,
+        deleteUser,
+        // -----------------------
         profileUpdate,
         profileUpdateLoading,
       }}

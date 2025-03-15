@@ -5,9 +5,10 @@ import { auth } from "../../firebase";
 import { AuthContext, useAuth } from "../../context/authContext";
 import { MdPostAdd } from "react-icons/md";
 import { useNavigate } from "react-router";
+import { AiOutlineUsergroupAdd } from "react-icons/ai";
 
 const Dashbord = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { user, blogs, userData } = useContext(AuthContext);
   console.log("🚀 ~ Dashbord ~ user:", user);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -25,7 +26,7 @@ const Dashbord = () => {
   }, []);
 
   return (
-    <div className="w-full h-screen bg-gradient-to-br from-fuchsia-100 to-pink-100 flex">
+    <div className="  w-full h-screen bg-gradient-to-br from-fuchsia-100 to-pink-100 flex">
       {/* Sidebar (optional) */}
       {/* <Sidebar /> */}
 
@@ -91,10 +92,12 @@ const Dashbord = () => {
             <p className="text-4xl font-bold text-blue-600 flex flex-row justify-around">
               {" "}
               {blogs.length}{" "}
-              <span  onClick={()=> navigate("/dashbord/admin-view-post")} className="cursor-pointer flex flex-col gap-2 items-center">
-                
+              <span
+                onClick={() => navigate("/dashbord/admin-view-post")}
+                className="cursor-pointer flex flex-col gap-2 items-center"
+              >
                 <MdPostAdd className="cursor-pointer" />
-                <h3 className="text-[23px]">view post</h3>
+                <h3 className="text-[23px]">View Post</h3>
               </span>
             </p>
             <p className="text-sm text-gray-500 mt-2">Updated just now</p>
@@ -105,9 +108,13 @@ const Dashbord = () => {
             <h2 className="text-xl font-semibold text-gray-700 mb-2">
               Authors
             </h2>
-            <p className=" cursor-pointer text-4xl font-bold text-green-600">
+            <p className=" cursor-pointer text-4xl font-bold text-green-600 flex flex-row justify-around">
               {" "}
-              {userData?.length }
+              {userData?.length}
+              <span onClick={()=> navigate("/dashbord/view-author-list")} className="cursor-pointer flex flex-col gap-2 items-center">
+                <AiOutlineUsergroupAdd />
+                <h3 className="text-[23px]">View Users</h3>
+              </span>
             </p>
             <p className="text-sm text-gray-500 mt-2">Active this week</p>
           </div>

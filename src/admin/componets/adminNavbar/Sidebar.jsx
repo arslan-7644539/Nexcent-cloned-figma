@@ -18,7 +18,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="h-screen w-64 bg-gradient-to-b from-blue-100 to-blue-200 p-6 shadow-md">
+    <div className="  h-screen w-64 bg-gradient-to-b from-blue-100 to-blue-200 p-6 shadow-md">
       <h1
         onClick={() => navigate("/dashbord")}
         className="text-3xl font-bold text-center mt-3 text-blue-700 mb-8 cursor-pointer hover:font-extrabold hover:underline hover:text-blue-800"

@@ -1,13 +1,14 @@
 // components/AddPost.jsx
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import React, { useContext, useState } from "react";
-import { auth, fireDB } from "../../../firebase";
+import { fireDB } from "../../../firebase";
 import { AuthContext } from "../../../context/authContext";
-// import { progress } from "motion";
 import CircularProgress from "@mui/material/CircularProgress";
-// import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { motion } from "motion/react";
+import { useSnackbar } from "notistack";
 
 const AddPost = () => {
+  const { enqueueSnackbar } = useSnackbar();
   // const storage = getStorage();
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useContext(AuthContext);
@@ -23,8 +24,8 @@ const AddPost = () => {
     // if (name === "image") {
     //   setPost({ ...post, image: files[0] });
     // } else {
-      setPost({ ...post, [name]: value });
-    // }
+    setPost({ ...post, [name]: value });
+    
   };
 
   const handleSubmit = async (e) => {
@@ -50,16 +51,21 @@ const AddPost = () => {
         author: user.displayName,
       });
       setPost({ title: "", description: "", tags: "", image: null });
-      alert("✅ Post created successfully!");
+      enqueueSnackbar("✅ Post created successfully!",{variant:"success"});
       setIsLoading(false);
     } catch (error) {
       console.error(error);
-      setIsLoading(true);
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="min-h-screen bg-[#f5f7fa] py-40 px-4   "
+    >
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-6">
         <h2 className="text-3xl font-semibold text-gray-800 mb-6">
           📝 Add New Post
@@ -132,14 +138,14 @@ const AddPost = () => {
             <button
               disabled={isLoading}
               type="submit"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition font-medium"
+              className="bg-primary hover:bg-green-700 text-white px-6 py-2 rounded-lg transition font-medium"
             >
               {isLoading ? <CircularProgress /> : "  Publish Post"}
             </button>
           </div>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

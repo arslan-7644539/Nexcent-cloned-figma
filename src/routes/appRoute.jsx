@@ -13,6 +13,7 @@ import BlogPost from "../pages/bloge/BlogPost";
 import AdminViewPost from "../admin/componets/post/AdminViewPost";
 import EditPost from "../admin/componets/post/EditPost";
 import EditProfile from "../admin/componets/profile/EditProfile";
+import AdminViewAuthor from "../admin/componets/auth/AdminViewAuthor";
 
 export const appRoutes = [
   {
@@ -75,6 +76,10 @@ export const appRoutes = [
       {
         path: "addAuthor",
         element: <AddAuthors />,
+      },
+      {
+        path: "view-author-list",
+        element: <AdminViewAuthor />,
       },
     ],
   },

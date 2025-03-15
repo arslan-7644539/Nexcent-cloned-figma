@@ -7,8 +7,10 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, fireDB } from "../../firebase";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router";
+import { useSnackbar } from "notistack";
 
 const AddAuthors = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
   const authorSchema = yup.object({
@@ -44,13 +46,16 @@ const AddAuthors = () => {
           uid: user.uid,
           createdAt: Timestamp.now(),
         });
-        alert("New Author Added Successfully");
+        enqueueSnackbar("New Author Added Successfully", {
+          variant: "success",
+        });
         actions.resetForm();
-        // setTimeout(() => {
-        //   navigate("/dashbord");
-        // }, 1000);
+        setTimeout(() => {
+          navigate("/dashbord");
+        }, 1000);
       } catch (error) {
         console.error(error);
+        enqueueSnackbar("Someting went wrong", { variant: "info" });
       } finally {
         actions.setSubmitting(false);
       }
