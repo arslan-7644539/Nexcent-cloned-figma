@@ -56,7 +56,7 @@ const EditPost = () => {
   }, [id, blogs]);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-pink-100 py-10 px-4">
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-6">
         <h2 className="text-3xl font-semibold text-gray-800 mb-6">
           📝 Edit Post

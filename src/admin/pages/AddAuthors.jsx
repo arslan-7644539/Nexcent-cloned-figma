@@ -74,7 +74,7 @@ const AddAuthors = () => {
   } = authorForm;
 
   return (
-    <div className=" container mx-auto h-screen flex justify-center items-center bg-[#F5F7FA] py-16 px-6 md:px-20">
+    <div className=" container mx-auto h-screen flex justify-center items-center bg-gradient-to-br from-blue-50 to-pink-100 py-16 px-6 md:px-20">
       <motion.div
         className="max-w-3xl mx-auto text-center bg-white p-10 rounded-3xl shadow-lg"
         initial={{ opacity: 0, y: 50 }}

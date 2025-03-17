@@ -6,8 +6,11 @@ import * as yup from "yup";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { LinearProgress } from "@mui/material";
+import { FaEye } from "react-icons/fa";
+import { BiHide } from "react-icons/bi";
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(true);
   const navigate = useNavigate();
   // -----------------------------
   const loginSchema = yup.object({
@@ -99,29 +102,40 @@ const Login = () => {
               <p className="text-red-500 text-sm mt-1">{errors.email}</p>
             )}
           </div>
-
           {/* Password Field */}
-          <div>
+
+          <div className="relative w-full">
+            {/* Label */}
             <label className="block mb-1 text-[#4D4D4D] font-semibold">
               Password
             </label>
+
+            {/* Input */}
             <input
               autoComplete="current-password"
               onBlur={handleBlur}
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={values.password}
               onChange={handleChange}
               placeholder="Enter your password"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF4F]"
+              className="w-full px-4 py-3 pr-14 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF4F] text-base sm:text-sm"
             />
+
+            {/* Toggle Eye Icon */}
+            <div
+              className="absolute top-13.5 right-4 sm:right-3 transform -translate-y-1/2 text-xl sm:text-lg text-gray-500 cursor-pointer z-10"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <BiHide /> : <FaEye />}
+            </div>
+
+            {/* Error */}
             {touched.password && errors.password && (
               <p className="text-red-500 text-sm mt-1">{errors.password}</p>
             )}
           </div>
-
           {dontHaveAccount}
-
           {/* Submit Button */}
           <button
             disabled={isSubmitting}

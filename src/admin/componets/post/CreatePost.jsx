@@ -64,7 +64,7 @@ const AddPost = () => {
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="min-h-screen bg-[#f5f7fa] py-40 px-4 D  "
+      className="min-h-screen bg-gradient-to-br from-blue-50 to-pink-100 py-40 px-4   "
     >
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-6">
         <div className="flex flex-row justify-between">

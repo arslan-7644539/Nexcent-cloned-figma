@@ -12,7 +12,7 @@ const AdminViewPost = () => {
   const { blogs, deletePost } = useContext(AuthContext);
 
   return (
-    <div className="container mx-auto min-h-screen bg-gray-100 p-6">
+    <div className="container mx-auto min-h-screen bg-gradient-to-br from-blue-50 to-pink-100 p-6">
       <div className="max-w-6xl mx-auto bg-white p-6 rounded shadow">
         <div className="flex flex-row justify-between items-baseline">
           <h2 className="text-2xl font-bold mb-4">📋 All Blog Posts</h2>
