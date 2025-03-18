@@ -14,6 +14,7 @@ import AdminViewPost from "../admin/componets/post/AdminViewPost";
 import EditPost from "../admin/componets/post/EditPost";
 import EditProfile from "../admin/componets/profile/EditProfile";
 import AdminViewAuthor from "../admin/componets/auth/AdminViewAuthor";
+import ViewSinglePost from "../pages/bloge/ViewSinglePost";
 
 export const appRoutes = [
   {
@@ -31,6 +32,10 @@ export const appRoutes = [
       {
         path: "blog-Post",
         element: <BlogPost />,
+      },
+      {
+        path: "single-post/:id",
+        element: <ViewSinglePost />,
       },
     ],
   },

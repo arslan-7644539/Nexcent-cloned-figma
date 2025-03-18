@@ -6,6 +6,7 @@ import { AuthContext } from "../../../context/authContext";
 // import { progress } from "motion";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useParams } from "react-router";
+import BackButton from "../buttons/BackButton";
 // import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const EditPost = () => {
@@ -58,9 +59,12 @@ const EditPost = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-pink-100 py-10 px-4">
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-6">
-        <h2 className="text-3xl font-semibold text-gray-800 mb-6">
-          📝 Edit Post
-        </h2>
+        <div className="flex flex-row justify-between ">
+          <h2 className="text-3xl font-semibold text-gray-800 mb-6">
+            📝 Edit Post
+          </h2>
+          <BackButton  />
+        </div>
 
         <form className="space-y-5">
           {/* Title */}
@@ -130,11 +134,15 @@ const EditPost = () => {
               disabled={postUpdateLoading}
               onClick={(e) => {
                 e.preventDefault();
-                postUpdate(postId, updatedPost,setUpdatedPost);
+                postUpdate(postId, updatedPost, setUpdatedPost);
               }}
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition font-medium"
             >
-              {postUpdateLoading ? <CircularProgress size={24} /> : "  Publish Post"}
+              {postUpdateLoading ? (
+                <CircularProgress size={24} />
+              ) : (
+                "  Publish Post"
+              )}
             </button>
           </div>
         </form>

@@ -86,7 +86,7 @@ const Dashbord = () => {
             <p className="text-sm text-gray-500 mt-1">Updated just now</p>
             <button
               onClick={() => navigate("/dashbord/admin-view-post")}
-              className="mt-4 w-full text-center bg-blue-100 text-blue-700 py-2 rounded-md hover:bg-blue-200 transition"
+              className="mt-4 w-full cursor-pointer text-center bg-blue-100 text-blue-700 py-2 rounded-md hover:bg-blue-200 transition"
             >
               View Posts
             </button>
@@ -104,7 +104,7 @@ const Dashbord = () => {
             <p className="text-sm text-gray-500 mt-1">Active this week</p>
             <button
               onClick={() => navigate("/dashbord/view-author-list")}
-              className="mt-4 w-full text-center bg-orange-100 text-orange-700 py-2 rounded-md hover:bg-orange-200 transition"
+              className="mt-4 cursor-pointer w-full text-center bg-orange-100 text-orange-700 py-2 rounded-md hover:bg-orange-200 transition"
             >
               View Users
             </button>
@@ -120,7 +120,7 @@ const Dashbord = () => {
             </div>
             <p className="text-4xl font-bold text-purple-600">3.4K</p>
             <p className="text-sm text-gray-500 mt-1">Last 7 days</p>
-            <button className="mt-4 w-full text-center bg-purple-100 text-purple-700 py-2 rounded-md hover:bg-purple-200 transition">
+            <button className="mt-4 cursor-pointer w-full text-center bg-purple-100 text-purple-700 py-2 rounded-md hover:bg-purple-200 transition">
               View Analytics
             </button>
           </div>

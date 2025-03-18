@@ -5,8 +5,10 @@ import { TbLogs } from "react-icons/tb";
 import { auth, fireDB } from "../../firebase";
 import { CircularProgress } from "@mui/material";
 import { AuthContext } from "../../context/authContext";
+import { useNavigate } from "react-router";
 
 const BlogPost = () => {
+  const navigate = useNavigate();
   const { blogs, blogsFetchingLoading } = useContext(AuthContext);
 
   if (blogsFetchingLoading)
@@ -30,12 +32,16 @@ const BlogPost = () => {
               className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"
             >
               <img
+                onClick={() => navigate(`/single-post/${blog.id}`)}
                 src={blog.image}
                 alt={blog.title}
                 className="w-full h-48 object-cover"
               />
               <div className="p-5">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                <h3
+                  onClick={() => navigate(`/single-post/${blog.id}`)}
+                  className="text-xl font-semibold text-gray-800 cursor-pointer mb-2"
+                >
                   {blog.title}
                 </h3>
                 <p className="text-gray-600 text-sm mb-3">

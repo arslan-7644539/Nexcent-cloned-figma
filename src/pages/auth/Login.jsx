@@ -10,7 +10,7 @@ import { FaEye } from "react-icons/fa";
 import { BiHide } from "react-icons/bi";
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   // -----------------------------
   const loginSchema = yup.object({
