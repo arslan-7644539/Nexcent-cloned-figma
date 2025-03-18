@@ -9,7 +9,7 @@ import BackButton from "../buttons/BackButton";
 
 const AdminViewPost = () => {
   //   const navigate = useNavigate();
-  const { blogs, deletePost } = useContext(AuthContext);
+  const { blogs, deletePost, blogsFetchingLoading } = useContext(AuthContext);
 
   return (
     <div className="container mx-auto min-h-screen bg-gradient-to-br from-blue-50 to-pink-100 p-6">
@@ -73,12 +73,21 @@ const AdminViewPost = () => {
                   </td>
                 </tr>
               ))}
-              {blogs.length === 0 && (
+
+              {blogs.length === 0 ? (
                 <tr>
                   <td colSpan="4" className="text-center text-gray-500 py-6">
-                    {<LinearProgress /> || " No posts found."}
+                    No posts found.
                   </td>
                 </tr>
+              ) : (
+                blogsFetchingLoading && (
+                  <tr>
+                    <td colSpan="4" className="text-center text-gray-500 py-6">
+                      <LinearProgress />
+                    </td>
+                  </tr>
+                )
               )}
             </tbody>
           </table>
