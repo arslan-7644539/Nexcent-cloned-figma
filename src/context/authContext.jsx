@@ -105,6 +105,7 @@ export const AuthProvider = ({ children }) => {
   const [blogs, setBlogs] = useState([]);
 
   console.log("🚀 ~ BlogPost ~ blogs:", blogs);
+  
 
   const fetchBlogs = async () => {
     setBlogsFetchingLoading(true);
@@ -123,7 +124,7 @@ export const AuthProvider = ({ children }) => {
   };
   useEffect(() => {
     fetchBlogs();
-  }, [blogs]);
+  }, []);
 
   // user Data fetching from firestor
   const [userData, setUserData] = useState(null);

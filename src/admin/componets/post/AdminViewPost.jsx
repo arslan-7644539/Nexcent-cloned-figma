@@ -73,11 +73,14 @@ const AdminViewPost = () => {
                   </td>
                 </tr>
               ))}
-
-              {blogs.length === 0 ? (
+              {/* ------------------------------------------------------------------------- */}
+              {blogs.length < 1 ? (
                 <tr>
                   <td colSpan="4" className="text-center text-gray-500 py-6">
-                    No posts found.
+                    <h3 className="text-center text-2xl font-bold">
+                      {" "}
+                      No posts found.
+                    </h3>
                   </td>
                 </tr>
               ) : (
@@ -89,6 +92,7 @@ const AdminViewPost = () => {
                   </tr>
                 )
               )}
+              {/* ------------------------------------------------------------------------------- */}
             </tbody>
           </table>
         </div>

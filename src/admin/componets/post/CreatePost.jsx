@@ -7,8 +7,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { motion } from "motion/react";
 import { useSnackbar } from "notistack";
 import BackButton from "../buttons/BackButton";
+import { useNavigate } from "react-router";
 
 const AddPost = () => {
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   // const storage = getStorage();
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +19,7 @@ const AddPost = () => {
     title: "",
     description: "",
     tags: "",
-    // image: null,
+    image: "",
   });
 
   const handleChange = (e) => {
@@ -47,12 +49,14 @@ const AddPost = () => {
         description: post.description,
         tags: post.tags,
         // image: imageUrl,
+        image: post.image,
         createdAt: Timestamp.now(),
         author: user.displayName,
       });
       setPost({ title: "", description: "", tags: "", image: null });
       enqueueSnackbar("✅ Post created successfully!", { variant: "success" });
       setIsLoading(false);
+      navigate("/dashbord");
     } catch (error) {
       console.error(error);
       setIsLoading(false);
@@ -125,18 +129,19 @@ const AddPost = () => {
           </div>
 
           {/* Image Upload */}
-          {/* <div>
+          <div>
             <label className="block text-gray-700 font-medium mb-1">
-              Upload Image (optional)
+              Upload Image
             </label>
             <input
-              type="file"
+              type="tect"
               name="image"
+              placeholder="Enter Image URL ( Only )"
               onChange={handleChange}
-              accept="image/*"
-              className="block w-full text-gray-600"
+              // accept="image/*"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-          </div> */}
+          </div>
 
           {/* Submit Button */}
           <div className="text-right">

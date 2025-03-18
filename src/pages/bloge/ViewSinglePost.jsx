@@ -60,7 +60,7 @@ const ViewSinglePost = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
       {/* Title */}
-      <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
+      <h1 className="text-4xl font-bold line-clamp-2 mb-4">{post.title}</h1>
 
       {/* Author & Meta */}
       <div className="flex items-center text-sm text-gray-500 mb-6 space-x-4">
@@ -76,7 +76,7 @@ const ViewSinglePost = () => {
 
       {/* Cover Image */}
       <img
-        // src={post.coverImage}
+        src={post.image}
         alt="Cover"
         className="rounded-xl w-full mb-6 shadow-lg"
       />
