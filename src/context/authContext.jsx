@@ -123,7 +123,7 @@ export const AuthProvider = ({ children }) => {
   };
   useEffect(() => {
     fetchBlogs();
-  }, []);
+  }, [blogs]);
 
   // user Data fetching from firestor
   const [userData, setUserData] = useState(null);
