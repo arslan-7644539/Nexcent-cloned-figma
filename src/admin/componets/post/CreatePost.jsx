@@ -61,14 +61,18 @@ const AddPost = () => {
     <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-pink-100 px-4 py-8">
       <div className="w-full max-w-4xl bg-white rounded-xl shadow-lg p-6">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-3xl font-semibold text-gray-800">📝 Add New Post</h2>
+          <h2 className="text-3xl font-semibold text-gray-800">
+            📝 Add New Post
+          </h2>
           <BackButton />
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Title */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Title</label>
+            <label className="block text-gray-700 font-medium mb-1">
+              Title
+            </label>
             <input
               type="text"
               name="title"
@@ -82,17 +86,23 @@ const AddPost = () => {
 
           {/* Content */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Content</label>
+            <label className="block text-gray-700 font-medium mb-1">
+              Content
+            </label>
             <JoditEditor
               ref={editor}
               value={post.content}
-              onChange={(newContent) => setPost({ ...post, content: newContent })}
+              onChange={(newContent) =>
+                setPost({ ...post, content: newContent })
+              }
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Description</label>
+            <label className="block text-gray-700 font-medium mb-1">
+              Description
+            </label>
             <textarea
               name="description"
               value={post.description}
@@ -106,7 +116,9 @@ const AddPost = () => {
 
           {/* Tags */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Tags (comma separated)</label>
+            <label className="block text-gray-700 font-medium mb-1">
+              Tags (comma separated)
+            </label>
             <input
               type="text"
               name="tags"
@@ -119,8 +131,11 @@ const AddPost = () => {
 
           {/* Image Upload */}
           <div>
-            <label className="block text-gray-700 font-medium mb-1">Upload Image</label>
+            <label className="block text-gray-700 font-medium mb-1">
+              Upload Image
+            </label>
             <input
+              value={post.image}
               type="text"
               name="image"
               placeholder="Enter Image URL ( Only )"
@@ -136,7 +151,11 @@ const AddPost = () => {
               type="submit"
               className="bg-primary hover:bg-green-700 text-white px-6 py-2 rounded-lg transition font-medium"
             >
-              {isLoading ? <CircularProgress size={24} color="inherit" /> : "Publish Post"}
+              {isLoading ? (
+                <CircularProgress size={24} color="inherit" />
+              ) : (
+                "Publish Post"
+              )}
             </button>
           </div>
         </form>

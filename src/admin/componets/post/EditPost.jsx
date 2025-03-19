@@ -1,17 +1,17 @@
 // components/AddPost.jsx
 import { addDoc, collection, Timestamp } from "firebase/firestore";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { auth, fireDB } from "../../../firebase";
 import { AuthContext } from "../../../context/authContext";
 // import { progress } from "motion";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useParams } from "react-router";
 import BackButton from "../buttons/BackButton";
+import JoditEditor from "jodit-react";
 // import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const EditPost = () => {
-  // const storage = getStorage();
-  //   const [isLoading, setIsLoading] = useState(false);
+  const editor = useRef(null);
   const { postUpdateLoading, postUpdate, blogs } = useContext(AuthContext);
   const [postId, setPostId] = useState(null);
   // console.log("🚀 ~ EditPost ~ postId:", postId);
@@ -19,16 +19,14 @@ const EditPost = () => {
     title: "",
     description: "",
     tags: "",
-    // image: null,
+    image: "",
+    content: "",
   });
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "image") {
-      setUpdatedPost({ ...updatedPost, image: files[0] });
-    } else {
-      setUpdatedPost({ ...updatedPost, [name]: value });
-    }
+    const { name, value } = e.target;
+
+    setUpdatedPost({ ...updatedPost, [name]: value });
   };
 
   //   ------------------------------------
@@ -45,7 +43,8 @@ const EditPost = () => {
             title: singlePost.title,
             description: singlePost.description,
             tags: singlePost.tags,
-            // image: singlePost.image,
+            image: singlePost.image,
+            content: singlePost.content,
           });
         }
       } catch (error) {
@@ -63,7 +62,7 @@ const EditPost = () => {
           <h2 className="text-3xl font-semibold text-gray-800 mb-6">
             📝 Edit Post
           </h2>
-          <BackButton  />
+          <BackButton />
         </div>
 
         <form className="space-y-5">
@@ -80,6 +79,20 @@ const EditPost = () => {
               placeholder="Enter title..."
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
+            />
+          </div>
+
+          {/* Content */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">
+              Content
+            </label>
+            <JoditEditor
+              ref={editor}
+              value={updatedPost.content}
+              onChange={(newContent) =>
+                setUpdatedPost({ ...updatedPost, content: newContent })
+              }
             />
           </div>
 
@@ -115,18 +128,19 @@ const EditPost = () => {
           </div>
 
           {/* Image Upload */}
-          {/* <div>
+          <div>
             <label className="block text-gray-700 font-medium mb-1">
-              Upload Image (optional)
+              Upload Image
             </label>
             <input
-              type="file"
+              value={updatedPost.image}
+              type="text"
               name="image"
+              placeholder="Enter Image URL ( Only )"
               onChange={handleChange}
-              accept="image/*"
-              className="block w-full text-gray-600"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-          </div> */}
+          </div>
 
           {/* Submit Button */}
           <div className="text-right">
