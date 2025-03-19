@@ -1,6 +1,6 @@
 // components/AddPost.jsx
 import { addDoc, collection, Timestamp } from "firebase/firestore";
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { fireDB } from "../../../firebase";
 import { AuthContext } from "../../../context/authContext";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -8,8 +8,10 @@ import { motion } from "motion/react";
 import { useSnackbar } from "notistack";
 import BackButton from "../buttons/BackButton";
 import { useNavigate } from "react-router";
+import JoditEditor from "jodit-react";
 
 const AddPost = () => {
+  const editor = useRef(null);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   // const storage = getStorage();
@@ -17,9 +19,11 @@ const AddPost = () => {
   const { user } = useContext(AuthContext);
   const [post, setPost] = useState({
     title: "",
-    description: "",
+
     tags: "",
     image: "",
+    content: "",
+    description: "",
   });
 
   const handleChange = (e) => {
@@ -45,15 +49,22 @@ const AddPost = () => {
       // }
 
       await addDoc(collection(fireDB, "posts"), {
-        title: post.description,
-        description: post.description,
+        title: post.title,
         tags: post.tags,
         // image: imageUrl,
         image: post.image,
+        content: post.content,
         createdAt: Timestamp.now(),
         author: user.displayName,
+        description: post.description,
       });
-      setPost({ title: "", description: "", tags: "", image: null });
+      setPost({
+        title: "",
+        description: "",
+        tags: "",
+        image: null,
+        content: "",
+      });
       enqueueSnackbar("✅ Post created successfully!", { variant: "success" });
       setIsLoading(false);
       navigate("/dashbord");
@@ -94,6 +105,22 @@ const AddPost = () => {
               placeholder="Enter title..."
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
+            />
+          </div>
+
+          {/* Content */}
+
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">
+              Content
+            </label>
+            <JoditEditor
+              name="Content"
+              ref={editor}
+              value={post.content}
+              onChange={(newContent) =>
+                setPost({ ...post, content: newContent })
+              }
             />
           </div>
 
