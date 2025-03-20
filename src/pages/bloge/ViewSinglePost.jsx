@@ -2,12 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useParams } from "react-router";
 import { CircularProgress } from "@mui/material";
+import CommentsBox from "../../componets/comments/CommentsBox";
+import CommentsList from "../../componets/comments/CommentsList";
 
 const ViewSinglePost = () => {
   const avatar =
     "https://media-mct1-1.cdn.whatsapp.net/v/t61.24694-24/473402618_1317270199580736_2652709947685588980_n.jpg?ccb=11-4&oh=01_Q5AaIbau7BThPDJcgc1M8LI97iGPx7Wblm5JXUywOymzVll0&oe=67DED6CC&_nc_sid=5e03e0&_nc_cat=102";
 
-  const [postId, setPostId] = useState(null);
+  const [postId, setPostId] = useState("");
+  console.log("🚀 ~ ViewSinglePost ~ postId:", postId);
   const [post, setPost] = useState({
     title: "",
     description: "",
@@ -24,12 +27,12 @@ const ViewSinglePost = () => {
       if (!blogs || blogs.length === 0) return;
       const signlePost = blogs.find((item) => item.id === id);
       if (signlePost) {
-        setPostId(signlePost.id);
+        setPostId(signlePost?.id);
         setPost({
           title: signlePost.title,
           description: signlePost.description,
           tags: signlePost.tags,
-          image: signlePost.image,
+          image: signlePost?.image,
           content: signlePost.content,
         });
       }
@@ -68,7 +71,7 @@ const ViewSinglePost = () => {
       {/* Cover Image */}
       <div className="mb-8">
         <img
-          src={post.image}
+          src={post?.image}
           alt="Cover"
           className="w-full h-[400px] object-cover rounded-xl shadow-lg"
         />
@@ -105,7 +108,8 @@ const ViewSinglePost = () => {
       {/* Comments Section */}
       <div className="bg-gray-50 p-6 rounded-xl shadow-inner mb-16">
         <h2 className="text-2xl font-semibold mb-3">Comments</h2>
-        <p className="text-gray-500 italic">Comments system coming soon...</p>
+        {/* <p className="text-gray-500 italic">Comments system coming soon...</p> */}
+        <CommentsBox title={post.title} postId={postId} />
       </div>
 
       {/* Related Posts */}

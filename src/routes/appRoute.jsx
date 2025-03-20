@@ -15,6 +15,7 @@ import EditPost from "../admin/componets/post/EditPost";
 import EditProfile from "../admin/componets/profile/EditProfile";
 import AdminViewAuthor from "../admin/componets/auth/AdminViewAuthor";
 import ViewSinglePost from "../pages/bloge/ViewSinglePost";
+import ViewComments from "../admin/componets/comments/ViewComments";
 
 export const appRoutes = [
   {
@@ -85,6 +86,10 @@ export const appRoutes = [
       {
         path: "view-author-list",
         element: <AdminViewAuthor />,
+      },
+      {
+        path: "view-comments",
+        element: <ViewComments />,
       },
     ],
   },
