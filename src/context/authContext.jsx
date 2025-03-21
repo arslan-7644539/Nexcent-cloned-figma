@@ -8,6 +8,8 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  orderBy,
+  query,
   updateDoc,
 } from "firebase/firestore";
 import { useNavigate } from "react-router";
@@ -105,12 +107,14 @@ export const AuthProvider = ({ children }) => {
   const [blogs, setBlogs] = useState([]);
 
   console.log("🚀 ~ BlogPost ~ blogs:", blogs);
-  
 
   const fetchBlogs = async () => {
     setBlogsFetchingLoading(true);
     try {
-      const querySnapshot = await getDocs(collection(fireDB, "posts"));
+      const postRef = collection(fireDB, "posts");
+      const q = query(postRef, orderBy("createdAt", "desc"));
+      // -------------------
+      const querySnapshot = await getDocs(q);
       const postData = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -119,7 +123,7 @@ export const AuthProvider = ({ children }) => {
       setBlogsFetchingLoading(false);
     } catch (error) {
       console.error(error);
-      blogsFetchingLoading(false);
+      setBlogsFetchingLoading(false);
     }
   };
   useEffect(() => {

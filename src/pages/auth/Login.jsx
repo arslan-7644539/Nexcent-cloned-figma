@@ -8,8 +8,10 @@ import { auth } from "../../firebase";
 import { LinearProgress } from "@mui/material";
 import { FaEye } from "react-icons/fa";
 import { BiHide } from "react-icons/bi";
+import { useSnackbar } from "notistack";
 
 const Login = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   // -----------------------------
@@ -32,7 +34,9 @@ const Login = () => {
           values.password
         );
         const user = res.user;
-        alert("Login Successfully");
+        enqueueSnackbar("Login Successfully", {
+          variant: "success",
+        });
         actions.resetForm();
         navigate("/dashbord");
       } catch (error) {

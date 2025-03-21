@@ -19,6 +19,7 @@
     "@tiptap/react": "^2.11.5",
     "@tiptap/starter-kit": "^2.11.5",
     "axios": "^1.8.1",
+    "date-fns": "^4.1.0",
     "firebase": "^11.4.0",
     "formik": "^2.4.6",
     "jodit": "^4.5.17",

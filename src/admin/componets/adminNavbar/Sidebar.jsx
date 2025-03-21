@@ -6,12 +6,15 @@ import { NavLink, useNavigate } from "react-router";
 import Logo from "../../../assets/Logo.png";
 import { PiEyeClosedDuotone } from "react-icons/pi";
 import { PiEyeClosedFill } from "react-icons/pi";
+import { VscFeedback } from "react-icons/vsc";
+import { FaChartBar } from "react-icons/fa";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
 
   const navItems = [
+    { name: "Dashbord", icon: <FaChartBar />, path: "/dashbord" },
     { name: "Profile", icon: <CgProfile />, path: "/dashbord/profile" },
     { name: "Add Post", icon: <MdPostAdd />, path: "/dashbord/addPost" },
     {
@@ -20,10 +23,11 @@ const Sidebar = () => {
       path: "/dashbord/addAuthor",
     },
     {
-      name: "View-Comments",
-      icon: <MdOutlineInsertComment />,
-      path: "/dashbord/view-comments",
+      name: "View-Feedbacks",
+      icon: <VscFeedback />,
+      path: "/dashbord/view-feedback",
     },
+
     { name: "View Site", icon: <MdViewQuilt />, path: "/" },
   ];
 
@@ -46,7 +50,7 @@ const Sidebar = () => {
                 <img
                   src={Logo}
                   alt="logo"
-                  onClick={() => navigate("/dashbord")}
+                  // onClick={() => navigate("/dashbord")}
                   className="w-36 h-auto cursor-pointer hover:scale-105 transition-transform duration-300"
                 />
               )}
@@ -83,17 +87,6 @@ const Sidebar = () => {
               </NavLink>
             ))}
           </nav>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center text-gray-400 text-sm mt-10">
-          {isOpen && (
-            <>
-              <p>© {new Date().getFullYear()} MyAdmin</p>
-              <p className="text-xs">All rights reserved</p>
-            </>
-          )}
-          {/* Collapse/Expand Button */}
         </div>
       </div>
     </div>

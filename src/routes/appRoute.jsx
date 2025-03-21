@@ -15,9 +15,14 @@ import EditPost from "../admin/componets/post/EditPost";
 import EditProfile from "../admin/componets/profile/EditProfile";
 import AdminViewAuthor from "../admin/componets/auth/AdminViewAuthor";
 import ViewSinglePost from "../pages/bloge/ViewSinglePost";
-import ViewComments from "../admin/componets/comments/ViewComments";
+import About from "../pages/about/About";
+import ContactUs from "../pages/contact/ContactUs";
+import ViewFeedback from "../admin/componets/feedback/ViewFeedback";
+import { dashbordRoute } from "./dashbordRoute";
+import { authRoute } from "./authRoute";
 
 export const appRoutes = [
+  // main route
   {
     path: "/",
     element: <Layout />,
@@ -31,6 +36,14 @@ export const appRoutes = [
         ),
       },
       {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "contact-us",
+        element: <ContactUs />,
+      },
+      {
         path: "blog-Post",
         element: <BlogPost />,
       },
@@ -41,56 +54,8 @@ export const appRoutes = [
     ],
   },
   // ------------------------------ auth section
-  {
-    path: "/login",
-    element: <Login />,
-  },
+  ...authRoute,
 
   // ------------------------------------------------admin dashbord section
-  {
-    path: "/dashbord",
-    element: (
-      <AuthGuard>
-        <NavLayout />,
-      </AuthGuard>
-    ),
-    children: [
-      {
-        index: true,
-        element: <Dashbord />,
-      },
-      {
-        path: "addPost",
-        element: <CreatePost />,
-      },
-      {
-        path: "admin-view-post",
-        element: <AdminViewPost />,
-      },
-      {
-        path: "edit-post/:id",
-        element: <EditPost />,
-      },
-      {
-        path: "profile",
-        element: <Profile />,
-      },
-      {
-        path: "edit-profile/:uid",
-        element: <EditProfile />,
-      },
-      {
-        path: "addAuthor",
-        element: <AddAuthors />,
-      },
-      {
-        path: "view-author-list",
-        element: <AdminViewAuthor />,
-      },
-      {
-        path: "view-comments",
-        element: <ViewComments />,
-      },
-    ],
-  },
+  ...dashbordRoute,
 ];

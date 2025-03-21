@@ -6,13 +6,20 @@ import { useAuth } from "../../context/authContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { ChevronDown, LogOut, User } from "lucide-react";
-// import { NavLink } from "react-router";
+
+// ✅ Active Link Class Function
+const activeLink = ({ isActive }) =>
+  isActive
+    ? "text-primary font-bold underline"
+    : "text-secondary drop-shadow-sm font-medium text-[15.14px] hover:underline";
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
-  // Close dropdown on outside click
+  // ✅ Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -23,16 +30,8 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // ------------------------------
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const activeLink = ({ isActive }) => {
-    return isActive
-      ? "text-primary font-bold text-underline"
-      : "text-secondary";
-  };
   return (
-    <div className=" container mx-auto w-full h-[89.76px] bg-white flex items-center shadow-md px-[100.23px] py-[11.14px] justify-between relative">
+    <div className="container mx-auto w-full h-[89.76px] bg-white flex items-center shadow-md px-[100.23px] py-[11.14px] justify-between relative">
       {/* Logo */}
       <motion.img
         whileHover={{ scale: 1.2 }}
@@ -42,7 +41,7 @@ const Header = () => {
         className="h-[25.71px] w-[107.52px]"
       />
 
-      {/* Navigation Menu */}
+      {/* Navigation */}
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -50,56 +49,29 @@ const Header = () => {
           duration: 0.5,
           ease: "easeOut",
         }}
-        className="flex items-center  gap-[22px]"
+        className="flex items-center gap-[22px]"
       >
         <div className="flex gap-[16px]">
-          <NavLink
-            className={`text-secondary drop-shadow-sm ${activeLink} font-medium text-[15.14px] hover:underline`}
-            to="/"
-          >
+          <NavLink to="/" className={activeLink}>
             Home
           </NavLink>
-          <NavLink
-            className={`text-secondary drop-shadow-sm ${activeLink} font-medium text-[15.14px] hover:underline`}
-            to="/"
-          >
-            Feature
+          <NavLink to="/about" className={activeLink}>
+            About
           </NavLink>
           <NavLink
-            className="text-secondary drop-shadow-sm  font-medium text-[15.14px] hover:underline"
-            to="#"
+            to="/contact-us"
+            className={activeLink}
+            // className="text-secondary drop-shadow-sm font-medium text-[15.14px] hover:underline"
           >
-            Community
+            Contact Us
           </NavLink>
-          <NavLink
-            className="text-secondary drop-shadow-sm  font-medium text-[15.14px] hover:underline"
-            to="/blog-Post"
-          >
+          <NavLink to="/blog-Post" className={activeLink}>
             Blog
-          </NavLink>
-          <NavLink
-            className="text-secondary drop-shadow-sm  font-medium text-[15.14px] hover:underline"
-            to="#"
-          >
-            Pricing
           </NavLink>
         </div>
 
+        {/* User Dropdown */}
         {user && (
-          // <motion.button
-
-          //   onClick={()=> navigate("/dashbord")}
-          //   initial={{ y: -100, opacity: 0 }}
-          //   animate={{ y: 0, opacity: 1 }}
-          //   transition={{
-          //     duration: 0.5,
-          //     ease: "easeOut",
-          //   }}
-          //   className="w-[140.25px] text-white h-[40.49px] flex items-center justify-center gap-[5.57px] px-[9.74px] py-[5px] cursor-pointer rounded-[2.78px] bg-primary  hover:bg-green-800 transition shadow-[0_4px_6px_rgba(0,0,0,0.5)] "
-          // >
-          //   Dashbore
-          // </motion.button>
-
           <div
             className="relative flex items-center space-x-3"
             ref={dropdownRef}
@@ -111,7 +83,7 @@ const Header = () => {
                 className="w-10 h-10 rounded-full border-2 border-white shadow-md cursor-pointer"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
               />
-              <p> {user.displayName} </p>
+              <p>{user.displayName}</p>
             </div>
             <ChevronDown
               size={20}
@@ -128,7 +100,7 @@ const Header = () => {
                       onClick={() => navigate("/dashbord")}
                       className="w-full text-left px-4 py-3 hover:bg-gray-100 flex items-center gap-2"
                     >
-                      <User size={18} /> Dashbord
+                      <User size={18} /> Dashboard
                     </button>
                   </li>
                   <li>
