@@ -74,7 +74,7 @@ const Sidebar = () => {
                 to={item.path}
                 end={item.path === "/dashbord"}
                 className={({ isActive }) =>
-                  `flex items-center gap-4 px-4 py-3 rounded-lg text-[17px] font-medium transition-all duration-200 group ${
+                  `flex items-center gap-4 px-4 py-3  rounded-lg text-[17px] font-medium transition-all duration-150 group ${
                     isActive
                       ? "bg-blue-600 text-white shadow-md"
                       : "text-gray-700 hover:bg-blue-500 hover:text-white"
