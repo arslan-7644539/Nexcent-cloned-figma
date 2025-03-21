@@ -5,7 +5,7 @@ import pathIcon from "../../assets/path.svg";
 import youtubeIcon from "../../assets/youtube.svg";
 import twitterIcon from "../../assets/twitter.svg";
 import instaIcon from "../../assets/insta.svg";
-import {motion} from 'motion/react'
+import { motion } from "motion/react";
 
 const Footer = () => {
   const Frame16 = () => (
@@ -29,16 +29,12 @@ const Footer = () => {
         {/* Left Section */}
         <div className="md:col-span-4 flex flex-col items-center gap-6">
           {/* Logo Section */}
-          <motion.div 
+          <motion.div
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.8 }}
-          className="flex items-center gap-2">
-            <img
-            
-              src={footerIcon}
-              alt="logo"
-              className="w-8 h-6"
-            />
+            className="flex items-center gap-2"
+          >
+            <img src={footerIcon} alt="logo" className="w-8 h-6" />
             <h3 className="text-white text-3xl font-semibold">Nexcent</h3>
           </motion.div>
           {/* Copyright */}
@@ -119,11 +115,11 @@ const Footer = () => {
         </div>
 
         {/* Stay Updated Section */}
-        <div className="md:col-span-4 flex flex-col gap-3">
-          <h3 className="text-white font-semibold text-lg mb-6]">
+        <div className="md:col-span-4 flex flex-col gap-4 ml-15">
+          <h3 className="text-white font-semibold text-lg ml-6 mb-6]">
             Stay up to date
           </h3>
-          <div className="relative w-full max-w-[250px]">
+          <div className="relative  max-w-[250px]">
             <input
               className="w-full h-10 bg-[#fafaff2c] text-white px-3 rounded-lg :outline-none focus:ring-2 focus:ring-green-500"
               type="email"
