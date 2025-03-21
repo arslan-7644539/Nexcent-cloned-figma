@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { format } from "date-fns";
 import { fireDB } from "../../../firebase";
+import { LinearProgress } from "@mui/material";
 
 const ViewFeedback = () => {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -38,7 +39,7 @@ const ViewFeedback = () => {
 
       {loading ? (
         <div className="text-center text-lg text-gray-500">
-          Loading feedbacks...
+          <LinearProgress />
         </div>
       ) : feedbacks.length === 0 ? (
         <div className="text-center text-gray-500">No feedbacks found.</div>

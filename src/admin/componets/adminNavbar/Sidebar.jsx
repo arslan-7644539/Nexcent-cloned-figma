@@ -10,6 +10,7 @@ import { VscFeedback } from "react-icons/vsc";
 import { FaChartBar } from "react-icons/fa";
 
 const Sidebar = () => {
+  // ------------------
   const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
 
@@ -71,6 +72,7 @@ const Sidebar = () => {
               <NavLink
                 key={index}
                 to={item.path}
+                end={item.path === "/dashbord"}
                 className={({ isActive }) =>
                   `flex items-center gap-4 px-4 py-3 rounded-lg text-[17px] font-medium transition-all duration-200 group ${
                     isActive

@@ -1,15 +1,28 @@
+import { CircularProgress } from "@mui/material";
 import NavLayout from "../admin/componets/adminNavbar/NavLayout";
-import AdminViewAuthor from "../admin/componets/auth/AdminViewAuthor";
-import ViewFeedback from "../admin/componets/feedback/ViewFeedback";
-import AdminViewPost from "../admin/componets/post/AdminViewPost";
-import EditPost from "../admin/componets/post/EditPost";
-import EditProfile from "../admin/componets/profile/EditProfile";
-import AddAuthors from "../admin/pages/AddAuthors";
-import Dashbord from "../admin/pages/Dashbord";
-import Profile from "../admin/pages/Profile";
 import AuthGuard from "../componets/navbar/AuthGuard";
-import CreatePost from "../admin/componets/post/CreatePost";
+import { lazy } from "react";
+// -------------------------------------------------------------
 
+const AdminViewAuthor = lazy(() =>
+  import("../admin/componets/auth/AdminViewAuthor")
+);
+const ViewFeedback = lazy(() =>
+  import("../admin/componets/feedback/ViewFeedback")
+);
+const AdminViewPost = lazy(() =>
+  import("../admin/componets/post/AdminViewPost")
+);
+const EditPost = lazy(() => import("../admin/componets/post/EditPost"));
+const EditProfile = lazy(() =>
+  import("../admin/componets/profile/EditProfile")
+);
+const AddAuthors = lazy(() => import("../admin/pages/AddAuthors"));
+const Dashbord = lazy(() => import("../admin/pages/Dashbord"));
+const Profile = lazy(() => import("../admin/pages/Profile"));
+const CreatePost = lazy(() => import("../admin/componets/post/CreatePost"));
+
+// -------------------------------------------------------------
 export const dashbordRoute = [
   {
     path: "/dashbord",

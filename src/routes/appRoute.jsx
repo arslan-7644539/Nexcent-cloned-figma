@@ -1,39 +1,39 @@
 // routes.jsx
 
-import Dashbord from "../admin/pages/Dashbord";
-import AuthGuard from "../componets/navbar/AuthGuard";
 import { Layout } from "../componets/navbar/Layout";
-import Login from "../pages/auth/Login";
-import Home from "../pages/home/Home";
-import NavLayout from "../admin/componets/adminNavbar/NavLayout";
-import CreatePost from "../admin/componets/post/CreatePost";
-import Profile from "../admin/pages/Profile";
-import AddAuthors from "../admin/pages/AddAuthors";
-import BlogPost from "../pages/bloge/BlogPost";
-import AdminViewPost from "../admin/componets/post/AdminViewPost";
-import EditPost from "../admin/componets/post/EditPost";
-import EditProfile from "../admin/componets/profile/EditProfile";
-import AdminViewAuthor from "../admin/componets/auth/AdminViewAuthor";
-import ViewSinglePost from "../pages/bloge/ViewSinglePost";
-import About from "../pages/about/About";
-import ContactUs from "../pages/contact/ContactUs";
-import ViewFeedback from "../admin/componets/feedback/ViewFeedback";
+
 import { dashbordRoute } from "./dashbordRoute";
 import { authRoute } from "./authRoute";
+import { lazy, Suspense } from "react";
+import { CircularProgress } from "@mui/material";
+// ----------------------------------------------------------
+
+const Home = lazy(() => import("../pages/home/Home"));
+const BlogPost = lazy(() => import("../pages/bloge/BlogPost"));
+const ViewSinglePost = lazy(() => import("../pages/bloge/ViewSinglePost"));
+const About = lazy(() => import("../pages/about/About"));
+const ContactUs = lazy(() => import("../pages/contact/ContactUs"));
+// -------------------------------------------------------------------
 
 export const appRoutes = [
   // main route
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center w-full h-screen">
+            <CircularProgress />
+          </div>
+        }
+      >
+        <Layout />
+      </Suspense>
+    ),
     children: [
       {
         index: true,
-        element: (
-          // <AuthGuard>
-          <Home />
-          // </AuthGuard>
-        ),
+        element: <Home />,
       },
       {
         path: "about",
