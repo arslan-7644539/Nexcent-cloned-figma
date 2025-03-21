@@ -41,6 +41,7 @@ const Login = () => {
         navigate("/dashbord");
       } catch (error) {
         console.error("login errer : ", error);
+        alert("Please fill a valid email & password");
       } finally {
         actions.setSubmitting(false);
       }
