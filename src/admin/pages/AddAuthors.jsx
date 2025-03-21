@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "motion/react";
 import * as yup from "yup";
 import { useFormik } from "formik";
@@ -9,10 +9,13 @@ import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router";
 import { useSnackbar } from "notistack";
 import BackButton from "../componets/buttons/BackButton";
+import { BiHide } from "react-icons/bi";
+import { FaEye } from "react-icons/fa";
 
 const AddAuthors = () => {
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const authorSchema = yup.object({
     username: yup.string().required("username is required"),
@@ -134,20 +137,27 @@ const AddAuthors = () => {
           </div>
 
           {/* Password Field */}
-          <div>
+          <div className="relative">
             <label className="block mb-1 text-[#4D4D4D] font-semibold">
               Password
             </label>
             <input
               autoComplete="new-password"
               onBlur={handleBlur}
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={values.password}
               onChange={handleChange}
               placeholder="Enter your password"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF4F]"
+              className= "   w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF4F]"
             />
+            {/* Toggle Eye Icon */}
+            <div
+              className="absolute top-13.5 right-4 sm:right-3 transform -translate-y-1/2 text-xl sm:text-lg text-gray-500 cursor-pointer z-10"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <BiHide /> : <FaEye />}
+            </div>
             {touched.password && errors.password && (
               <p className="text-red-500 text-sm mt-1">{errors.password}</p>
             )}
