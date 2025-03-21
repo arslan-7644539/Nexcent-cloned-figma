@@ -1,13 +1,13 @@
 // components/AddPost.jsx
 import { addDoc, collection, Timestamp } from "firebase/firestore";
-import React, { useContext, useRef, useState } from "react";
+import React, { lazy, useContext, useRef, useState } from "react";
 import { fireDB } from "../../../firebase";
 import { AuthContext } from "../../../context/authContext";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useSnackbar } from "notistack";
 import BackButton from "../buttons/BackButton";
 import { useNavigate } from "react-router";
-import JoditEditor from "jodit-react";
+const JoditEditor = lazy(()=> import("jodit-react"))
 
 const AddPost = () => {
   const editor = useRef(null);
