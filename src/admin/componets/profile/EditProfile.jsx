@@ -6,16 +6,21 @@ import { AuthContext } from "../../../context/authContext";
 import BackButton from "../buttons/BackButton";
 
 const EditProfile = () => {
+  // ------------------------
   const [userId, setUserId] = useState("");
+  // -------------------------------------------
   const { uid } = useParams();
-  console.log("🚀 ~ EditProfile ~ uid:", uid);
+  // console.log("🚀 ~ EditProfile ~ uid:", uid);
+  // -----------------------------------------------
   const { userData, profileUpdate, profileUpdateLoading } =
     useContext(AuthContext);
-  console.log("🚀 ~ EditProfile ~ userData:", userData);
+  // console.log("🚀 ~ EditProfile ~ userData:", userData);
+  // ------------------------------------------------------
   const [updatedData, setUpdatedData] = useState({
     username: "",
     email: "",
     password: "",
+    image: "",
   });
   console.log("🚀 ~ EditProfile ~ updatedData:", updatedData);
 
@@ -33,21 +38,23 @@ const EditProfile = () => {
 
       try {
         const singleUser = userData.find((item) => item.id === uid);
-        console.log("🚀 ~ fetchUser ~ singleUser:", singleUser);
+        // console.log("🚀 ~ fetchUser ~ singleUser:", singleUser);
         if (singleUser) {
           setUserId(singleUser.uid);
           setUpdatedData({
             username: singleUser.username,
             email: singleUser.email,
             password: singleUser.password,
+            image: singleUser.image,
           });
         }
       } catch (error) {
         console.error(error);
+        alert("something went wrong please try again");
       }
     };
     fetchUser();
-  }, []);
+  }, [userData]);
 
   return (
     <div className=" container mx-auto h-screen flex justify-center items-center bg-gradient-to-br from-blue-50 to-pink-100 py-16 px-6 md:px-20">
@@ -118,7 +125,25 @@ const EditProfile = () => {
             />
           </div>
 
+          {/* Image url field */}
+
+          <div>
+            <label className="block mb-1 text-[#4D4D4D] font-semibold">
+              Image
+            </label>
+            <input
+              autoComplete="username"
+              type="text"
+              name="image"
+              value={updatedData.image}
+              onChange={handleChang}
+              placeholder="Enter your Image ( Url Only )"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF4F]"
+            />
+          </div>
+
           <button
+            disabled={profileUpdateLoading}
             onClick={(e) => {
               e.preventDefault();
               profileUpdate(userId, updatedData, setUpdatedData);

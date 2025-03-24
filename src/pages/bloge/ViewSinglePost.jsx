@@ -6,8 +6,7 @@ import CommentsBox from "../../componets/comments/CommentsBox";
 import CommentsList from "../../componets/comments/CommentsList";
 
 const ViewSinglePost = () => {
-  const avatar =
-    "https://media-mct1-1.cdn.whatsapp.net/v/t61.24694-24/473402618_1317270199580736_2652709947685588980_n.jpg?ccb=11-4&oh=01_Q5AaIbau7BThPDJcgc1M8LI97iGPx7Wblm5JXUywOymzVll0&oe=67DED6CC&_nc_sid=5e03e0&_nc_cat=102";
+  //  ---------------------------
 
   const [postId, setPostId] = useState("");
   console.log("🚀 ~ ViewSinglePost ~ postId:", postId);
@@ -17,9 +16,34 @@ const ViewSinglePost = () => {
     tags: "",
     image: "",
     content: "",
+    createdAt: "",
   });
 
-  const { blogs, blogsFetchingLoading } = useContext(AuthContext);
+  const { blogs, blogsFetchingLoading, userData, user } =
+    useContext(AuthContext);
+  // ------------------------------------------------------------------------
+  const [AuthorData, setAuthorData] = useState({
+    username: "",
+    image: "",
+  });
+  useEffect(() => {
+    const fetchUserData = () => {
+      try {
+        const singleUser = userData.find((u) => u.uid === user.uid);
+        if (singleUser) {
+          setAuthorData({
+            username: singleUser?.username,
+            image: singleUser?.image,
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchUserData();
+  }, [user, userData]);
+  // -----------------------------------------------------------------------
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -29,11 +53,12 @@ const ViewSinglePost = () => {
       if (signlePost) {
         setPostId(signlePost?.id);
         setPost({
-          title: signlePost.title,
-          description: signlePost.description,
-          tags: signlePost.tags,
+          title: signlePost?.title,
+          description: signlePost?.description,
+          tags: signlePost?.tags,
           image: signlePost?.image,
-          content: signlePost.content,
+          content: signlePost?.content,
+          createdAt: signlePost?.createdAt,
         });
       }
     };
@@ -58,13 +83,18 @@ const ViewSinglePost = () => {
       {/* Author Info */}
       <div className="flex items-center space-x-4 mb-8">
         <img
-          src={avatar}
-          alt="Author"
+          src={AuthorData.image}
+          alt="admin"
           className="w-12 h-12 rounded-full shadow"
         />
         <div>
-          <p className="text-sm font-medium text-gray-700">By Admin</p>
-          <p className="text-xs text-gray-400">Published on March 18, 2025</p>
+          <p className="text-sm font-medium text-gray-700">
+            By Admin {`:${AuthorData.username}`}
+          </p>
+          <p className="text-xs text-gray-400">
+            Published on :{" "}
+            {new Date(post?.createdAt?.seconds * 1000).toLocaleDateString()}
+          </p>
         </div>
       </div>
 

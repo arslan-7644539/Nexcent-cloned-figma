@@ -1,23 +1,48 @@
 import React, { useEffect, useRef, useState } from "react";
 import Logo from "../../assets/Logo.svg";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import { motion } from "motion/react";
 import { useAuth } from "../../context/authContext";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { ChevronDown, LogOut, User } from "lucide-react";
 
-// ✅ Active Link Class Function
-const activeLink = ({ isActive }) =>
-  isActive
-    ? "text-primary font-bold underline"
-    : "text-secondary drop-shadow-sm font-medium text-[15.14px] hover:underline";
-
 const Header = () => {
+  // -------------------
+  const location = useLocation();
+  // console.log("🚀 ~ Header ~ location:", location);
+  const { pathname } = location;
+  // -----------------------------
+  const { user, userData } = useAuth();
+  // -----------------------------------------------
+  const [userImage, setUserImage] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = () => {
+      try {
+        const singleUser = userData.find((u) => u.uid === user.uid);
+        if (singleUser) {
+          setUserImage(singleUser?.image);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchUserData();
+  }, [user, userData]);
+  // ------------------------------------------------------
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef();
-  const { user } = useAuth();
   const navigate = useNavigate();
+
+  // ✅ Active Link Class Function
+  const activeLink = ({ isActive, to }) => {
+    const isNestedActive = to !== "/" && pathname.startsWith(to);
+    return isActive || isNestedActive
+      ? "text-primary font-bold underline"
+      : "text-secondary drop-shadow-sm font-medium text-[15.14px] hover:underline";
+  };
 
   // ✅ Close dropdown on outside click
   useEffect(() => {
@@ -52,20 +77,28 @@ const Header = () => {
         className="flex items-center gap-[22px]"
       >
         <div className="flex gap-[16px]">
-          <NavLink to="/" className={activeLink}>
+          <NavLink
+            to="/"
+            className={(props) => activeLink({ ...props, to: "/" })}
+          >
             Home
           </NavLink>
-          <NavLink to="/about" className={activeLink}>
+          <NavLink
+            to="/about"
+            className={(props) => activeLink({ ...props, to: "/about" })}
+          >
             About
           </NavLink>
           <NavLink
             to="/contact-us"
-            className={activeLink}
-            // className="text-secondary drop-shadow-sm font-medium text-[15.14px] hover:underline"
+            className={(props) => activeLink({ ...props, to: "/contact-us" })}
           >
             Contact Us
           </NavLink>
-          <NavLink to="/blog-Post" className={activeLink}>
+          <NavLink
+            to="/blog-Post"
+            className={(props) => activeLink({ ...props, to: "/blog-post" })}
+          >
             Blog
           </NavLink>
         </div>
@@ -78,7 +111,7 @@ const Header = () => {
           >
             <div className="flex flex-col items-center">
               <img
-                src="https://media-mct1-1.cdn.whatsapp.net/v/t61.24694-24/473402618_1317270199580736_2652709947685588980_n.jpg?ccb=11-4&oh=01_Q5AaIbau7BThPDJcgc1M8LI97iGPx7Wblm5JXUywOymzVll0&oe=67DED6CC&_nc_sid=5e03e0&_nc_cat=102"
+                src={userImage}
                 alt="Profile"
                 className="w-10 h-10 rounded-full border-2 border-white shadow-md cursor-pointer"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}

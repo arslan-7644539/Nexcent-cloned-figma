@@ -1,5 +1,5 @@
 // context/AuthContext.jsx
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, lazy, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, fireDB } from "../firebase"; // your firebase.js path
 // import { User } from "lucide-react";
@@ -14,6 +14,7 @@ import {
 } from "firebase/firestore";
 import { useNavigate } from "react-router";
 import { useSnackbar } from "notistack";
+// const useSnackbar = lazy(() => import("notistack"));
 
 export const AuthContext = createContext();
 
@@ -55,19 +56,24 @@ export const AuthProvider = ({ children }) => {
     try {
       const profileRef = doc(fireDB, "users", userId);
       await updateDoc(profileRef, updatedData);
-      enqueueSnackbar("profile update successfully", { variant: "success" });
       setProfileUpdateLoading(false);
       setUpdatedData({
         username: "",
         email: "",
         password: "",
+        image: "",
       });
+      // enqueueSnackbar("Login Successfully", {
+      //   variant: "success",
+      // });
+      alert("Profile Updated");
       setTimeout(() => {
         navigate("/dashbord");
       }, 1000);
     } catch (error) {
       console.error(error);
       setProfileUpdateLoading(false);
+      enqueueSnackbar("Failed to update profile", { variant: "error" });
     }
   };
 
@@ -106,7 +112,7 @@ export const AuthProvider = ({ children }) => {
 
   const [blogs, setBlogs] = useState([]);
 
-  console.log("🚀 ~ BlogPost ~ blogs:", blogs);
+  // console.log("🚀 ~ BlogPost ~ blogs:", blogs);
 
   const fetchBlogs = async () => {
     setBlogsFetchingLoading(true);
@@ -133,7 +139,7 @@ export const AuthProvider = ({ children }) => {
   // user Data fetching from firestor
   const [userData, setUserData] = useState(null);
   const [usersLoading, setusersLoading] = useState(false);
-  console.log("🚀 ~ AuthProvider ~ userData:", userData);
+  // console.log("🚀 ~ AuthProvider ~ userData:", userData);
 
   const fetchUserData = async () => {
     setusersLoading(true);

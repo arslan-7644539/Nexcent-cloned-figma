@@ -9,7 +9,31 @@ import { AiOutlineUsergroupAdd } from "react-icons/ai";
 
 const Dashbord = () => {
   const navigate = useNavigate();
+  // ---------------------------------
   const { user, blogs, userData } = useContext(AuthContext);
+
+  const [userinfo, setUserInfo] = useState({
+    username: "",
+    image: "",
+  });
+  useEffect(() => {
+    const fetchUserData = () => {
+      try {
+        const singleUser = userData.find((u) => u.uid === user.uid);
+        if (singleUser) {
+          setUserInfo({
+            username: singleUser.username,
+            image: singleUser.image,
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchUserData();
+  }, [user, userData]);
+
+  // ----------------------------------------------------------
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef();
 
@@ -39,12 +63,14 @@ const Dashbord = () => {
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <img
-                src="https://media-mct1-1.cdn.whatsapp.net/v/t61.24694-24/473402618_1317270199580736_2652709947685588980_n.jpg?ccb=11-4&oh=01_Q5AaIbau7BThPDJcgc1M8LI97iGPx7Wblm5JXUywOymzVll0&oe=67DED6CC&_nc_sid=5e03e0&_nc_cat=102"
+                src={userinfo?.image}
                 alt="profile"
                 className="w-10 h-10 rounded-full border-2 border-white shadow-md"
               />
               <div className="text-sm">
-                <p className="font-semibold text-gray-700">{user.displayName}</p>
+                <p className="font-semibold text-gray-700">
+                  {userinfo?.username}
+                </p>
               </div>
               <ChevronDown className="text-gray-600" />
             </div>
