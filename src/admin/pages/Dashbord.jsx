@@ -80,7 +80,7 @@ const Dashbord = () => {
               <div className="absolute right-0 mt-2 w-48 bg-white shadow-xl rounded-lg z-50">
                 <ul className="py-2 text-gray-700">
                   <li>
-                    <button className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2">
+                    <button onClick={()=> navigate("/dashbord/profile")} className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2">
                       <User size={18} /> Profile
                     </button>
                   </li>

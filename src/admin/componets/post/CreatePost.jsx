@@ -132,7 +132,7 @@ const AddPost = () => {
           {/* Image Upload */}
           <div>
             <label className="block text-gray-700 font-medium mb-1">
-              Upload Image
+              Upload Featured Image
             </label>
             <input
               value={post.image}
