@@ -73,14 +73,23 @@ const ViewSinglePost = () => {
   }
   // --------------------
   const currentPostUrl = window.location.href;
+  const text = "Check out this awesome post";
 
   const handleFBShear = () => {
     const fbShear = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
       currentPostUrl
     )}`;
-    console.log("🚀 ~ handleFBShear ~ fbShear:", fbShear)
+    // console.log("🚀 ~ handleFBShear ~ fbShear:", fbShear);
     window.open(fbShear, "_blank");
   };
+
+  const handleShearTwitter = () => {
+    const tShear = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      currentPostUrl
+    )}&text=${encodeURIComponent(text)}`;
+    window.open(tShear, "_blank");
+  };
+  // -----------------------------------------------------------------------------------------
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-12 text-gray-800">
@@ -142,7 +151,10 @@ const ViewSinglePost = () => {
         >
           Share on Facebook
         </button>
-        <button className="px-5 py-2 bg-sky-400 hover:bg-sky-500 text-white rounded-full transition">
+        <button
+          onClick={handleShearTwitter}
+          className="px-5 py-2 bg-sky-400 hover:bg-sky-500 text-white rounded-full transition"
+        >
           Share on Twitter
         </button>
       </div>
