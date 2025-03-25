@@ -84,7 +84,7 @@ const ViewSinglePost = () => {
   };
 
   const handleShearTwitter = () => {
-    const tShear = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+    const tShear = `https://x.com/intent/tweet?url=${encodeURIComponent(
       currentPostUrl
     )}&text=${encodeURIComponent(text)}`;
     window.open(tShear, "_blank");
