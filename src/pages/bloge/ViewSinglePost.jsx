@@ -9,7 +9,6 @@ const ViewSinglePost = () => {
   //  ---------------------------
 
   const [postId, setPostId] = useState("");
-  console.log("🚀 ~ ViewSinglePost ~ postId:", postId);
   const [post, setPost] = useState({
     title: "",
     description: "",
@@ -72,6 +71,16 @@ const ViewSinglePost = () => {
       </div>
     );
   }
+  // --------------------
+  const currentPostUrl = window.location.href;
+
+  const handleFBShear = () => {
+    const fbShear = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      currentPostUrl
+    )}`;
+    console.log("🚀 ~ handleFBShear ~ fbShear:", fbShear)
+    window.open(fbShear, "_blank");
+  };
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-12 text-gray-800">
@@ -127,7 +136,10 @@ const ViewSinglePost = () => {
 
       {/* Share Buttons */}
       <div className="flex gap-4 mb-16">
-        <button className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition">
+        <button
+          onClick={handleFBShear}
+          className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition"
+        >
           Share on Facebook
         </button>
         <button className="px-5 py-2 bg-sky-400 hover:bg-sky-500 text-white rounded-full transition">
