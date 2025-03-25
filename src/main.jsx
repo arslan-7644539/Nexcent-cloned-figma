@@ -8,7 +8,7 @@ import { SnackbarProvider } from "notistack";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter forceRefresh={false}>
       <AuthProvider>
         <SnackbarProvider
           maxSnack={3}
