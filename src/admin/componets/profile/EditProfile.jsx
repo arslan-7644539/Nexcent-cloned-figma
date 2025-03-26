@@ -4,10 +4,13 @@ import { LinearProgress } from "@mui/material";
 import { useParams } from "react-router";
 import { AuthContext } from "../../../context/authContext";
 import BackButton from "../buttons/BackButton";
+import { BiHide } from "react-icons/bi";
+import { FaEye } from "react-icons/fa";
 
 const EditProfile = () => {
   // ------------------------
   const [userId, setUserId] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   // -------------------------------------------
   const { uid } = useParams();
   // console.log("🚀 ~ EditProfile ~ uid:", uid);
@@ -110,19 +113,26 @@ const EditProfile = () => {
           </div>
 
           {/* Password Field */}
-          <div>
+          <div className="relative w-full">
             <label className="block mb-1 text-[#4D4D4D] font-semibold">
               Password
             </label>
             <input
               autoComplete="new-password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               value={updatedData.password}
               onChange={handleChang}
               placeholder="Enter your password"
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF4F]"
             />
+            {/* Toggle Eye Icon */}
+            <div
+              className="absolute top-13.5 right-4 sm:right-3 transform -translate-y-1/2 text-xl sm:text-lg text-gray-500 cursor-pointer z-10"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <BiHide /> : <FaEye />}
+            </div>
           </div>
 
           {/* Image url field */}
