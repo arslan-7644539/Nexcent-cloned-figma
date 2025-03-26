@@ -23,6 +23,54 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
+  // fetch user feedback
+
+  const [feedbacks, setFeedbacks] = useState([]);
+  const [fbLoading, setFBLoading] = useState(true);
+
+  const getAllFeedbacks = async () => {
+    try {
+      const q = query(
+        collection(fireDB, "feedbacks"),
+        orderBy("createdAt", "desc")
+      );
+      const querySnapshot = await getDocs(q);
+      const feedbackArray = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setFeedbacks(feedbackArray);
+      setFBLoading(false);
+    } catch (error) {
+      console.error("Error fetching feedbacks:", error);
+      setFBLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getAllFeedbacks();
+  }, []);
+
+
+  // delete user feedback
+
+  const deleteFB = async (fbId) => {
+    try {
+      const confirm = window.confirm(
+        "Are you sure you want to delete this FB"
+      );
+      if (confirm) {
+        await deleteDoc(doc(fireDB, "feedbacks", fbId));
+        enqueueSnackbar("FB delete Successfuly", { variant: "success" });
+        setFeedbacks((prevFB) =>
+          prevFB.filter((fb) => fb?.id !== fbId)
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // post-update
   const [postUpdateLoading, setPostUpdateLoading] = useState(false);
 
@@ -37,7 +85,6 @@ export const AuthProvider = ({ children }) => {
         title: "",
         description: "",
         tags: "",
-        // image: null,
       });
       setTimeout(() => {
         navigate("/dashbord/admin-view-post");
@@ -81,8 +128,6 @@ export const AuthProvider = ({ children }) => {
   const [blogsFetchingLoading, setBlogsFetchingLoading] = useState(false);
 
   const [blogs, setBlogs] = useState([]);
-
-  // console.log("🚀 ~ BlogPost ~ blogs:", blogs);
 
   const fetchBlogs = async () => {
     setBlogsFetchingLoading(true);
@@ -198,6 +243,10 @@ export const AuthProvider = ({ children }) => {
         // -----------------------
         profileUpdate,
         profileUpdateLoading,
+        // -----------------------
+        feedbacks,
+        fbLoading,
+        deleteFB,
       }}
     >
       {children}
