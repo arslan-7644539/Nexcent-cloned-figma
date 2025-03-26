@@ -1,27 +1,57 @@
 // components/AddPost.jsx
 import { addDoc, collection, Timestamp } from "firebase/firestore";
-import React, { lazy, useContext, useRef, useState } from "react";
+import React, { lazy, useContext, useEffect, useRef, useState } from "react";
 import { fireDB } from "../../../firebase";
 import { AuthContext } from "../../../context/authContext";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useSnackbar } from "notistack";
 import BackButton from "../buttons/BackButton";
 import { useNavigate } from "react-router";
-const JoditEditor = lazy(()=> import("jodit-react"))
+const JoditEditor = lazy(() => import("jodit-react"));
 
 const AddPost = () => {
+  // ------------------
   const editor = useRef(null);
+  // -------------------------
   const navigate = useNavigate();
+  // -------------------------------------
   const { enqueueSnackbar } = useSnackbar();
+  // ---------------------------------------------
   const [isLoading, setIsLoading] = useState(false);
-  const { user } = useContext(AuthContext);
+  // --------------------------------------------------
+  const { user, userData } = useContext(AuthContext);
+  // -------------------------------------------------
+
   const [post, setPost] = useState({
     title: "",
     tags: "",
     image: "",
     content: "",
     description: "",
+    author: "",
+    authorImage: "",
   });
+  // -----------------------------------
+  useEffect(() => {
+    const fetchAuthorData = () => {
+      try {
+        const currentUser = userData?.find((u) => u?.uid === user?.uid);
+        // console.log("🚀 ~ fetchUserData ~ currentUser:", currentUser);
+        if (currentUser) {
+          setPost({
+            author: currentUser?.username,
+            authorImage: currentUser?.image,
+          });
+          console.log("🚀 ~ fetchUserData ~ authorImage:", authorImage);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchAuthorData();
+  }, [userData, user]);
+
+  // ------------------------------------------------
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,7 +68,8 @@ const AddPost = () => {
         image: post.image,
         content: post.content,
         createdAt: Timestamp.now(),
-        author: user.displayName,
+        author: post.author,
+        authorImage: post.authorImage,
         description: post.description,
       });
       setPost({
@@ -47,6 +78,8 @@ const AddPost = () => {
         tags: "",
         image: "",
         content: "",
+        author: "",
+        authorImage: "",
       });
       enqueueSnackbar("✅ Post created successfully!", { variant: "success" });
       setIsLoading(false);
@@ -79,6 +112,23 @@ const AddPost = () => {
               value={post.title}
               onChange={handleChange}
               placeholder="Enter title..."
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          {/* Author Name */}
+
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">
+              Author Name
+            </label>
+            <input
+              type="text"
+              name="author"
+              value={post.author}
+              onChange={handleChange}
+              placeholder="Author Name"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />

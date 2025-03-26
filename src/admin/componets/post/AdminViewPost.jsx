@@ -30,15 +30,15 @@ const AdminViewPost = () => {
               </tr>
             </thead>
             <tbody>
-              {blogs.map((post) => (
+              {blogs?.map((post) => (
                 <tr
-                  key={post.id}
+                  key={post?.id}
                   className="border-t hover:bg-gray-50 transition"
                 >
                   <td className="px-6 py-4">
                     <img
-                      src={post.image}
-                      alt={post.title}
+                      src={post?.image}
+                      alt={post?.title}
                       className="w-24 h-16 object-cover rounded shadow"
                     />
                   </td>
@@ -62,7 +62,7 @@ const AdminViewPost = () => {
                       </Link>
 
                       <button
-                        onClick={() => deletePost(post.id)}
+                        onClick={() => deletePost(post.id, )}
                         className="inline-flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded text-sm shadow"
                       >
                         <FiTrash2 className="text-base" />

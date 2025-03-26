@@ -77,36 +77,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // post-delete
-  const deletePost = async (postId) => {
-    try {
-      const confirm = window.confirm(
-        "Are you sure you want to delete this post"
-      );
-      if (confirm) {
-        await deleteDoc(doc(fireDB, "posts", postId));
-        enqueueSnackbar("post delete Successfuly", { variant: "success" });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // delete-user
-  const deleteUser = async (userId) => {
-    try {
-      const confirm = window.confirm(
-        "Are you sure you want to delete this user"
-      );
-      if (confirm) {
-        await deleteDoc(doc(fireDB, "users", userId));
-        enqueueSnackbar("user delete Successfuly", { variant: "success" });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   // fetching blogs
   const [blogsFetchingLoading, setBlogsFetchingLoading] = useState(false);
 
@@ -136,6 +106,22 @@ export const AuthProvider = ({ children }) => {
     fetchBlogs();
   }, []);
 
+  // post-delete
+  const deletePost = async (postId) => {
+    try {
+      const confirm = window.confirm(
+        "Are you sure you want to delete this post"
+      );
+      if (confirm) {
+        await deleteDoc(doc(fireDB, "posts", postId));
+        enqueueSnackbar("post delete Successfuly", { variant: "success" });
+        setBlogs((prevPost) => prevPost?.filter((post) => post?.id !== postId));
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   // user Data fetching from firestor
   const [userData, setUserData] = useState(null);
   const [usersLoading, setusersLoading] = useState(false);
@@ -160,6 +146,24 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     fetchUserData();
   }, []);
+
+  // delete-user
+  const deleteUser = async (userId) => {
+    try {
+      const confirm = window.confirm(
+        "Are you sure you want to delete this user"
+      );
+      if (confirm) {
+        await deleteDoc(doc(fireDB, "users", userId));
+        enqueueSnackbar("user delete Successfuly", { variant: "success" });
+        setUserData((prevUser) =>
+          prevUser.filter((user) => user?.id !== userId)
+        );
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // user authenticatiion
   const [user, setUser] = useState(null);

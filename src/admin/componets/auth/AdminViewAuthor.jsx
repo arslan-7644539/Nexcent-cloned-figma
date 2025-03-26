@@ -39,7 +39,7 @@ const AdminViewAuthor = () => {
                 <tr key={user.id} className="border-t">
                   <td className="px-4 py-2">
                     <img
-                      src={user?.imageURL || "user"}
+                      src={user?.image || "user"}
                       alt={user?.username || "userName"}
                       className="w-20 h-12 object-cover rounded"
                     />

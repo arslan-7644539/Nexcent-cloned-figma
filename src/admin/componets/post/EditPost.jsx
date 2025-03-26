@@ -21,6 +21,7 @@ const EditPost = () => {
     tags: "",
     image: "",
     content: "",
+    author: "",
   });
 
   const handleChange = (e) => {
@@ -36,15 +37,16 @@ const EditPost = () => {
     const fetchPost = () => {
       if (!blogs || blogs.length === 0) return;
       try {
-        const singlePost = blogs.find((item) => item.id === id);
+        const singlePost = blogs.find((item) => item?.id === id);
         if (singlePost) {
-          setPostId(singlePost.id);
+          setPostId(singlePost?.id);
           setUpdatedPost({
-            title: singlePost.title,
-            description: singlePost.description,
-            tags: singlePost.tags,
-            image: singlePost.image,
-            content: singlePost.content,
+            title: singlePost?.title,
+            description: singlePost?.description,
+            tags: singlePost?.tags,
+            image: singlePost?.image,
+            content: singlePost?.content,
+            author: singlePost?.author,
           });
         }
       } catch (error) {
@@ -77,6 +79,23 @@ const EditPost = () => {
               value={updatedPost.title}
               onChange={handleChange}
               placeholder="Enter title..."
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          {/* Author Name */}
+
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">
+              Author Name
+            </label>
+            <input
+              type="text"
+              name="author"
+              value={updatedPost.author}
+              onChange={handleChange}
+              placeholder="Author Name"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />

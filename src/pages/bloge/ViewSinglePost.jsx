@@ -16,31 +16,12 @@ const ViewSinglePost = () => {
     image: "",
     content: "",
     createdAt: "",
+    author: "",
+    authorImage: "",
   });
 
-  const { blogs, blogsFetchingLoading, userData, user } =
-    useContext(AuthContext);
-  // ------------------------------------------------------------------------
-  const [AuthorData, setAuthorData] = useState({
-    username: "",
-    image: "",
-  });
-  useEffect(() => {
-    const fetchUserData = () => {
-      try {
-        const singleUser = userData.find((u) => u.uid === user.uid);
-        if (singleUser) {
-          setAuthorData({
-            username: singleUser?.username,
-            image: singleUser?.image,
-          });
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchUserData();
-  }, [user, userData]);
+  const { blogs, blogsFetchingLoading } = useContext(AuthContext);
+
   // -----------------------------------------------------------------------
 
   const { id } = useParams();
@@ -58,6 +39,8 @@ const ViewSinglePost = () => {
           image: signlePost?.image,
           content: signlePost?.content,
           createdAt: signlePost?.createdAt,
+          author: signlePost?.author,
+          authorImage: signlePost?.authorImage,
         });
       }
     };
@@ -101,13 +84,13 @@ const ViewSinglePost = () => {
       {/* Author Info */}
       <div className="flex items-center space-x-4 mb-8">
         <img
-          src={AuthorData.image}
-          alt="admin"
+          src={post.authorImage}
+          alt="Author"
           className="w-12 h-12 rounded-full shadow"
         />
         <div>
           <p className="text-sm font-medium text-gray-700">
-            By Admin {`:${AuthorData.username}`}
+            Author {`:${post.author}`}
           </p>
           <p className="text-xs text-gray-400">
             Published on :{" "}
