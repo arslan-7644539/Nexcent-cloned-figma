@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useRoutes } from "react-router";
 
 import { appRoutes } from "./routes/appRoute";
+import { AuthContext } from "./context/authContext";
 
 const App = () => {
-  const routes = useRoutes(appRoutes);
+  const { userData } = useContext(AuthContext);
+  const routes = useRoutes(appRoutes(userData));
   return routes;
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { MdPostAdd, MdViewQuilt, MdOutlineInsertComment } from "react-icons/md";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
@@ -8,16 +8,26 @@ import { PiEyeClosedDuotone } from "react-icons/pi";
 import { PiEyeClosedFill } from "react-icons/pi";
 import { VscFeedback } from "react-icons/vsc";
 import { FaChartBar } from "react-icons/fa";
+import { AuthContext } from "../../../context/authContext";
 
 const Sidebar = () => {
   // ------------------
+  const { userData } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
 
   const navItems = [
     { name: "Dashbord", icon: <FaChartBar />, path: "/dashbord" },
-    { name: "Profile", icon: <CgProfile />, path: "/dashbord/profile" },
-    { name: "Add Post", icon: <MdPostAdd />, path: "/dashbord/addPost" },
+    {
+      name: "Profile",
+      icon: <CgProfile />,
+      path: "/dashbord/profile",
+    },
+    {
+      name: "Add Post",
+      icon: <MdPostAdd />,
+      path: "/dashbord/addPost",
+    },
     {
       name: "Add Authors",
       icon: <AiOutlineUsergroupAdd />,

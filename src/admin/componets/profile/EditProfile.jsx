@@ -138,20 +138,21 @@ const EditProfile = () => {
           </div>
 
           {/* user role */}
-
-          <FormControl fullWidth margin="normal">
-            <InputLabel> Author Role</InputLabel>
-            <Select
-              label="Author Role"
-              name="role"
-              value={updatedData.role}
-              onChange={handleChang}
-            >
-              <MenuItem value="">Select Role</MenuItem>
-              <MenuItem value="admin">Admin</MenuItem>
-              <MenuItem value="editor">Editor</MenuItem>
-            </Select>
-          </FormControl>
+          {/* {userData?.role === "admin" && ( */}
+            <FormControl fullWidth margin="normal">
+              <InputLabel> Author Role</InputLabel>
+              <Select
+                label="Author Role"
+                name="role"
+                value={updatedData.role}
+                onChange={handleChang}
+              >
+                <MenuItem value="">Select Role</MenuItem>
+                <MenuItem value="admin">Admin</MenuItem>
+                <MenuItem value="editor">Editor</MenuItem>
+              </Select>
+            </FormControl>
+           {/* )} */}
 
           {/* Password Field */}
           <div className="relative w-full">

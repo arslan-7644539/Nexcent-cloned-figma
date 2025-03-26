@@ -80,7 +80,10 @@ const Dashbord = () => {
               <div className="absolute right-0 mt-2 w-48 bg-white shadow-xl rounded-lg z-50">
                 <ul className="py-2 text-gray-700">
                   <li>
-                    <button onClick={()=> navigate("/dashbord/profile")} className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2">
+                    <button
+                      onClick={() => navigate("/dashbord/profile")}
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                    >
                       <User size={18} /> Profile
                     </button>
                   </li>
@@ -129,7 +132,11 @@ const Dashbord = () => {
             </p>
             <p className="text-sm text-gray-500 mt-1">Active this week</p>
             <button
-              onClick={() => navigate("/dashbord/view-author-list")}
+              // disabled={userData?.role === "editor"}
+              onClick={() =>
+                // userData?.role === "admin" &&
+                navigate("/dashbord/view-author-list")
+              }
               className="mt-4 cursor-pointer w-full text-center bg-orange-100 text-orange-700 py-2 rounded-md hover:bg-orange-200 transition"
             >
               View Users
