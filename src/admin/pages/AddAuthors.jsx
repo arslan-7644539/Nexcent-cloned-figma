@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { motion } from "motion/react";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { LinearProgress } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  LinearProgress,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, fireDB } from "../../firebase";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
@@ -20,6 +26,8 @@ const AddAuthors = () => {
   const authorSchema = yup.object({
     username: yup.string().required("username is required"),
     email: yup.string().email("Invalid Email").required("Email is required"),
+    image: yup.string(),
+    role: yup.string().required("role is required"),
     password: yup
       .string()
       .min(6, "password must be a 6 characters")
@@ -30,40 +38,47 @@ const AddAuthors = () => {
     initialValues: {
       username: "",
       email: "",
+      image: "",
+      role: "",
       password: "",
     },
     validationSchema: authorSchema,
-    onSubmit: async (values, actions) => {
-      try {
-        const userCrenditional = await createUserWithEmailAndPassword(
-          auth,
-          values.email,
-          values.password
-        );
-        const user = userCrenditional.user;
-        // ---------------------------------
+    onSubmit: useCallback(
+      async (values, actions) => {
+        try {
+          const userCrenditional = await createUserWithEmailAndPassword(
+            auth,
+            values.email,
+            values.password
+          );
+          const user = userCrenditional.user;
+          // ---------------------------------
 
-        await setDoc(doc(fireDB, "users", user.uid), {
-          username: values.username,
-          email: values.email,
-          password: values.password,
-          uid: user.uid,
-          createdAt: Timestamp.now(),
-        });
-        enqueueSnackbar("New Author Added Successfully", {
-          variant: "success",
-        });
-        actions.resetForm();
-        setTimeout(() => {
-          navigate("/dashbord");
-        }, 1000);
-      } catch (error) {
-        console.error(error);
-        enqueueSnackbar("Someting went wrong", { variant: "info" });
-      } finally {
-        actions.setSubmitting(false);
-      }
-    },
+          await setDoc(doc(fireDB, "users", user.uid), {
+            username: values?.username,
+            email: values?.email,
+            image: values?.image,
+            role: values?.role,
+            password: values?.password,
+            uid: user?.uid,
+            createdAt: Timestamp.now(),
+          });
+          enqueueSnackbar("New Author Added Successfully", {
+            variant: "success",
+          });
+          actions.resetForm();
+          setTimeout(() => {
+            navigate("/dashbord");
+          }, 1000);
+        } catch (error) {
+          console.error(error);
+          enqueueSnackbar("Someting went wrong", { variant: "info" });
+        } finally {
+          actions.setSubmitting(false);
+        }
+      },
+      [navigate]
+    ),
   });
 
   const {
@@ -77,7 +92,7 @@ const AddAuthors = () => {
   } = authorForm;
 
   return (
-    <div className=" container mx-auto h-screen flex justify-center items-center bg-gradient-to-br from-blue-50 to-pink-100 py-16 px-6 md:px-20">
+    <div className=" container mx-auto  flex justify-center items-center bg-gradient-to-br from-blue-50 to-pink-100 py-16 px-6 md:px-20 ">
       <motion.div
         className="max-w-3xl mx-auto text-center bg-white p-10 rounded-3xl shadow-lg"
         initial={{ opacity: 0, y: 50 }}
@@ -136,6 +151,45 @@ const AddAuthors = () => {
             )}
           </div>
 
+          {/* User Image Field */}
+          <div>
+            <label className="block mb-1 text-[#4D4D4D] font-semibold">
+              Your Image
+            </label>
+            <input
+              onBlur={handleBlur}
+              type="text"
+              name="image"
+              value={values.image}
+              onChange={handleChange}
+              placeholder="Enter your image (Url only)"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF4F]"
+            />
+            {touched.image && errors.image && (
+              <p className="text-red-500 text-sm mt-1">{errors.image}</p>
+            )}
+          </div>
+
+          {/* User Role Field */}
+          <FormControl
+            fullWidth
+            margin="normal"
+            error={touched?.role && Boolean(errors?.role)}
+          >
+            <InputLabel> Author Role</InputLabel>
+            <Select
+              label="Author Role"
+              name="role"
+              value={values.role}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            >
+              <MenuItem value="">Select Role</MenuItem>
+              <MenuItem value="admin">Admin</MenuItem>
+              <MenuItem value="editor">Editor</MenuItem>
+            </Select>
+          </FormControl>
+
           {/* Password Field */}
           <div className="relative">
             <label className="block mb-1 text-[#4D4D4D] font-semibold">
@@ -149,7 +203,7 @@ const AddAuthors = () => {
               value={values.password}
               onChange={handleChange}
               placeholder="Enter your password"
-              className= "   w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF4F]"
+              className="   w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF4F]"
             />
             {/* Toggle Eye Icon */}
             <div

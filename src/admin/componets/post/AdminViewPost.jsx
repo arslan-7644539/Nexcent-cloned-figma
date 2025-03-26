@@ -7,7 +7,7 @@ import { FiEdit, FiTrash2 } from "react-icons/fi";
 
 const AdminViewPost = () => {
   const { blogs, deletePost, blogsFetchingLoading } = useContext(AuthContext);
-  console.log("🚀 ~ AdminViewPost ~ blogs:", blogs);
+  // console.log("🚀 ~ AdminViewPost ~ blogs:", blogs);
 
   return (
     <div className="container mx-auto min-h-screen bg-gradient-to-br from-blue-50 to-pink-100 py-10 px-4">

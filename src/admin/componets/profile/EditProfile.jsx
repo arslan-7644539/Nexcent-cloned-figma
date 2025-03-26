@@ -1,6 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { LinearProgress } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  LinearProgress,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import { useParams } from "react-router";
 import { AuthContext } from "../../../context/authContext";
 import BackButton from "../buttons/BackButton";
@@ -24,6 +30,7 @@ const EditProfile = () => {
     email: "",
     password: "",
     image: "",
+    role: "",
   });
   console.log("🚀 ~ EditProfile ~ updatedData:", updatedData);
 
@@ -45,10 +52,11 @@ const EditProfile = () => {
         if (singleUser) {
           setUserId(singleUser.uid);
           setUpdatedData({
-            username: singleUser.username,
-            email: singleUser.email,
-            password: singleUser.password,
-            image: singleUser.image,
+            username: singleUser?.username,
+            email: singleUser?.email,
+            password: singleUser?.password,
+            image: singleUser?.image,
+            role: singleUser?.role,
           });
         }
       } catch (error) {
@@ -60,7 +68,7 @@ const EditProfile = () => {
   }, [userData]);
 
   return (
-    <div className=" container mx-auto h-screen flex justify-center items-center bg-gradient-to-br from-blue-50 to-pink-100 py-16 px-6 md:px-20">
+    <div className=" container mx-auto  flex justify-center items-center bg-gradient-to-br from-blue-50 to-pink-100 py-16 px-6 md:px-20">
       <motion.div
         className="max-w-3xl mx-auto text-center bg-white p-10 rounded-3xl shadow-lg"
         initial={{ opacity: 0, y: 50 }}
@@ -112,6 +120,39 @@ const EditProfile = () => {
             />
           </div>
 
+          {/* Image url field */}
+
+          <div>
+            <label className="block mb-1 text-[#4D4D4D] font-semibold">
+              Image
+            </label>
+            <input
+              autoComplete="username"
+              type="text"
+              name="image"
+              value={updatedData.image}
+              onChange={handleChang}
+              placeholder="Enter your Image ( Url Only )"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF4F]"
+            />
+          </div>
+
+          {/* user role */}
+
+          <FormControl fullWidth margin="normal">
+            <InputLabel> Author Role</InputLabel>
+            <Select
+              label="Author Role"
+              name="role"
+              value={updatedData.role}
+              onChange={handleChang}
+            >
+              <MenuItem value="">Select Role</MenuItem>
+              <MenuItem value="admin">Admin</MenuItem>
+              <MenuItem value="editor">Editor</MenuItem>
+            </Select>
+          </FormControl>
+
           {/* Password Field */}
           <div className="relative w-full">
             <label className="block mb-1 text-[#4D4D4D] font-semibold">
@@ -133,23 +174,6 @@ const EditProfile = () => {
             >
               {showPassword ? <BiHide /> : <FaEye />}
             </div>
-          </div>
-
-          {/* Image url field */}
-
-          <div>
-            <label className="block mb-1 text-[#4D4D4D] font-semibold">
-              Image
-            </label>
-            <input
-              autoComplete="username"
-              type="text"
-              name="image"
-              value={updatedData.image}
-              onChange={handleChang}
-              placeholder="Enter your Image ( Url Only )"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4CAF4F]"
-            />
           </div>
 
           <button

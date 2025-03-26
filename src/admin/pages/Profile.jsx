@@ -22,6 +22,7 @@ const Profile = () => {
     email: "",
     uid: "",
     image: "",
+    role: "",
   });
   // console.log("🚀 ~ Profile ~ profileData:", profileData);
   // ---------------------
@@ -45,6 +46,7 @@ const Profile = () => {
             email: currentUser?.email,
             uid: currentUser?.uid,
             image: currentUser?.image,
+            role: currentUser?.role,
           });
         }
       } catch (error) {
@@ -52,7 +54,7 @@ const Profile = () => {
       }
     };
     fetchProfileData();
-  }, [user,userData]);
+  }, [user, userData]);
 
   return (
     <Card
@@ -91,13 +93,13 @@ const Profile = () => {
                 <BackButton />
               </div>
               <Typography variant="body1" color="text.secondary">
-                Email: {profileData.email}
+                Email: {profileData?.email}
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                UID: {profileData.uid}
+                UID: {profileData?.uid}
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                Role: {user.role || "Administrator"}
+                Role: {profileData?.role || "Administrator"}
               </Typography>
 
               {/* Edit Button */}

@@ -114,12 +114,10 @@ export const AuthProvider = ({ children }) => {
         const profileRef = doc(fireDB, "users", userId);
         await updateDoc(profileRef, updatedData);
         setProfileUpdateLoading(false);
-        setUpdatedData({
-          username: "",
-          email: "",
-          password: "",
-          image: "",
-        });
+        setUpdatedData((prev) => ({
+          ...prev,
+          ...updatedData,
+        }));
         // enqueueSnackbar("Login Successfully", {
         //   variant: "success",
         // });
@@ -130,10 +128,11 @@ export const AuthProvider = ({ children }) => {
       } catch (error) {
         console.error(error);
         setProfileUpdateLoading(false);
+        alert("something went wrong");
         enqueueSnackbar("Failed to update profile", { variant: "error" });
       }
     },
-    []
+    [navigate, fireDB]
   );
   // ------------------------------------------------------------------------
 
@@ -251,8 +250,8 @@ export const AuthProvider = ({ children }) => {
       user,
       loading,
       // -----------------------
-      blogsFetchingLoading,
       blogs,
+      blogsFetchingLoading,
       deletePost,
       postUpdate,
       postUpdateLoading,
