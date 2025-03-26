@@ -1,5 +1,13 @@
 // context/AuthContext.jsx
-import { createContext, lazy, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  lazy,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, fireDB } from "../firebase"; // your firebase.js path
 // import { User } from "lucide-react";
@@ -28,7 +36,7 @@ export const AuthProvider = ({ children }) => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [fbLoading, setFBLoading] = useState(true);
 
-  const getAllFeedbacks = async () => {
+  const getAllFeedbacks = useCallback(async () => {
     try {
       const q = query(
         collection(fireDB, "feedbacks"),
@@ -45,91 +53,96 @@ export const AuthProvider = ({ children }) => {
       console.error("Error fetching feedbacks:", error);
       setFBLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getAllFeedbacks();
   }, []);
-
+  // ---------------------------------------------------------------------
 
   // delete user feedback
 
-  const deleteFB = async (fbId) => {
+  const deleteFB = useCallback(async (fbId) => {
     try {
-      const confirm = window.confirm(
-        "Are you sure you want to delete this FB"
-      );
+      const confirm = window.confirm("Are you sure you want to delete this FB");
       if (confirm) {
         await deleteDoc(doc(fireDB, "feedbacks", fbId));
         enqueueSnackbar("FB delete Successfuly", { variant: "success" });
-        setFeedbacks((prevFB) =>
-          prevFB.filter((fb) => fb?.id !== fbId)
-        );
+        setFeedbacks((prevFB) => prevFB.filter((fb) => fb?.id !== fbId));
       }
     } catch (error) {
       console.error(error);
     }
-  };
+  }, []);
+  // ------------------------------------------------------------------------
 
   // post-update
   const [postUpdateLoading, setPostUpdateLoading] = useState(false);
 
-  const postUpdate = async (postId, updatedData, setUpdatedPost) => {
-    setPostUpdateLoading(true);
-    try {
-      const updateRef = doc(fireDB, "posts", postId);
-      await updateDoc(updateRef, updatedData);
-      enqueueSnackbar("Updated successfuly", { variant: "success" });
-      setPostUpdateLoading(false);
-      setUpdatedPost({
-        title: "",
-        description: "",
-        tags: "",
-      });
-      setTimeout(() => {
-        navigate("/dashbord/admin-view-post");
-      }, 1000);
-    } catch (error) {
-      console.error(error);
-      setPostUpdateLoading(false);
-    }
-  };
+  const postUpdate = useCallback(
+    async (postId, updatedData, setUpdatedPost) => {
+      setPostUpdateLoading(true);
+      try {
+        const updateRef = doc(fireDB, "posts", postId);
+        await updateDoc(updateRef, updatedData);
+        enqueueSnackbar("Updated successfuly", { variant: "success" });
+        setPostUpdateLoading(false);
+        setUpdatedPost({
+          title: "",
+          description: "",
+          tags: "",
+        });
+        setTimeout(() => {
+          navigate("/dashbord/admin-view-post");
+        }, 1000);
+      } catch (error) {
+        console.error(error);
+        setPostUpdateLoading(false);
+      }
+    },
+    []
+  );
+  // -----------------------------------------------------------
 
   // user-profile-update
   const [profileUpdateLoading, setProfileUpdateLoading] = useState(false);
 
-  const profileUpdate = async (userId, updatedData, setUpdatedData) => {
-    setProfileUpdateLoading(true);
-    try {
-      const profileRef = doc(fireDB, "users", userId);
-      await updateDoc(profileRef, updatedData);
-      setProfileUpdateLoading(false);
-      setUpdatedData({
-        username: "",
-        email: "",
-        password: "",
-        image: "",
-      });
-      // enqueueSnackbar("Login Successfully", {
-      //   variant: "success",
-      // });
-      alert("Profile Updated");
-      setTimeout(() => {
-        navigate("/dashbord");
-      }, 1000);
-    } catch (error) {
-      console.error(error);
-      setProfileUpdateLoading(false);
-      enqueueSnackbar("Failed to update profile", { variant: "error" });
-    }
-  };
+  const profileUpdate = useCallback(
+    async (userId, updatedData, setUpdatedData) => {
+      setProfileUpdateLoading(true);
+      try {
+        const profileRef = doc(fireDB, "users", userId);
+        await updateDoc(profileRef, updatedData);
+        setProfileUpdateLoading(false);
+        setUpdatedData({
+          username: "",
+          email: "",
+          password: "",
+          image: "",
+        });
+        // enqueueSnackbar("Login Successfully", {
+        //   variant: "success",
+        // });
+        alert("Profile Updated");
+        setTimeout(() => {
+          navigate("/dashbord");
+        }, 1000);
+      } catch (error) {
+        console.error(error);
+        setProfileUpdateLoading(false);
+        enqueueSnackbar("Failed to update profile", { variant: "error" });
+      }
+    },
+    []
+  );
+  // ------------------------------------------------------------------------
 
   // fetching blogs
   const [blogsFetchingLoading, setBlogsFetchingLoading] = useState(false);
 
   const [blogs, setBlogs] = useState([]);
 
-  const fetchBlogs = async () => {
+  const fetchBlogs = useCallback(async () => {
     setBlogsFetchingLoading(true);
     try {
       const postRef = collection(fireDB, "posts");
@@ -146,13 +159,14 @@ export const AuthProvider = ({ children }) => {
       console.error(error);
       setBlogsFetchingLoading(false);
     }
-  };
+  }, []);
   useEffect(() => {
     fetchBlogs();
   }, []);
+  // --------------------------------------------------------------
 
   // post-delete
-  const deletePost = async (postId) => {
+  const deletePost = useCallback(async (postId) => {
     try {
       const confirm = window.confirm(
         "Are you sure you want to delete this post"
@@ -165,35 +179,40 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, []);
+  // ---------------------------------------------------------------------
 
   // user Data fetching from firestor
   const [userData, setUserData] = useState(null);
   const [usersLoading, setusersLoading] = useState(false);
   // console.log("🚀 ~ AuthProvider ~ userData:", userData);
 
-  const fetchUserData = async () => {
-    setusersLoading(true);
-    try {
-      const userQuery = await getDocs(collection(fireDB, "users"));
-      const usersData = userQuery.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setUserData(usersData);
-      setusersLoading(false);
-    } catch (error) {
-      console.error(error);
-      setusersLoading(false);
-    }
-  };
+  const fetchUserData = useMemo(
+    () => async () => {
+      setusersLoading(true);
+      try {
+        const userQuery = await getDocs(collection(fireDB, "users"));
+        const usersData = userQuery.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setUserData(usersData);
+        setusersLoading(false);
+      } catch (error) {
+        console.error(error);
+        setusersLoading(false);
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     fetchUserData();
   }, []);
+  // -------------------------------------------------------------------------
 
   // delete-user
-  const deleteUser = async (userId) => {
+  const deleteUser = useCallback(async (userId) => {
     try {
       const confirm = window.confirm(
         "Are you sure you want to delete this user"
@@ -208,7 +227,8 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, []);
+  // ---------------------------------------------------------------------------
 
   // user authenticatiion
   const [user, setUser] = useState(null);
@@ -224,33 +244,55 @@ export const AuthProvider = ({ children }) => {
 
     return () => unsubscribe(); // cleanup
   }, []);
+  // ---------------------------------------------------------------------------
+
+  const authValue = useMemo(
+    () => ({
+      user,
+      loading,
+      // -----------------------
+      blogsFetchingLoading,
+      blogs,
+      deletePost,
+      postUpdate,
+      postUpdateLoading,
+      // -----------------------
+      userData,
+      usersLoading,
+      deleteUser,
+      // -----------------------
+      profileUpdate,
+      profileUpdateLoading,
+      // -----------------------
+      feedbacks,
+      fbLoading,
+      deleteFB,
+    }),
+    [
+      user,
+      loading,
+      // -----------------------
+      blogsFetchingLoading,
+      blogs,
+      deletePost,
+      postUpdate,
+      postUpdateLoading,
+      // -----------------------
+      userData,
+      usersLoading,
+      deleteUser,
+      // -----------------------
+      profileUpdate,
+      profileUpdateLoading,
+      // -----------------------
+      feedbacks,
+      fbLoading,
+      deleteFB,
+    ]
+  );
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        loading,
-        // -----------------------
-        blogsFetchingLoading,
-        blogs,
-        deletePost,
-        postUpdate,
-        postUpdateLoading,
-        // -----------------------
-        userData,
-        usersLoading,
-        deleteUser,
-        // -----------------------
-        profileUpdate,
-        profileUpdateLoading,
-        // -----------------------
-        feedbacks,
-        fbLoading,
-        deleteFB,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { motion } from "motion/react"; // Make sure you installed framer-motion
 import { Link, useNavigate } from "react-router";
 import { useFormik } from "formik";
@@ -26,7 +26,7 @@ const Login = () => {
       password: "",
     },
     validationSchema: loginSchema,
-    onSubmit: async (values, actions) => {
+    onSubmit: useCallback(async (values, actions) => {
       try {
         const res = await signInWithEmailAndPassword(
           auth,
@@ -45,7 +45,7 @@ const Login = () => {
       } finally {
         actions.setSubmitting(false);
       }
-    },
+    }, []),
   });
 
   const {
