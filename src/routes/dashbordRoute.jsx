@@ -3,6 +3,7 @@ import { AuthContext } from "../context/authContext";
 import AuthGuard from "../componets/navbar/AuthGuard";
 import NavLayout from "../admin/componets/adminNavbar/NavLayout";
 import PrivateRoute from "../admin/componets/userRole/PrivateRoute";
+import AuthorProfileEdit from "../admin/componets/auth/AuthorProfileEdit";
 
 // Lazy Load Components
 const AdminViewAuthor = lazy(() =>
@@ -101,6 +102,14 @@ export const DashbordRoute = (userData) => {
       element: (
         <PrivateRoute allowedRole={["admin"]}>
           <AdminViewAuthor />
+        </PrivateRoute>
+      ),
+    },
+    {
+      path: "author-Edit-Profile/:id",
+      element: (
+        <PrivateRoute allowedRole={["admin"]}>
+          <AuthorProfileEdit />
         </PrivateRoute>
       ),
     },

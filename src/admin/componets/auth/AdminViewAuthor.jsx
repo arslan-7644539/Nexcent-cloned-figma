@@ -2,13 +2,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../../context/authContext";
 import { LinearProgress } from "@mui/material";
 import BackButton from "../buttons/BackButton";
+import { Link } from "react-router";
+import { FiEdit } from "react-icons/fi";
 
 const AdminViewAuthor = () => {
   //   const navigate = useNavigate();
   const { userData, deleteUser, usersLoading } = useContext(AuthContext);
   console.log("🚀 ~ AdminViewAuthor ~ userData:", userData);
-
-  
 
   return (
     <div className="container mx-auto min-h-screen bg-gray-100 p-6">
@@ -64,6 +64,14 @@ const AdminViewAuthor = () => {
                     >
                       Delete
                     </button>
+                    <Link
+                     to={`/dashbord/author-Edit-Profile/${user?.id}`}
+                    >
+                      <button className="inline-flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded text-sm shadow">
+                        <FiEdit className="text-base" />
+                        Edit
+                      </button>
+                    </Link>
                   </td>
                 </tr>
               ))}
