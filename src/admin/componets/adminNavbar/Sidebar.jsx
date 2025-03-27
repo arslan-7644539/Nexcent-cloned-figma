@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { MdPostAdd, MdViewQuilt, MdOutlineInsertComment } from "react-icons/md";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
@@ -9,38 +9,73 @@ import { PiEyeClosedFill } from "react-icons/pi";
 import { VscFeedback } from "react-icons/vsc";
 import { FaChartBar } from "react-icons/fa";
 import { AuthContext } from "../../../context/authContext";
+import UserRole from "../userRole/UserRole";
 
 const Sidebar = () => {
   // ------------------
-  const { userData } = useContext(AuthContext);
+  // const { userData } = useContext(AuthContext);
+  const [role, setRole] = useState(null);
+  useEffect(() => {
+    UserRole().then((userRole) => {
+      setRole(userRole);
+    });
+  }, []);
+
   const [isOpen, setIsOpen] = useState(true);
   const navigate = useNavigate();
 
-  const navItems = [
-    { name: "Dashbord", icon: <FaChartBar />, path: "/dashbord" },
-    {
-      name: "Profile",
-      icon: <CgProfile />,
-      path: "/dashbord/profile",
-    },
-    {
-      name: "Add Post",
-      icon: <MdPostAdd />,
-      path: "/dashbord/addPost",
-    },
-    {
-      name: "Add Authors",
-      icon: <AiOutlineUsergroupAdd />,
-      path: "/dashbord/addAuthor",
-    },
-    {
-      name: "View-Feedbacks",
-      icon: <VscFeedback />,
-      path: "/dashbord/view-feedback",
-    },
+  const navItems =
+    role === "admin"
+      ? [
+          { name: "Dashbord", icon: <FaChartBar />, path: "/dashbord" },
+          {
+            name: "Profile",
+            icon: <CgProfile />,
+            path: "/dashbord/profile",
+          },
+          {
+            name: "Add Post",
+            icon: <MdPostAdd />,
+            path: "/dashbord/addPost",
+          },
+          {
+            name: "Add Authors",
+            icon: <AiOutlineUsergroupAdd />,
+            path: "/dashbord/addAuthor",
+          },
+          {
+            name: "View-Feedbacks",
+            icon: <VscFeedback />,
+            path: "/dashbord/view-feedback",
+          },
 
-    { name: "View Site", icon: <MdViewQuilt />, path: "/" },
-  ];
+          { name: "View Site", icon: <MdViewQuilt />, path: "/" },
+        ]
+      : [
+          { name: "Dashbord", icon: <FaChartBar />, path: "/dashbord" },
+          {
+            name: "Profile",
+            icon: <CgProfile />,
+            path: "/dashbord/profile",
+          },
+          {
+            name: "Add Post",
+            icon: <MdPostAdd />,
+            path: "/dashbord/addPost",
+          },
+          // {
+          //   name: "Add Authors",
+          //   icon: <AiOutlineUsergroupAdd />,
+          //   path: "/dashbord/addAuthor",
+          // },
+          {
+            name: "View-Feedbacks",
+            icon: <VscFeedback />,
+            path: "/dashbord/view-feedback",
+          },
+
+          { name: "View Site", icon: <MdViewQuilt />, path: "/" },
+        ];
 
   return (
     <div className="flex h-screen">

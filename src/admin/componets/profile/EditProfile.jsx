@@ -12,8 +12,17 @@ import { AuthContext } from "../../../context/authContext";
 import BackButton from "../buttons/BackButton";
 import { BiHide } from "react-icons/bi";
 import { FaEye } from "react-icons/fa";
+import UserRole from "../userRole/UserRole";
 
 const EditProfile = () => {
+  // ----------------------------
+  const [role, setRole] = useState(null);
+  // console.log("🚀 ~ EditProfile ~ role:", role)
+  useEffect(() => {
+    UserRole().then((userRole) => {
+      setRole(userRole);
+    });
+  }, []);
   // ------------------------
   const [userId, setUserId] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -32,7 +41,7 @@ const EditProfile = () => {
     image: "",
     role: "",
   });
-  console.log("🚀 ~ EditProfile ~ updatedData:", updatedData);
+  // console.log("🚀 ~ EditProfile ~ updatedData:", updatedData);
 
   const handleChang = (e) => {
     const { name, value } = e.target;
@@ -138,7 +147,7 @@ const EditProfile = () => {
           </div>
 
           {/* user role */}
-          {/* {userData?.role === "admin" && ( */}
+          {role === "admin" ? (
             <FormControl fullWidth margin="normal">
               <InputLabel> Author Role</InputLabel>
               <Select
@@ -152,7 +161,7 @@ const EditProfile = () => {
                 <MenuItem value="editor">Editor</MenuItem>
               </Select>
             </FormControl>
-           {/* )} */}
+          ) : null}
 
           {/* Password Field */}
           <div className="relative w-full">

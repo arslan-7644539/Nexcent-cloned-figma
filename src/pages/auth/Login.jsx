@@ -11,6 +11,8 @@ import { BiHide } from "react-icons/bi";
 import { useSnackbar } from "notistack";
 
 const Login = () => {
+  console.log(auth.currentUser);
+  
   const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();

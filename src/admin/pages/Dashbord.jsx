@@ -6,8 +6,18 @@ import { AuthContext } from "../../context/authContext";
 import { MdPostAdd } from "react-icons/md";
 import { useNavigate } from "react-router";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
+import UserRole from "../componets/userRole/UserRole";
 
 const Dashbord = () => {
+  // -----------------------
+
+  const [role, setRole] = useState(null);
+  useEffect(() => {
+    UserRole().then((userRole) => {
+      setRole(userRole);
+    });
+  }, []);
+
   const navigate = useNavigate();
   // ---------------------------------
   const { user, blogs, userData } = useContext(AuthContext);
@@ -132,10 +142,9 @@ const Dashbord = () => {
             </p>
             <p className="text-sm text-gray-500 mt-1">Active this week</p>
             <button
-              // disabled={userData?.role === "editor"}
+              disabled={!role || role === "editor"}
               onClick={() =>
-                // userData?.role === "admin" &&
-                navigate("/dashbord/view-author-list")
+                role === "admin" && navigate("/dashbord/view-author-list")
               }
               className="mt-4 cursor-pointer w-full text-center bg-orange-100 text-orange-700 py-2 rounded-md hover:bg-orange-200 transition"
             >

@@ -1,5 +1,7 @@
 import { CircularProgress } from "@mui/material";
 import { lazy, Suspense } from "react";
+import Unauthorized from "../pages/unauthorized/Unauthorized";
+import NotFound from "../pages/404/NotFound";
 const Login = lazy(() => import("../pages/auth/Login"));
 export const authRoute = [
   {
@@ -15,5 +17,13 @@ export const authRoute = [
         <Login />
       </Suspense>
     ),
+  },
+  {
+    path: "/unauthorized",
+    element: <Unauthorized />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ];
