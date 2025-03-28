@@ -1,9 +1,10 @@
 import { Layout } from "../componets/navbar/Layout";
-import { DashbordRoute } from "./DashbordRoute";
+// import { DashbordRoute } fro./adminRoute/DashbordRouteute";
 import { authRoute } from "./authRoute";
 import { lazy, Suspense } from "react";
 import { CircularProgress } from "@mui/material";
 import { auth } from "../firebase";
+import { DashbordRoute } from "./adminRoute/DashbordRoute";
 // ----------------------------------------------------------
 
 const Home = lazy(() => import("../pages/home/Home"));

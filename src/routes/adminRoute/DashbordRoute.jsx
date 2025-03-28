@@ -1,28 +1,28 @@
 import { lazy, useContext } from "react";
-import { AuthContext } from "../context/authContext";
-import AuthGuard from "../componets/navbar/AuthGuard";
-import NavLayout from "../admin/componets/adminNavbar/NavLayout";
-import PrivateRoute from "../admin/componets/userRole/PrivateRoute";
-import AuthorProfileEdit from "../admin/componets/auth/AuthorProfileEdit";
+// import { AuthContext } from "../../context/authContext";
+import AuthGuard from "../../componets/navbar/AuthGuard";
+import NavLayout from "../../admin/componets/adminNavbar/NavLayout";
+import PrivateRoute from "../../admin/componets/userRole/PrivateRoute";
+import AuthorProfileEdit from "../../admin/componets/auth/AuthorProfileEdit";
 
 // Lazy Load Components
 const AdminViewAuthor = lazy(() =>
-  import("../admin/componets/auth/AdminViewAuthor")
+  import("../../admin/componets/auth/AdminViewAuthor")
 );
 const ViewFeedback = lazy(() =>
-  import("../admin/componets/feedback/ViewFeedback")
+  import("../../admin/componets/feedback/ViewFeedback")
 );
 const AdminViewPost = lazy(() =>
-  import("../admin/componets/post/AdminViewPost")
+  import("../../admin/componets/post/AdminViewPost")
 );
-const EditPost = lazy(() => import("../admin/componets/post/EditPost"));
+const EditPost = lazy(() => import("../../admin/componets/post/EditPost"));
 const EditProfile = lazy(() =>
-  import("../admin/componets/profile/EditProfile")
+  import("../../admin/componets/profile/EditProfile")
 );
-const AddAuthors = lazy(() => import("../admin/pages/AddAuthors"));
-const Dashbord = lazy(() => import("../admin/pages/Dashbord"));
-const Profile = lazy(() => import("../admin/pages/Profile"));
-const CreatePost = lazy(() => import("../admin/componets/post/CreatePost"));
+const AddAuthors = lazy(() => import("../../admin/pages/AddAuthors"));
+const Dashbord = lazy(() => import("../../admin/pages/Dashbord"));
+const Profile = lazy(() => import("../../admin/pages/Profile"));
+const CreatePost = lazy(() => import("../../admin/componets/post/CreatePost"));
 
 export const DashbordRoute = (userData) => {
   // const { userData } = useContext(AuthContext);
