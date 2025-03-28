@@ -114,7 +114,7 @@ const Dashbord = () => {
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Card 1: Total Posts */}
-          <div className="bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-xl p-6 transition-all duration-300">
+          <div className="bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-xl p-6 transition duration-300">
             <div className="flex justify-between items-center mb-3">
               <h2 className="text-xl font-semibold text-gray-700">
                 Total Posts

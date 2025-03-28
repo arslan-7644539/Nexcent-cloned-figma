@@ -92,11 +92,11 @@ const AddAuthors = () => {
     isSubmitting,
   } = authorForm;
 
-  const { userData } = useContext(AuthContext);
-  if (userData?.role === "editor") {
-    alert("permission denied");
-    return;
-  }
+  // const { userData } = useContext(AuthContext);
+  // if (userData?.role === "editor") {
+  //   alert("permission denied");
+  //   return;
+  // }
 
   return (
     <>

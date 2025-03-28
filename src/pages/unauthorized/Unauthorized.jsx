@@ -1,8 +1,19 @@
 import { useNavigate } from "react-router";
 import { Button, Card, CardContent, Typography } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/authContext";
+import UserRole from "../../admin/componets/userRole/UserRole";
 
 const Unauthorized = () => {
+  // const {userData} = useContext(AuthContext)
   const navigate = useNavigate();
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    UserRole().then((userRole) => {
+      setRole(userRole);
+    });
+  }, []);
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
@@ -20,9 +31,9 @@ const Unauthorized = () => {
             color="primary"
             size="large"
             className="rounded-full px-6 py-2 text-white"
-            onClick={() => navigate("/dashbord")}
+            onClick={() => (role ? navigate("/dashbord") : navigate("/"))}
           >
-            Go to Dashboard
+            Go back
           </Button>
         </CardContent>
       </Card>

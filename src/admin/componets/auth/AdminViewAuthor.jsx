@@ -8,7 +8,7 @@ import { FiEdit } from "react-icons/fi";
 const AdminViewAuthor = () => {
   //   const navigate = useNavigate();
   const { userData, deleteUser, usersLoading } = useContext(AuthContext);
-  console.log("🚀 ~ AdminViewAuthor ~ userData:", userData);
+  // console.log("🚀 ~ AdminViewAuthor ~ userData:", userData);
 
   return (
     <div className="container mx-auto min-h-screen bg-gray-100 p-6">

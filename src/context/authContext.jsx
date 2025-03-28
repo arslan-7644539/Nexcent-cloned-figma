@@ -8,8 +8,8 @@ import {
   useMemo,
   useState,
 } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth, fireDB } from "../firebase"; // your firebase.js path
+import { onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { auth, fireDB, GoogleProvider } from "../firebase"; // your firebase.js path
 // import { User } from "lucide-react";
 import {
   collection,
@@ -22,7 +22,6 @@ import {
 } from "firebase/firestore";
 import { useNavigate } from "react-router";
 import { useSnackbar } from "notistack";
-// const useSnackbar = lazy(() => import("notistack"));
 
 export const AuthContext = createContext();
 
@@ -186,24 +185,21 @@ export const AuthProvider = ({ children }) => {
   const [usersLoading, setusersLoading] = useState(false);
   // console.log("🚀 ~ AuthProvider ~ userData:", userData);
 
-  const fetchUserData = useMemo(
-    () => async () => {
-      setusersLoading(true);
-      try {
-        const userQuery = await getDocs(collection(fireDB, "users"));
-        const usersData = userQuery.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setUserData(usersData);
-        setusersLoading(false);
-      } catch (error) {
-        console.error(error);
-        setusersLoading(false);
-      }
-    },
-    []
-  );
+  const fetchUserData = useCallback(async () => {
+    setusersLoading(true);
+    try {
+      const userQuery = await getDocs(collection(fireDB, "users"));
+      const usersData = userQuery.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setUserData(usersData);
+      setusersLoading(false);
+    } catch (error) {
+      console.error(error);
+      setusersLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     fetchUserData();

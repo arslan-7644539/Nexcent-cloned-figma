@@ -8,13 +8,11 @@ import {
   Select,
 } from "@mui/material";
 import { useParams } from "react-router";
-// import { AuthContext } from "../../../context/authContext";
-// import BackButton from "../buttons/BackButton";
+
 import { BiHide } from "react-icons/bi";
 import { FaEye } from "react-icons/fa";
 import { AuthContext } from "../../../context/authContext";
 import BackButton from "../buttons/BackButton";
-// import UserRole from "../userRole/UserRole";
 
 const AuthorProfileEdit = () => {
   // ------------------------
@@ -22,11 +20,11 @@ const AuthorProfileEdit = () => {
   const [showPassword, setShowPassword] = useState(false);
   // -------------------------------------------
   const { id } = useParams();
-  // console.log("🚀 ~ EditProfile ~ uid:", uid);
+
   // -----------------------------------------------
   const { userData, profileUpdate, profileUpdateLoading } =
     useContext(AuthContext);
-  // console.log("🚀 ~ EditProfile ~ userData:", userData);
+
   // ------------------------------------------------------
   const [updatedData, setUpdatedData] = useState({
     username: "",
@@ -35,7 +33,6 @@ const AuthorProfileEdit = () => {
     image: "",
     role: "",
   });
-  
 
   const handleChang = (e) => {
     const { name, value } = e.target;
@@ -51,7 +48,7 @@ const AuthorProfileEdit = () => {
 
       try {
         const singleUser = userData.find((item) => item.id === id);
-        // console.log("🚀 ~ fetchUser ~ singleUser:", singleUser);
+
         if (singleUser) {
           setUserId(singleUser.uid);
           setUpdatedData({

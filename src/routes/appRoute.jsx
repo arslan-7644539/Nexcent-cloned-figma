@@ -1,7 +1,4 @@
-// routes.jsx
-
 import { Layout } from "../componets/navbar/Layout";
-
 import { DashbordRoute } from "./DashbordRoute";
 import { authRoute } from "./authRoute";
 import { lazy, Suspense } from "react";
