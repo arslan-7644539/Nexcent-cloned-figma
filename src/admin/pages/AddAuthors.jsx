@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import * as yup from "yup";
 import { useFormik } from "formik";
@@ -9,7 +9,12 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateCurrentUser,
+} from "firebase/auth";
 import { auth, fireDB } from "../../firebase";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router";
@@ -20,6 +25,34 @@ import { FaEye } from "react-icons/fa";
 import { AuthContext } from "../../context/authContext";
 
 const AddAuthors = () => {
+  const { userData } = useContext(AuthContext);
+  // ----------------------------------  exist admin info fetching
+  const [adminInfo, setAdminInfo] = useState({
+    adminEmail: "",
+    adminPassword: "",
+  });
+  const currentAdmin = auth?.currentUser;
+
+  useEffect(() => {
+    const fetchAdminInfo = () => {
+      try {
+        if (!userData || !adminInfo) return;
+        const existingAdmin = userData?.find(
+          (u) => u?.email === currentAdmin?.email
+        );
+        if (existingAdmin)
+          setAdminInfo({
+            adminEmail: existingAdmin?.email,
+            adminPassword: existingAdmin?.password,
+          });
+      } catch (error) {
+        console.log("🚀 ~ fetchAdminInfo ~ error:", error);
+      }
+    };
+    fetchAdminInfo();
+  }, [adminInfo, userData]);
+  // -----------------------------------
+
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -44,42 +77,49 @@ const AddAuthors = () => {
       password: "",
     },
     validationSchema: authorSchema,
-    onSubmit: useCallback(
-      async (values, actions) => {
-        try {
-          const userCrenditional = await createUserWithEmailAndPassword(
-            auth,
-            values.email,
-            values.password
-          );
-          const user = userCrenditional.user;
-          // ---------------------------------
+    onSubmit: async (values, actions) => {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        const user = userCredential.user;
+        // ---------------------------------
 
-          await setDoc(doc(fireDB, "users", user.uid), {
-            username: values?.username,
-            email: values?.email,
-            image: values?.image,
-            role: values?.role,
-            password: values?.password,
-            uid: user?.uid,
-            createdAt: Timestamp.now(),
-          });
-          enqueueSnackbar("New Author Added Successfully", {
-            variant: "success",
-          });
-          actions.resetForm();
-          setTimeout(() => {
-            navigate("/dashbord");
-          }, 1000);
-        } catch (error) {
-          console.error(error);
-          enqueueSnackbar("Someting went wrong", { variant: "info" });
-        } finally {
-          actions.setSubmitting(false);
+        await setDoc(doc(fireDB, "users", user.uid), {
+          username: values?.username,
+          email: values?.email,
+          image: values?.image,
+          role: values?.role,
+          password: values?.password,
+          uid: user?.uid,
+          createdAt: Timestamp.now(),
+        });
+
+        // await signOut(auth);
+        if (currentAdmin) {
+          await signInWithEmailAndPassword(
+            auth,
+            adminInfo?.adminEmail,
+            adminInfo?.adminPassword
+          );
+          // await updateCurrentUser(auth, currentAdmin);
         }
-      },
-      [navigate]
-    ),
+        enqueueSnackbar("New Author Added Successfully", {
+          variant: "success",
+        });
+        actions.resetForm();
+        setTimeout(() => {
+          navigate("/dashbord");
+        }, 1000);
+      } catch (error) {
+        console.error(error);
+        enqueueSnackbar("Someting went wrong", { variant: "info" });
+      } finally {
+        actions.setSubmitting(false);
+      }
+    },
   });
 
   const {
@@ -184,7 +224,7 @@ const AddAuthors = () => {
               margin="normal"
               error={touched?.role && Boolean(errors?.role)}
             >
-              <InputLabel> Select  Role</InputLabel>
+              <InputLabel> Select Role</InputLabel>
               <Select
                 label="Author Role"
                 name="role"

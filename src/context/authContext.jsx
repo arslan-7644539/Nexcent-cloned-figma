@@ -8,7 +8,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { onAuthStateChanged, signInWithPopup, deleteUser } from "firebase/auth";
 import { auth, fireDB, GoogleProvider } from "../firebase"; // your firebase.js path
 // import { User } from "lucide-react";
 import {
@@ -27,6 +27,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   // ------------------------------------
+
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
@@ -207,13 +208,17 @@ export const AuthProvider = ({ children }) => {
   // -------------------------------------------------------------------------
 
   // delete-user
-  const deleteUser = useCallback(async (userId) => {
+  const deleteUsers = useCallback(async (userId) => {
     try {
       const confirm = window.confirm(
         "Are you sure you want to delete this user"
       );
       if (confirm) {
         await deleteDoc(doc(fireDB, "users", userId));
+        const existingUser = auth?.currentUser;
+        if (existingUser && existingUser?.uid === userId) {
+          await deleteUser(existingUser);
+        }
         enqueueSnackbar("user delete Successfuly", { variant: "success" });
         setUserData((prevUser) =>
           prevUser.filter((user) => user?.id !== userId)
@@ -254,7 +259,7 @@ export const AuthProvider = ({ children }) => {
       // -----------------------
       userData,
       usersLoading,
-      deleteUser,
+      deleteUsers,
       // -----------------------
       profileUpdate,
       profileUpdateLoading,
@@ -275,7 +280,7 @@ export const AuthProvider = ({ children }) => {
       // -----------------------
       userData,
       usersLoading,
-      deleteUser,
+      deleteUsers,
       // -----------------------
       profileUpdate,
       profileUpdateLoading,

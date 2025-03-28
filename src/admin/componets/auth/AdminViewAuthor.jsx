@@ -7,7 +7,7 @@ import { FiEdit } from "react-icons/fi";
 
 const AdminViewAuthor = () => {
   //   const navigate = useNavigate();
-  const { userData, deleteUser, usersLoading } = useContext(AuthContext);
+  const { userData, deleteUsers, usersLoading } = useContext(AuthContext);
   // console.log("🚀 ~ AdminViewAuthor ~ userData:", userData);
 
   return (
@@ -60,7 +60,7 @@ const AdminViewAuthor = () => {
                     {/* ------------- */}
                     <button
                       className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 cursor-pointer rounded text-sm"
-                      onClick={() => deleteUser(user?.id)}
+                      onClick={() => deleteUsers(user?.id)}
                     >
                       Delete
                     </button>
