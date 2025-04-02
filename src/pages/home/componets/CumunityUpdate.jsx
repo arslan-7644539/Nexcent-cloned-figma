@@ -2,13 +2,10 @@ import React from "react";
 import Image18 from "../../../assets/image18.svg";
 import Image19 from "../../../assets/image19.svg";
 import Image20 from "../../../assets/image20.svg";
-import {motion} from "motion/react"
+import { motion } from "motion/react";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
- const CumunityUpdate = () => {
-
-   
-
+const CumunityUpdate = () => {
   const cumunityData = [
     {
       image: Image18,
@@ -40,7 +37,13 @@ import { FaLongArrowAltRight } from "react-icons/fa";
         </div>
         <div className="top-[98.71px] w-[1002.34px] h-[255.8px] flex flex-row   justify-between items-center px-[100.23px] mr-26 ">
           {cumunityData.map((item, index) => (
-            <div
+            <motion.div
+              whileHover={{
+                rotateX: 25,
+                rotateY: 10,
+                boxShadow:"0px 20px 50px rgba(40, 203, 139, 1)",
+                y:-5,
+              }}
               key={index}
               className="relative shadow-[0_2px_3px_rgba(0,0,0,0.3)]  overflow-hidden left-[100.23px] w-[256.15px] h-[255.8px] flex flex-col items-center gap-[-66.82px] "
             >
@@ -62,7 +65,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
                   <FaLongArrowAltRight className=" mt-1" />
                 </motion.button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { Button, Card, CardContent, Typography } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/authContext";
 const NotFound = () => {
   const { userData } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
@@ -19,7 +20,7 @@ const NotFound = () => {
           </Typography>
           <Typography variant="body1" className="text-gray-600 mb-6">
             The page you are looking for might have been removed or does not
-            exist.
+            exist. <code> {location?.pathname} </code>
           </Typography>
           <Button
             variant="contained"
