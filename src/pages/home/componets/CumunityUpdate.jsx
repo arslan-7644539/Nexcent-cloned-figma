@@ -41,7 +41,8 @@ const CumunityUpdate = () => {
               whileHover={{
                 rotateX: 25,
                 rotateY: 10,
-                boxShadow:"0px 20px 50px rgba(40, 203, 139, 1)",
+                // boxShadow:"0px 20px 50px rgba(40, 203, 139, 1)",
+                boxShadow: "0px 20px 50px rgba(0, 122, 255, 0.3)",  
                 y:-5,
               }}
               key={index}
@@ -57,8 +58,8 @@ const CumunityUpdate = () => {
                   {item.title}{" "}
                 </p>
                 <motion.button
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.8 }}
+                  // whileHover={{ scale: 1.2 }}
+                  // whileTap={{ scale: 0.8 }}
                   className="left-[11.14px] text-primary  cursor-pointer hover:text-green-800 transition  top-[81.27px] w-[198.38px] h-[31.14px] flex flex-row justify-center gap-[5.57px] px-[5.57px] py-[5.57px]  "
                 >
                   <span> Read More</span>

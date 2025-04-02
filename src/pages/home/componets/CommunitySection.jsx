@@ -2,9 +2,14 @@ import React from "react";
 import icon1 from "../../../assets/icon1.png";
 import icon2 from "../../../assets/icon2.png";
 import icon3 from "../../../assets/icon3.png";
-import CumunityUpdate from "./CumunityUpdate";
+// import CumunityUpdate from "./CumunityUpdate";
+import { motion, useInView } from "motion/react";
 
 const CommunitySection = () => {
+  const { ref, inview } = useInView({
+    triggerOnce: true,
+    threshold: 0.5,
+  });
   const memberData = [
     {
       icon: icon1,
@@ -38,16 +43,36 @@ const CommunitySection = () => {
 
       <div className="flex flex-wrap justify-center gap-6">
         {memberData.map((item, index) => (
-          <div
+          <motion.div
+            initial={{
+              scale: 0,
+              opacity: 0,
+            }}
+            whileInView={{
+              scale: 1,
+              opacity: 1,
+            }}
+            transition={{
+              duration: 0.6,
+            }}
+            viewport={{ once: true }}
+            whileHover={{
+              scale: 1.05,
+              y: -10,
+              // boxShadow: "0px 20px 50px rgba(40, 203, 139, 1)",
+              transition: { duration: 0.3, ease: "easeOut" },
+            }}
             key={index}
             className="w-60 flex flex-col items-center p-4  box-border drop-shadow-sm  bg-white"
           >
             <img src={item.icon} alt="icon" className="w-12 h-12" />
-            <h3 className="text-lg font-bold text-center">{item.title}</h3>
-            <p className="text-sm text-gray-600 text-center">
+            <h3 className="text-xl font-semibold text-center text-gray-800">
+              {item.title}
+            </h3>
+            <p className="text-sm text-gray-500 text-center">
               {item.description}
             </p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
