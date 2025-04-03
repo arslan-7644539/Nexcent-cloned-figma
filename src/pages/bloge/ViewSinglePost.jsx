@@ -76,6 +76,15 @@ const ViewSinglePost = () => {
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-12 text-gray-800">
+      {/* Cover Image */}
+      <div className="mb-2 py-0 px-6 flex items-center justify-center">
+        <img
+          src={post?.image}
+          alt="Cover"
+          className="w-[664px] h-[332px] object-cover rounded-xl shadow-lg"
+        />
+      </div>
+
       {/* Title */}
       <h1 className="text-5xl font-extrabold mb-6 leading-tight">
         {post.title}
@@ -97,15 +106,6 @@ const ViewSinglePost = () => {
             {new Date(post?.createdAt?.seconds * 1000).toLocaleDateString()}
           </p>
         </div>
-      </div>
-
-      {/* Cover Image */}
-      <div className="mb-8">
-        <img
-          src={post?.image}
-          alt="Cover"
-          className="w-full h-[400px] object-cover rounded-xl shadow-lg"
-        />
       </div>
 
       {/* Tags */}
@@ -142,15 +142,8 @@ const ViewSinglePost = () => {
         </button>
       </div>
 
-      {/* Comments Section */}
-      <div className="bg-gray-50 p-6 rounded-xl shadow-inner mb-16">
-        <h2 className="text-2xl font-semibold mb-3">Comments</h2>
-        {/* <p className="text-gray-500 italic">Comments system coming soon...</p> */}
-        <CommentsBox title={post.title} postId={postId} />
-      </div>
-
       {/* Related Posts */}
-      <div className="mt-10">
+      <div className="my-10 ">
         <h2 className="text-3xl font-semibold mb-6">Related Posts</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {[1, 2].map((_, i) => (
@@ -169,6 +162,13 @@ const ViewSinglePost = () => {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Comments Section */}
+      <div className="bg-gray-50 p-6 rounded-xl shadow-inner mb-16">
+        <h2 className="text-2xl font-semibold mb-3">Comments</h2>
+        {/* <p className="text-gray-500 italic">Comments system coming soon...</p> */}
+        <CommentsBox title={post.title} postId={postId} />
       </div>
     </div>
   );
