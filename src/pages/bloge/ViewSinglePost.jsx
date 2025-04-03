@@ -99,7 +99,7 @@ const ViewSinglePost = () => {
         />
         <div>
           <p className="text-sm font-medium text-gray-700">
-            Author {`:${post.author}`}
+             {`${post.author}`}
           </p>
           <p className="text-xs text-gray-400">
             Published on :{" "}
