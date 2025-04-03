@@ -87,19 +87,19 @@ const ViewSinglePost = () => {
 
       {/* Title */}
       <h1 className="text-5xl font-extrabold mb-6 leading-tight">
-        {post.title}
+        {post?.title}
       </h1>
 
       {/* Author Info */}
       <div className="flex items-center space-x-4 mb-8">
         <img
-          src={post.authorImage}
+          src={post?.authorImage}
           alt="Author"
           className="w-12 h-12 rounded-full shadow"
         />
         <div>
           <p className="text-sm font-medium text-gray-700">
-             {`${post.author}`}
+             {`${post?.author}`}
           </p>
           <p className="text-xs text-gray-400">
             Published on :{" "}
@@ -115,7 +115,7 @@ const ViewSinglePost = () => {
             key={index}
             className="bg-blue-100 text-blue-600 px-4 py-1 rounded-full text-sm font-medium"
           >
-            #{tag.trim()}
+            #{tag?.trim()}
           </span>
         ))}
       </div>
@@ -123,7 +123,7 @@ const ViewSinglePost = () => {
       {/* Content */}
       <div
         className="prose prose-lg prose-blue max-w-none mb-12"
-        dangerouslySetInnerHTML={{ __html: post.content }}
+        dangerouslySetInnerHTML={{ __html: post?.content }}
       />
 
       {/* Share Buttons */}
