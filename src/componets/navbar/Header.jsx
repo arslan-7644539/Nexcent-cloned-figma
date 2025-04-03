@@ -56,7 +56,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="container mx-auto w-full h-[89.76px] bg-white flex items-center shadow-md px-[100.23px] py-[11.14px] justify-between relative">
+    <div className="container mx-auto max-w-full w-full h-[89.76px] bg-white flex items-center shadow-md px-[100.23px] py-[11.14px] justify-between relative">
       {/* Logo */}
       <motion.img
         whileHover={{ scale: 1.2 }}

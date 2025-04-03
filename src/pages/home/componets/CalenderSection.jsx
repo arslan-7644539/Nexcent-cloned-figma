@@ -1,13 +1,12 @@
 import React from "react";
-import {motion} from "motion/react"
+import { motion } from "motion/react";
 import mobileLogo from "../../../assets/pana.svg";
 
- const CalenderSection = () => {
-    
+const CalenderSection = () => {
   return (
     <>
       <div className=" container mx-auto top-[571.16px]  w-[1002.34px] h-[301.68px] ">
-        <div className=" w-full h-auto  flex flex-row  justify-evenly gap-96 my-20 items-center px-[100.23px] ">
+        <div className=" w-full h-auto  flex flex-row  justify-evenly gap-20 my-20 items-center px-[100.23px] ">
           <motion.img
             initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
@@ -43,6 +42,5 @@ import mobileLogo from "../../../assets/pana.svg";
     </>
   );
 };
-
 
 export default CalenderSection;

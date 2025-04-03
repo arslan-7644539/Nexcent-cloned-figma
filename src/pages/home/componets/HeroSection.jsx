@@ -24,7 +24,7 @@ const HeroSection = () => {
         style={{ scaleX: scrollYProgress, transformOrigin: "0%" }}
       />
       {/* Hero Section */}
-      <div className="container mx-auto flex flex-col md:flex-row items-center gap-10 py-20 px-8 bg-[#F5F7FA] shadow-md ">
+      <div className="container max-w-full mx-auto flex flex-col md:flex-row items-center gap-10 py-20 px-8 bg-[#F5F7FA] shadow-md ">
         {/* Left Content */}
         <motion.div
           initial={{ x: -200, opacity: 0 }}

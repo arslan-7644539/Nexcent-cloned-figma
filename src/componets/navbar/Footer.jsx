@@ -24,7 +24,7 @@ const Footer = () => {
   );
 
   const Footer = () => (
-    <div className=" container w-full bg-[#263238] py-12 px-8 md:px-20">
+    <div className=" container max-w-full w-full bg-[#263238] py-12 px-8 md:px-20">
       <div className="grid md:grid-cols-12 gap-8">
         {/* Left Section */}
         <div className="md:col-span-4 flex flex-col items-center gap-6">
@@ -136,7 +136,7 @@ const Footer = () => {
 
   return (
     <>
-      <div className=" container mx-auto top-[2608.87px] w-full h-[438.53px] flex flex-col items-start mt-[33px] ">
+      <div className=" container max-w-full mx-auto top-[2608.87px] w-full h-[438.53px] flex flex-col items-start mt-[33px] ">
         <Frame16 />
         <Footer />
       </div>

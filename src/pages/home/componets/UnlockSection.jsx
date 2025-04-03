@@ -5,7 +5,7 @@ import rafikiLogo from "../../../assets/rafiki.svg";
 const UnlockSection = () => {
   return (
     <>
-      <div className=" container mx-auto w-[1002.34px] h-[301.4px] flex flex-col  md:flex-row items-center py-[100.23px] mx-auto ">
+      <div className=" container mx-auto  w-[1002.34px] h-[301.4px]  flex flex-col  md:flex-row items-center py-[100.23px]  ">
         {/* ------------- */}
         <div className="w-1/2">
           <motion.div

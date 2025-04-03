@@ -8,7 +8,7 @@ import AnimatedCounter from "../../../componets/animatedCounter/AnimatedCounter"
 
 const AchivementSection = () => {
   return (
-    <div className="container mx-auto flex flex-col md:flex-row items-center justify-between space-y-10 md:space-y-0 py-16 px-6 bg-[#F5F7FA]">
+    <div className="container mx-auto max-w-full flex flex-col md:flex-row items-center justify-between space-y-10 md:space-y-0 py-16 px-6 bg-[#F5F7FA]">
       {/* Section Heading */}
       <div className="text-center md:text-left md:w-1/2">
         <p className="text-4xl md:text-6xl font-semibold leading-tight">
