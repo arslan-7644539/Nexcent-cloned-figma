@@ -50,7 +50,7 @@ const AddAuthors = () => {
       }
     };
     fetchAdminInfo();
-  }, [adminInfo, userData]);
+  }, [userData, adminInfo?.adminEmail, adminInfo?.adminPassword]);
   // -----------------------------------
 
   const { enqueueSnackbar } = useSnackbar();

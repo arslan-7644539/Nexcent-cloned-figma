@@ -1,31 +1,22 @@
-import React, { useEffect, useRef } from "react";
-import { motion, useMotionValue, useTransform, animate, useInView } from "motion/react";
+import React from "react";
+
 import Icon1 from "../../../assets/icon1.1.svg";
 import Icon3 from "../../../assets/icon1.3.svg";
 import Icon4 from "../../../assets/icon1.4.svg";
+import AnimatedCounter from "../../../componets/animatedCounter/AnimatedCounter";
 
-const AnimatedCounter = ({ from = 0, to = 100, duration = 2 }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const count = useMotionValue(from);
-  const rounded = useTransform(count, (latest) => Math.round(latest));
-
-  useEffect(() => {
-    if (isInView) {
-      animate(count, to, { duration });
-    }
-  }, [isInView]);
-
-  return <motion.span ref={ref} className="text-primary">{rounded}</motion.span>;
-};
 
 const AchivementSection = () => {
   return (
     <div className="container mx-auto flex flex-col md:flex-row items-center justify-between space-y-10 md:space-y-0 py-16 px-6 bg-[#F5F7FA]">
       {/* Section Heading */}
       <div className="text-center md:text-left md:w-1/2">
-        <p className="text-4xl md:text-6xl font-semibold leading-tight">Helping a local</p>
-        <p className="text-4xl md:text-6xl font-semibold text-primary leading-tight">business reinvent itself</p>
+        <p className="text-4xl md:text-6xl font-semibold leading-tight">
+          Helping a local
+        </p>
+        <p className="text-4xl md:text-6xl font-semibold text-primary leading-tight">
+          business reinvent itself
+        </p>
         <p className="text-lg md:text-2xl font-medium text-gray-600 mt-4">
           We reached here with our hard work and dedication
         </p>
@@ -59,7 +50,9 @@ const AchivementSection = () => {
             <h3 className="text-4xl font-bold">
               <AnimatedCounter from={0} to={828867} duration={3} />
             </h3>
-            <p className="text-base font-semibold text-gray-500">Event Bookings</p>
+            <p className="text-base font-semibold text-gray-500">
+              Event Bookings
+            </p>
           </div>
         </div>
 
