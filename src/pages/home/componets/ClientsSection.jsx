@@ -23,6 +23,9 @@ const ClientsSection = () => {
           animate={{
             x: "-100%", // Animate logos to move left
           }}
+          // whileHover={{
+          //   x: 0,
+          // }}
           transition={{
             x: {
               repeat: Infinity, // Repeat the animation infinitely
@@ -31,14 +34,41 @@ const ClientsSection = () => {
               ease: "linear", // Make the scroll smooth and linear
             },
           }}
-          className="flex space-x-45"
+          className="flex space-x-45 "
         >
           {clientsLogos.map((logo, index) => (
-            <img
+            <motion.img
               key={index}
               src={logo}
               alt="Client Logo"
-              className="w-10 h-10 rounded-md shadow-md"
+              className="w-10 h-10  rounded-md shadow-md"
+            />
+          ))}
+          {/* ------------- */}
+          {clientsLogos.map((logo, index) => (
+            <motion.img
+              key={index}
+              src={logo}
+              alt="Client Logo"
+              className="w-10 h-10  rounded-md shadow-md"
+            />
+          ))}
+          {/* ---------------- */}
+          {clientsLogos.map((logo, index) => (
+            <motion.img
+              key={index}
+              src={logo}
+              alt="Client Logo"
+              className="w-10 h-10  rounded-md shadow-md"
+            />
+          ))}
+          {/* --------------------- */}
+          {clientsLogos.map((logo, index) => (
+            <motion.img
+              key={index}
+              src={logo}
+              alt="Client Logo"
+              className="w-10 h-10  rounded-md shadow-md"
             />
           ))}
         </motion.div>
