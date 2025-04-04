@@ -15,14 +15,14 @@ const HeroSection = () => {
   const { scrollYProgress } = useScroll();
   return (
     <>
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
         className="fixed top-0 left-0 right-0 h-1 bg-blue-500 z-50"
         style={{ scaleX: scrollYProgress, transformOrigin: "0%" }}
-      />
+      /> */}
       {/* Hero Section */}
       <div className="container max-w-full mx-auto flex flex-col md:flex-row items-center gap-10 py-20 px-8 bg-[#F5F7FA] shadow-md ">
         {/* Left Content */}
