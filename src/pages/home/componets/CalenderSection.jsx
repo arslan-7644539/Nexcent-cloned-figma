@@ -16,12 +16,12 @@ const CalenderSection = () => {
             alt="logo"
             className="w-[307.34px] h-[301.68px]"
           />
-          <div className=" left-[442px] top-[42.89px] w-[460.1px] h-[215.9px] flex flex-col items-start gap-[22.27px] ">
+          <div className=" left-[442px] top-[42.89px] w-[460.1px] h-[287.9px] flex flex-col items-start gap-33 ">
             <div className="w-[418.34px] h-[157.14px] flex flex-col items-start gap-[11.14px] ">
               <h3 className="w-[418.34px] h-[62px] font-bold text-[25.06px] leading-[30.6px]  text-[#263238] text-justify max-w-xs  ">
                 How to design your site footer like we did
               </h3>
-              <p className="top-[73.14px] w-[418.34px] h-[84px] font-medium text-[11.74px] leading-[13.9px]  text-[#89939E] max-w-lg text-justify">
+              <p className="top-[73.14px] w-[418.34px] h-[84px] font-medium text-[15.74px] leading-[20.9px]  text-[#89939E] max-w-lg text-justify">
                 Donec a eros justo. Fusce egestas tristique ultrices. Nam
                 tempor, augue nec tincidunt molestie, massa nunc varius arcu, at
                 scelerisque elit erat a magna. Donec quis erat at libero

@@ -23,12 +23,12 @@ const CumunityUpdate = () => {
   ];
   return (
     <>
-      <div className=" container  mx-auto top-[2111.13px] w-[1002.34px] h-[354.51px] flex flex-col items-center m-auto my-20 gap-[11.14px]  ">
+      <div className=" container  mx-auto top-[2111.13px] w-[1002.34px] h-[354.51px] flex flex-col items-center m-auto my-20 gap-10  ">
         <div className="left-[114.85px] w-[722.64px] h-[87.57px] flex flex-col items-center gap-[5.57px] ">
           <h3 className="w-[772.64px] h-[31px] font-semibold text-[25.6px] leading-[30.6px] text-center ">
             Caring is the new marketing
           </h3>
-          <p className=" left-[167.57px] top-[36.57px] w-[437.13px] h-[51px] font-medium text-[11.14px] leading-[16.7px] max-w-lg text-center text-[#89939E]">
+          <p className=" left-[167.57px] top-[36.57px] w-[437.13px] h-[51px] font-medium text-[14.14px] leading-[16.7px] max-w-lg text-center text-[#89939E]">
             The Nextcent blog is the best place to read about the latest
             membership insights, trends and more. See who's joining the
             community, read about how our community are increasing their

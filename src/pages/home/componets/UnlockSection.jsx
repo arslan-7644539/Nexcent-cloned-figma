@@ -24,12 +24,12 @@ const UnlockSection = () => {
         </div>
         {/* --------------- */}
         <div className="w-1/2">
-          <div className="left-[442px] top-[56.75px] w-[660.1px] h-[187.9px] flex flex-col justify-start ">
+          <div className=" mx-[442.px] my-[56.75px] w-[760.1px] h-[287.9px] flex flex-col gap-15 justify-start ">
             <div className="w-[418.34px] h-[129.14px] flex flex-col items-start gap-[11.14px] ">
               <h3 className=" text-justify leading-relaxed  max-w-xs break-words text-xl font-bold ">
                 The unseen of spending three <span>years at Pixelgrade</span>
               </h3>
-              <p className=" top-[73.14px] w-[418.34px] max-w-lg text-justify md:h-[56px] h-auto font-normal text-[11.74px] leading-[13.9px] text-[#89939E]  ">
+              <p className=" top-[73.14px] w-[418.34px] max-w-lg text-justify md:h-[56px] h-auto font-normal text-[15.74px] leading-[20.9px] text-[#89939E]  ">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
                 amet justo ipsum. Sed accumsan quam vitae est varius fringilla.
                 Pellentesque placerat vestibulum lorem sed porta. Nullam mattis
