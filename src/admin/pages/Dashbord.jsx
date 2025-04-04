@@ -62,7 +62,7 @@ const Dashbord = () => {
       <div className="flex-1 p-6 md:p-10">
         {/* Topbar */}
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
+          <h1 className="text-3xl md:text-4xl font-bold font-primary text-gray-800">
             Dashboard Overview
           </h1>
 
@@ -78,7 +78,7 @@ const Dashbord = () => {
                 className="w-10 h-10 rounded-full border-2 border-white shadow-md"
               />
               <div className="text-sm">
-                <p className="font-semibold text-gray-700">
+                <p className="font-semibold text-gray-700 font-ubuntu">
                   {userinfo?.username}
                 </p>
               </div>
@@ -92,7 +92,7 @@ const Dashbord = () => {
                   <li>
                     <button
                       onClick={() => navigate("/dashbord/profile")}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2"
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2 font-primary"
                     >
                       <User size={18} /> Profile
                     </button>
@@ -100,7 +100,7 @@ const Dashbord = () => {
                   <li>
                     <button
                       onClick={() => signOut(auth)}
-                      className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2 text-red-500"
+                      className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center gap-2 text-red-500 font-primary"
                     >
                       <LogOut size={18} /> Logout
                     </button>
@@ -122,10 +122,10 @@ const Dashbord = () => {
               <MdPostAdd size={28} className="text-blue-500" />
             </div>
             <p className="text-4xl font-bold text-blue-600">{blogs.length}</p>
-            <p className="text-sm text-gray-500 mt-1">Updated just now</p>
+            <p className="text-sm text-gray-500 mt-1 font-ubuntu">Updated just now</p>
             <button
               onClick={() => navigate("/dashbord/admin-view-post")}
-              className="mt-4 w-full cursor-pointer text-center bg-blue-100 text-blue-700 py-2 rounded-md hover:bg-blue-200 transition"
+              className="mt-4 w-full cursor-pointer text-center bg-blue-100 text-blue-700 py-2 rounded-md hover:bg-blue-200 transition font-primary"
             >
               View Posts
             </button>
@@ -140,13 +140,13 @@ const Dashbord = () => {
             <p className="text-4xl font-bold text-orange-500">
               {userData?.length}
             </p>
-            <p className="text-sm text-gray-500 mt-1">Active this week</p>
+            <p className="text-sm text-gray-500 mt-1 font-ubuntu">Active this week</p>
             <button
               disabled={!role || role === "editor"}
               onClick={() =>
                 role === "admin" && navigate("/dashbord/view-author-list")
               }
-              className="mt-4 cursor-pointer w-full text-center bg-orange-100 text-orange-700 py-2 rounded-md hover:bg-orange-200 transition"
+              className="mt-4 cursor-pointer w-full text-center bg-orange-100 text-orange-700 py-2 rounded-md font-primary hover:bg-orange-200 transition"
             >
               View Users
             </button>
@@ -161,8 +161,8 @@ const Dashbord = () => {
               <span className="text-purple-600 text-2xl font-bold">📈</span>
             </div>
             <p className="text-4xl font-bold text-purple-600">3.4K</p>
-            <p className="text-sm text-gray-500 mt-1">Last 7 days</p>
-            <button className="mt-4 cursor-pointer w-full text-center bg-purple-100 text-purple-700 py-2 rounded-md hover:bg-purple-200 transition">
+            <p className="text-sm text-gray-500 mt-1 font-ubuntu">Last 7 days</p>
+            <button className="mt-4 cursor-pointer w-full text-center bg-purple-100 text-purple-700 py-2 rounded-md hover:bg-purple-200 transition font-primary">
               View Analytics
             </button>
           </div>

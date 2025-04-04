@@ -10,6 +10,8 @@ import { VscFeedback } from "react-icons/vsc";
 import { FaChartBar } from "react-icons/fa";
 import { AuthContext } from "../../../context/authContext";
 import UserRole from "../userRole/UserRole";
+import { FaCircleChevronRight } from "react-icons/fa6";
+import { FaChevronCircleLeft } from "react-icons/fa";
 
 const Sidebar = () => {
   // ------------------
@@ -77,6 +79,8 @@ const Sidebar = () => {
           { name: "View Site", icon: <MdViewQuilt />, path: "/" },
         ];
 
+
+
   return (
     <div className="flex h-screen">
       <div
@@ -103,10 +107,10 @@ const Sidebar = () => {
             </div>
             <div className="mt-4 flex justify-center">
               <button
-                className="text-xl text-white bg-blue-600 p-2 rounded-md hover:bg-blue-700 transition duration-200"
+                className="text-xl text-white bg-blue-600 p-2 rounded-[100%] hover:bg-blue-700 transition duration-200"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                {isOpen ? <PiEyeClosedFill /> : <PiEyeClosedDuotone />}
+                {isOpen ? <FaChevronCircleLeft /> : <FaCircleChevronRight />}
               </button>
             </div>
           </div>
