@@ -24,7 +24,7 @@ const UnlockSection = () => {
         </div>
         {/* --------------- */}
         <div className="w-1/2">
-          <div className=" mx-[44.2.px] my-[56.75px] w-[760.1px] h-[287.9px] flex flex-col gap-15 justify-start ">
+          <div className=" mx-[44.2.px] my-[56.75px] w-[760.1px] h-[287.9px] flex flex-col gap-19 justify-start ">
             <div className="w-[418.34px] h-[129.14px] flex flex-col items-start gap-[11.14px] ">
               <h3 className=" text-justify  leading-relaxed  max-w-xs break-words text-xl font-bold font-primary ">
                 The unseen of spending three <span>years at Pixelgrade</span>
