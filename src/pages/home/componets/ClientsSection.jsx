@@ -34,14 +34,14 @@ const ClientsSection = () => {
               ease: "linear", // Make the scroll smooth and linear
             },
           }}
-          className="flex space-x-45 "
+          className="flex my-10  space-x-15 "
         >
           {clientsLogos.map((logo, index) => (
             <motion.img
               key={index}
               src={logo}
               alt="Client Logo"
-              className="w-10 h-10  rounded-md shadow-md"
+              className="w-15 h-15   rounded-md shadow-md"
             />
           ))}
           {/* ------------- */}
@@ -50,7 +50,7 @@ const ClientsSection = () => {
               key={index}
               src={logo}
               alt="Client Logo"
-              className="w-10 h-10  rounded-md shadow-md"
+              className="w-15 h-15   rounded-md shadow-md"
             />
           ))}
           {/* ---------------- */}
@@ -59,7 +59,7 @@ const ClientsSection = () => {
               key={index}
               src={logo}
               alt="Client Logo"
-              className="w-10 h-10 rounded-md shadow-md"
+              className="w-15 h-15  rounded-md shadow-md"
             />
           ))}
           {/* --------------------- */}
@@ -68,7 +68,7 @@ const ClientsSection = () => {
               key={index}
               src={logo}
               alt="Client Logo"
-              className="w-10 h-10  rounded-md shadow-md"
+              className="w-15 h-15   rounded-md shadow-md"
             />
           ))}
         </motion.div>

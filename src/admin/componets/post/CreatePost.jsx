@@ -91,7 +91,7 @@ const AddPost = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-blue-50 to-pink-100 px-4 py-8">
+    <div className="min-h-screen w-full overflow-hidden flex items-center justify-center bg-gradient-to-br from-blue-50 to-pink-100 px-4 py-8">
       <div className="w-full max-w-4xl bg-white rounded-xl shadow-lg p-6">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-3xl font-semibold text-gray-800">

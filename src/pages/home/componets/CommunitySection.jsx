@@ -63,7 +63,7 @@ const CommunitySection = () => {
               transition: { duration: 0.3, ease: "easeOut" },
             }}
             key={index}
-            className="w-60 flex flex-col items-center p-4  box-border drop-shadow-sm  bg-white"
+            className="w-80 h-80 hover:shadow-xl flex flex-col items-center p-4  box-border drop-shadow-sm  bg-white"
           >
             <img src={item.icon} alt="icon" className="w-12 h-12" />
             <h3 className="text-xl font-semibold text-center text-gray-800">

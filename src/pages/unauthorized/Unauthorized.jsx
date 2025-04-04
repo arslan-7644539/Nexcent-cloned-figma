@@ -17,7 +17,7 @@ const Unauthorized = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
-      <Card className="w-full max-w-md shadow-lg rounded-2xl">
+      <Card className="w-full  max-w-md shadow-lg rounded-2xl">
         <CardContent className="text-center p-6">
           <Typography variant="h4" className="font-bold text-red-600 mb-4">
             Access Denied 🚫
