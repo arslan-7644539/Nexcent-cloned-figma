@@ -58,18 +58,22 @@ const Dashbord = () => {
   }, []);
 
   return (
-    <div className="w-full h-screen bg-gradient-to-br from-blue-50 to-pink-100 flex">
-      <div className="flex-1 p-6 md:p-10">
+    <div className="w-full h-screen  bg-gradient-to-br from-blue-50 to-pink-100 flex">
+      <div className="flex-1 p-6 sm:p-10">
         {/* Topbar */}
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold font-primary text-gray-800">
-            Dashboard Overview
+          <h1 className=" text-2l leading-4 sm:text-4xl font-bold font-primary text-gray-800">
+            Dashboard{" "}
+            <span className="text-primary sm:border-none border border-neutral-600 bg-white sm:bg-transparent sm:shadow-none sm:drop-shadow-none drop-shadow-lg shadow-2xl sm:text-black">
+              {" "}
+              Overview
+            </span>
           </h1>
 
           {/* Profile Dropdown */}
           <div ref={dropdownRef} className="relative">
             <div
-              className="flex items-center gap-3 cursor-pointer"
+              className="flex sm:flex-row flex-col justify-center items-center sm:gap-3 relative left-4 cursor-pointer"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <img
@@ -77,12 +81,12 @@ const Dashbord = () => {
                 alt="profile"
                 className="w-10 h-10 rounded-full border-2 border-white shadow-md"
               />
-              <div className="text-sm">
-                <p className="font-semibold text-gray-700 font-ubuntu">
+              <div className="text-sm ">
+                <p className="font-semibold leading-4 text-center text-gray-700 font-ubuntu">
                   {userinfo?.username}
                 </p>
               </div>
-              <ChevronDown className="text-gray-600" />
+              <ChevronDown className="text-gray-600 sm:block hidden" />
             </div>
 
             {/* Dropdown */}
@@ -114,55 +118,63 @@ const Dashbord = () => {
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Card 1: Total Posts */}
-          <div className="bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-xl p-6 transition duration-300">
+          <div className="bg-white h-25  sm:h-53 border border-gray-200 rounded-xl shadow-md hover:shadow-xl sm:p-6 transition duration-300">
             <div className="flex justify-between items-center mb-3">
-              <h2 className="text-xl font-semibold text-gray-700">
+              <h2 className="sm:static relative sm:text-xl text-sm top-1 sm:mx-1 mx-3 font-semibold text-gray-700">
                 Total Posts
               </h2>
-              <MdPostAdd size={28} className="text-blue-500" />
+              <MdPostAdd size={28} className="text-blue-500 mx-3 " />
             </div>
-            <p className="text-4xl font-bold text-blue-600">{blogs.length}</p>
-            <p className="text-sm text-gray-500 mt-1 font-ubuntu">Updated just now</p>
+            <p className="sm:text-4xl sm:static absolute top-33.5  left-50 font-bold text-blue-600">
+              {blogs.length}
+            </p>
+            <p className=" sm:text-sm text-[11px] text-center sm:text-left text-gray-500 mt-1 font-ubuntu">
+              Updated just now
+            </p>
             <button
               onClick={() => navigate("/dashbord/admin-view-post")}
-              className="mt-4 w-full cursor-pointer text-center bg-blue-100 text-blue-700 py-2 rounded-md hover:bg-blue-200 transition font-primary"
+              className="sm:mt-4 sm:w-full w-25 h-6 sm:h-10.5 sm:static relative left-16 cursor-pointer text-center bg-blue-100 text-blue-700 sm:py-2   rounded-2xl sm:rounded-md hover:bg-blue-200 transition font-primary"
             >
               View Posts
             </button>
           </div>
 
           {/* Card 2: Authors */}
-          <div className="bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-xl p-6 transition-all duration-300">
+          <div className="bg-white h-25  sm:h-53 border border-gray-200 rounded-xl shadow-md hover:shadow-xl sm:p-6 transition duration-300">
             <div className="flex justify-between items-center mb-3">
-              <h2 className="text-xl font-semibold text-gray-700">Authors</h2>
+              <h2 className="sm:static relative sm:text-xl text-sm top-1 sm:mx-1 mx-3 font-semibold text-gray-700">Authors</h2>
               <AiOutlineUsergroupAdd size={28} className="text-orange-500" />
             </div>
-            <p className="text-4xl font-bold text-orange-500">
+            <p className="sm:text-4xl sm:static absolute top-65  left-50 font-bold text-orange-500">
               {userData?.length}
             </p>
-            <p className="text-sm text-gray-500 mt-1 font-ubuntu">Active this week</p>
+            <p className=" sm:text-sm text-[11px] text-center sm:text-left text-gray-500 mt-1 font-ubuntu">
+              Active this week
+            </p>
             <button
               disabled={!role || role === "editor"}
               onClick={() =>
                 role === "admin" && navigate("/dashbord/view-author-list")
               }
-              className="mt-4 cursor-pointer w-full text-center bg-orange-100 text-orange-700 py-2 rounded-md font-primary hover:bg-orange-200 transition"
+              className="sm:mt-4 sm:w-full w-25 h-6 sm:h-10.5 sm:static relative left-16 cursor-pointer text-center bg-orange-100 text-orange-600 sm:py-2   rounded-2xl sm:rounded-md hover:bg-blue-200 transition font-primary"
             >
               View Users
             </button>
           </div>
 
           {/* Card 3: Site Views */}
-          <div className="bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-xl p-6 transition-all duration-300">
+          <div className="bg-white h-25  sm:h-53 border border-gray-200 rounded-xl shadow-md hover:shadow-xl sm:p-6 transition duration-300">
             <div className="flex justify-between items-center mb-3">
-              <h2 className="text-xl font-semibold text-gray-700">
+              <h2 className="sm:static relative sm:text-xl text-sm top-1 sm:mx-1 mx-3 font-semibold text-gray-700">
                 Site Views
               </h2>
               <span className="text-purple-600 text-2xl font-bold">📈</span>
             </div>
-            <p className="text-4xl font-bold text-purple-600">3.4K</p>
-            <p className="text-sm text-gray-500 mt-1 font-ubuntu">Last 7 days</p>
-            <button className="mt-4 cursor-pointer w-full text-center bg-purple-100 text-purple-700 py-2 rounded-md hover:bg-purple-200 transition font-primary">
+            <p className="sm:text-4xl sm:static absolute top-96  left-50 font-bold text-purple-600">3.4K</p>
+            <p className=" sm:text-sm text-[11px] text-center sm:text-left text-gray-500 mt-1 font-ubuntu">
+              Last 7 days
+            </p>
+            <button className="sm:mt-4 sm:w-full w-25 h-6 sm:h-10.5 sm:static relative left-16 cursor-pointer text-center bg-purple-100 text-purple-700 sm:py-2   rounded-2xl sm:rounded-md hover:bg-blue-200 transition font-primary">
               View Analytics
             </button>
           </div>

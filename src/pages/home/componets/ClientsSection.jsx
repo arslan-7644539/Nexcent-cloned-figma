@@ -12,7 +12,7 @@ const ClientsSection = () => {
   const clientsLogos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7];
   return (
     <div className=" container mx-auto flex flex-col items-center gap-3 py-16 ">
-      <h3 className="text-4xl font-bold text-secondary [text-shadow:2px_2px_4px_rgba(0,0,0,0.3)] ">
+      <h3 className="md:text-4xl text-2xl md:font-bold font-semibold  text-secondary [text-shadow:2px_2px_4px_rgba(0,0,0,0.3)] ">
         Our Clients
       </h3>
       <p className="text-sm text-gray-600 [text-shadow:1px_1px_3px_rgba(0,0,0,0.3)]">
@@ -34,14 +34,14 @@ const ClientsSection = () => {
               ease: "linear", // Make the scroll smooth and linear
             },
           }}
-          className="flex my-10  space-x-15 "
+          className="flex md:my-10 my-6  md:space-x-15 space-x-5 "
         >
           {clientsLogos.map((logo, index) => (
             <motion.img
               key={index}
               src={logo}
               alt="Client Logo"
-              className="w-15 h-15   rounded-md shadow-md"
+              className="md:w-15 md:h-15 w-7 h-7   rounded-md shadow-md"
             />
           ))}
           {/* ------------- */}
@@ -50,7 +50,7 @@ const ClientsSection = () => {
               key={index}
               src={logo}
               alt="Client Logo"
-              className="w-15 h-15   rounded-md shadow-md"
+              className="md:w-15 md:h-15 w-7 h-7   rounded-md shadow-md"
             />
           ))}
           {/* ---------------- */}
@@ -59,7 +59,7 @@ const ClientsSection = () => {
               key={index}
               src={logo}
               alt="Client Logo"
-              className="w-15 h-15  rounded-md shadow-md"
+              className="md:w-15 md:h-15 w-7 h-7   rounded-md shadow-md"
             />
           ))}
           {/* --------------------- */}
@@ -68,7 +68,7 @@ const ClientsSection = () => {
               key={index}
               src={logo}
               alt="Client Logo"
-              className="w-15 h-15   rounded-md shadow-md"
+              className="md:w-15 md:h-15 w-7 h-7   rounded-md shadow-md"
             />
           ))}
         </motion.div>

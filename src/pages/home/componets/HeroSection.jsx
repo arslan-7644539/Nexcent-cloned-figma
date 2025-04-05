@@ -24,15 +24,15 @@ const HeroSection = () => {
         style={{ scaleX: scrollYProgress, transformOrigin: "0%" }}
       /> */}
       {/* Hero Section */}
-      <div className="container max-w-full mx-auto flex flex-col md:flex-row items-center gap-10 py-20 px-8 bg-[#F5F7FA] shadow-md ">
+      <div className="container max-w-full  mx-auto flex flex-col md:flex-row items-center md:static relative gap-10 py-20 px-8 bg-[#F5F7FA] shadow-md ">
         {/* Left Content */}
         <motion.div
           initial={{ x: -200, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className=" ml-40 w-full md:w-1/2 flex flex-col items-start gap-5"
+          className="md:ml-40 md:h-[45%] h-27 w-full md:w-1/2 flex flex-col items-start gap-5  top-1"
         >
-          <h3 className="text-7xl font-bold text-secondary">
+          <h3 className="md:text-7xl text-2xl font-semibold  md:font-bold text-secondary">
             Lessons and insights <br />
             <span className="text-primary">from 8 years</span>
           </h3>
@@ -45,7 +45,7 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Right Image */}
-        <div className=" w-full md:w-1/3 flex items-center justify-center">
+        <div className=" w-full p-8  md:w-1/3 flex items-center justify-center">
           <motion.img
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}

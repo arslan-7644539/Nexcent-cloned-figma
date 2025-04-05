@@ -32,16 +32,16 @@ const CommunitySection = () => {
   ];
 
   return (
-    <div className=" container mx-auto flex flex-col items-center gap-3 py-16">
-      <h3 className="text-3xl font-bold text-secondary text-center [text-shadow:2px_2px_4px_rgba(0,0,0,0.3)] ">
+    <div className=" container mx-auto flex flex-col items-center gap-1.5 md:gap-3 py-16">
+      <h3 className="md:text-3xl text-2xl md:font-bold font-semibold  text-secondary text-center [text-shadow:2px_2px_4px_rgba(0,0,0,0.3)] ">
         Manage your entire community <br />
         <span>in a single system</span>
       </h3>
-      <p className="text-sm text-gray-600  mb-[11.14px]">
+      <p className="text-sm text-gray-600 underline  mb-[11.14px]">
         Who is Nextcent suitable for?
       </p>
 
-      <div className="flex flex-wrap justify-center gap-6">
+      <div className="flex md:flex-wrap md:flex-row flex-col justify-center gap-6">
         {memberData.map((item, index) => (
           <motion.div
             initial={{
@@ -63,13 +63,17 @@ const CommunitySection = () => {
               transition: { duration: 0.3, ease: "easeOut" },
             }}
             key={index}
-            className="w-80 h-80 hover:shadow-xl flex flex-col items-center p-4  box-border drop-shadow-sm  bg-white"
+            className="md:w-80 md:h-80 w-70 h-25 hover:shadow-xl flex flex-col  items-center p-4  box-border drop-shadow-sm  bg-white"
           >
-            <img src={item.icon} alt="icon" className="w-12 h-12" />
-            <h3 className="text-xl font-semibold text-center text-gray-800">
+            <img
+              src={item.icon}
+              alt="icon"
+              className="md:w-12 md:h-12 w-8 h-8"
+            />
+            <h3 className="md:text-xl text-sm font-semibold text-center text-gray-800">
               {item.title}
             </h3>
-            <p className="text-sm text-gray-500 text-center">
+            <p className="md:text-sm text-[10px] text-gray-500 text-center">
               {item.description}
             </p>
           </motion.div>

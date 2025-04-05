@@ -6,7 +6,7 @@ const CalenderSection = () => {
   return (
     <>
       <div className=" container mx-auto top-[571.16px]  w-[1002.34px] h-[301.68px] ">
-        <div className=" w-full h-auto  flex flex-row  justify-evenly gap-20 my-20 items-center px-[100.23px] ">
+        <div className=" w-full h-auto md:static relative right-60  flex md:flex-row flex-col  md:justify-evenly justify-center md:gap-20 gap-10  md:my-20 my-10 items-center px-[100.23px] ">
           <motion.img
             initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
