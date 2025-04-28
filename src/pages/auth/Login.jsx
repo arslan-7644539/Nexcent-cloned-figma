@@ -9,10 +9,11 @@ import { LinearProgress } from "@mui/material";
 import { FaEye } from "react-icons/fa";
 import { BiHide } from "react-icons/bi";
 import { useSnackbar } from "notistack";
+import toast from "react-hot-toast";
 
 const Login = () => {
   console.log(auth.currentUser);
-  
+
   const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const Login = () => {
         navigate("/dashbord");
       } catch (error) {
         console.error("login errer : ", error);
-        alert("Please fill a valid email & password");
+        enqueueSnackbar("Please fill a valid email & password");
       } finally {
         actions.setSubmitting(false);
       }

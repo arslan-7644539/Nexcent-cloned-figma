@@ -7,12 +7,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAZ5E3F0LxbM2y4o7OXv7if5m-MKwqAaHY",
-  authDomain: "wechat-4af2d.firebaseapp.com",
-  projectId: "wechat-4af2d",
-  storageBucket: "wechat-4af2d.firebasestorage.app",
-  messagingSenderId: "57382886572",
-  appId: "1:57382886572:web:7c3939206535c47ca45309",
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
 };
 
 // Initialize Firebase
@@ -21,4 +21,3 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const fireDB = getFirestore(app);
 export const GoogleProvider = new GoogleAuthProvider();
-

@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { CircularProgress } from "@mui/material";
 import CommentsBox from "../../componets/comments/CommentsBox";
 import CommentsList from "../../componets/comments/CommentsList";
+import BackButton from "../../admin/componets/buttons/BackButton";
 
 const ViewSinglePost = () => {
   //  ---------------------------
@@ -91,21 +92,24 @@ const ViewSinglePost = () => {
       </h1>
 
       {/* Author Info */}
-      <div className="flex items-center space-x-4 mb-8">
-        <img
-          src={post?.authorImage}
-          alt="Author"
-          className="w-12 h-12 rounded-full shadow"
-        />
-        <div>
-          <p className="text-sm font-medium text-gray-700">
-             {`${post?.author}`}
-          </p>
-          <p className="text-xs text-gray-400">
-            Published on :{" "}
-            {new Date(post?.createdAt?.seconds * 1000).toLocaleDateString()}
-          </p>
+      <div className="flex justify-between items-center">
+        <div className="flex items-center space-x-4 mb-8">
+          <img
+            src={post?.authorImage}
+            alt="Author"
+            className="w-12 h-12 rounded-full shadow"
+          />
+          <div>
+            <p className="text-sm font-medium text-gray-700">
+              {`${post?.author}`}
+            </p>
+            <p className="text-xs text-gray-400">
+              Published on :{" "}
+              {new Date(post?.createdAt?.seconds * 1000).toLocaleDateString()}
+            </p>
+          </div>
         </div>
+        <BackButton />
       </div>
 
       {/* Tags */}
